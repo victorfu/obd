@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- 配置action的访问路径为.do的形式 -->
+	<constant name="struts.action.extension" value="action"></constant>
+	<!-- 配置struts的开发模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 配置struts文件上传大小限制 -->
+	<constant name="struts.multipart.maxSize" value="1000000000"/>
+	<!-- 配置struts的简单模式 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<package name="system" namespace="/" extends="struts-default">
+		<!-- 首页功能 -->
+		<action name="index" class="indexAction" method="index">
+			<result name="show_login">/WEB-INF/page/common/login.jsp</result>
+		</action>
+		<!-- 用户登录 -->
+		<action name="user-*" class="userAction" method="{1}">
+			<result name="show_home">/WEB-INF/page/common/home.jsp</result>
+			<!-- 处理验证登录失败, 跳转到login.jsp -->
+			<result name="show_error">/WEB-INF/page/common/login.jsp</result>
+			<!-- 注册页面 -->
+			<result name="userRegPage">/WEB-INF/page/common/userRegister.jsp</result>
+		</action>
+
+		<!-- 设备管理 -->
+		<action name="device-*" class="deviceAction" method="{1}">
+			<result name="devicePage">/WEB-INF/page/system/deviceList.jsp</result>
+			<result name="deviceTypePage">/WEB-INF/page/system/deviceTypeList.jsp</result>
+		</action>
+		
+		<!-- 车辆管理 -->
+		<action name="car-*" class="carAction" method="{1}">
+			<result name="carPage">/WEB-INF/page/system/carList.jsp</result>
+		</action>
+		
+		<!-- 车辆行程查询 -->
+		<action name="trip-*" class="tripAction" method="{1}">
+			<result name="tripPage">/WEB-INF/page/system/tripList.jsp</result>
+			<result name="mapPage">/WEB-INF/page/system/mapList.jsp</result>
+		</action>
+		
+		<!-- 用户子账号管理 -->
+		<action name="account-*" class="accountAction" method="{1}">
+			<result name="accountPage">/WEB-INF/page/system/accountList.jsp</result>
+		</action>
+		
+		
+		
+		<!-- 数据库维护 -->
+		<action name="dbconfig" class="databaseConfigAction" method="home">
+			<result name="show_database">/WEB-INF/page/common/databaseConfig.jsp</result>
+		</action>
+		<!-- 系统日志查看 -->
+		<action name="syslog-*" class="systemLogAction" method="{1}">
+			<result name="show_log">/WEB-INF/page/common/systemLog.jsp</result>
+		</action>
+		<!-- 系统参数设定 -->
+		<action name="sysparam-*" class="sysParamAction" method="{1}">
+			<result name="sysInitPage">/WEB-INF/page/common/sysInit.jsp</result>
+			<result name="show_sysparam">/WEB-INF/page/common/sysparam.jsp</result>
+		</action>
+		
+		<!-- 外呼任务管理 -->
+		<action name="task-*" class="taskAction" method="{1}">
+			<result name="show_task">/WEB-INF/page/manage/taskList.jsp</result>
+			<result name="show_telmanage">/WEB-INF/page/manage/telManage.jsp</result>
+		</action>
+	</package>  
+	<package name="ajax" namespace="/" extends="json-default">
+		<!-- 用户登录 -->
+		<action name="ajaxlogin" class="userAction" method="ajaxlogin">
+			<result type="json"></result>
+		</action>
+		<!-- 删除单条设备 -->
+		<action name="deleteDev" class="deviceAction" method="deleteDev">
+			<result type="json"></result>
+		</action>
+		<!-- 删除单条设备类型 -->
+		<action name="deleteDevType" class="deviceAction" method="deleteType">
+			<result type="json"></result>
+		</action>
+		
+		<!--  -->
+		
+		<action name="getmapdata" class="tripAction" method="getmapdata">
+			<result type="json"></result>
+		</action>
+		
+		<!-- 清空数据库日志 -->
+		<action name="dbconfig-empty" class="databaseConfigAction" method="empty">
+			<result type="json"></result>
+		</action>
+		<!-- 备份数据库 -->
+		<action name="dbconfig-backup" class="databaseConfigAction" method="backup">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>

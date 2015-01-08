@@ -1,0 +1,33 @@
+@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,table,th,td,img,textarea{margin:0;padding:0;}
+body{outline: 0;color:#333; vertical-align:baseline;font:12px Verdana,Tahoma,Arial,sans-serif,"宋体";}
+h1,h2,h3,h4,h5{ font-size:12px; font-weight:normal;}
+strong{font-weight: bold;}
+img{border:none;}
+ul,ol,li{list-style: none;}
+a{ text-decoration:none;}
+a,a:link,a:visited{color:rgb(79,129,189);}
+a:active{color:black;}
+a:hover{color:white;background: rgb(79,129,189);}
+.clear {clear:both;}
+
+.dtree a,.dtree a:link,.dtree a:visited {color:rgb(64,112,170);text-decoration: none;}
+.dtree a:hover {color:#fff;background:#56BBF5;}
+.dtree{width:153px; border-right:1px double #ccc; margin-right:5px; overflow:hidden;}
+.dtree h2{height:28px; font-size:14px; font-weight:bold; color: #fff; background:#3C96EA; line-height:28px; text-indent:20px; cursor:pointer; position:relative;}
+.dtree li a{font-size:14px;}
+/*
+.dtree h2:after{content:"+"; position:absolute; left:5px;top:1px;}
+*/
+.dtree h2.up{background-color:#3C96EA; color:#FFF;}
+.dtree li a.up{background-color:#56BBF5; color:#FFF;}
+/*
+.dtree h2.up:after{content:"-";}
+*/
+.dtree h2:hover{ background-color:#3C96EA; color:#FFF;}
+.dtree ol{display:none;}
+.dtree ol li{text-indent:30px; height:26px; line-height:26px; color:#666;}
+.dtree ol li a{display:block;}
+.dtree del,.dtree del a{ color:#999!important;}
+.dtree > div{ margin:2px 0 0; border-bottom:1px dashed #ccc;}
+.dtree sup{ color:#CC3300; font-family:icon;line-height: 8px;}
