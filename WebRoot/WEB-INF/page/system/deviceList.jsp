@@ -15,9 +15,13 @@
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 	<!-- 日期控件 start -->
-    <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css?v=1'/>" rel="stylesheet" />
-	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js?v=1'/>"></script>
+    <link type="text/css" href="<c:url value='datetimepicker/jquery.datetimepicker.css?v=1'/>" rel="stylesheet" />
+	<script type="text/javascript" src="<c:url value='datetimepicker/jquery.datetimepicker.js?v=1'/>"></script>
     <!-- 日期控件 end -->
+    <!-- 日期控件开始 -->
+    <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css'/>" rel="stylesheet" />
+	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
+    <!-- 日期控件结束 -->
  	<!-- jPage 分页插件 start -->
  	<link type="text/css" href="<c:url value='jPage/jPages.css'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='jPage/jPages.js'/>"></script>
@@ -28,23 +32,23 @@
 <div id="contentWrap">
 	<h3 class="h3_title">设备管理</h3>
    	<form name="form1" action="<c:url value='/device-query.action'/>" method="post">
-   	<input type="hidden" id="pageflag" name="pageflag" value=""/>
 	<div class="queryDiv_h80">
 	   	<ul class="queryWrap_ul">
-			<li><label>设备号：</label><input type="text" name="q_pino" class="ipt100 inputDefault" value="${q_pino }" maxlength="20"/></li>
-			<li><label>代理商：</label><input type="text" name="q_caryear" class="ipt60 inputDefault" value="${q_caryear }" maxlength="8"/></li>
-	        <li><label>批次号：</label><input type="text" name="q_chuxcs" class="ipt60 inputDefault" value="${q_chuxcs }" maxlength="8"/></li>
-	        <li><label>导入日期：</label><input type="text" name="q_chephm" class="ipt100 inputDefault" value="${q_chephm }" maxlength="20"/></li>
+			<li><label>设备号：</label><input type="text" name="devno" class="ipt100 inputDefault" value="${devno }" maxlength="20"/></li>
+			<li><label>代理商：</label><input type="text" name="proxy" class="ipt60 inputDefault" value="${proxy }" maxlength="8"/></li>
+	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" class="ipt120 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="8"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" class="ipt120 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20"/></li>
+	        <script>
+	        	$("#sdttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
+	        	$("#edttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
+	        </script>
 		</ul>
 		<ul class="queryWrap_ul" style="margin-top:-4px;">
 			<li>
-	        	<label>车牌号码：</label>
-	        	<input type="text" name="q_uname" class="ipt100 inputDefault" value="${q_uname }" maxlength="20"/>
-	        </li>	       
-	        <li>
-	        	<label>用户姓名：</label>
-	        	<input type="text" name="q_mobile" class="ipt100 inputDefault" value="${q_mobile }" maxlength="11"/>
-	        </li>
+				<label>状态</label>
+				<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:80px; height:22px;" headerKey="-1" headerValue="全部" listValue="str" value="state"></s:select>
+			</li>	       
+	        <li></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li><input type="button" onclick="saveDevice('0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li>
@@ -59,8 +63,8 @@
 			<thead class="tab_head">
                  <tr>
                      <th width="6%">设备编号</th>
-                     <th width="4%">AID</th>
-                     <th width="8%">类型编号</th>
+                     <th width="6%">代理商编号</th>
+                     <th width="6%">类型名称</th>
                      <th width="4%">状态</th>
                      <th width="6%">型号</th>
                      <th width="12%">初次使用</th>
@@ -75,7 +79,7 @@
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.dsn }</td>
 					<td>${ls.aid }</td>
-					<td>${ls.vid }</td>
+					<td>${ls.vname }</td>
 					<td>
 						<c:if test="${ls.state eq 0 }">停用</c:if>
 						<c:if test="${ls.state eq 10 }">未绑定</c:if>
@@ -116,6 +120,7 @@
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
+	    <!--
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">代理商：</span>
 	        <div class="ipt-box">
@@ -123,17 +128,18 @@
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
+	    -->
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">设备类型：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="typex" name="type" class="ipt_text_w150 inputDefault" maxlength="15"/>
+	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="typ" listValue="fat" value="type"></s:select>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
-	    <div class="lab_ipt_item">
+	    <div class="lab_ipt_item" id="is_show_devstate">
 	    	<span class="lab120">设备状态：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="statex" name="state" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	        	<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:160px; height:26px;" listValue="str" value="state"></s:select>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
@@ -154,7 +160,7 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">有效期：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="valdtx" name="valdt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="valdtx" name="valdt" onclick="WdatePicker({skin:'whyGreen'})" class="ipt_text_w150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
@@ -182,6 +188,12 @@
 			method="post" 
 			enctype="multipart/form-data"
 			onsubmit="return validateuploadInforFile(this)">
+		<div class="lab_ipt_item">
+	    	<span class="lab120">设备类型：</span>
+	        <div class="ipt-box">
+	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="vid" listValue="vid_name" value="type"></s:select>
+	        </div>
+	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">选择文件：</span>
 	        <div class="ipt-box">

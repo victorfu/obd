@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.voicet.common.action.BaseAction;
+import cn.voicet.common.util.DotSession;
 import cn.voicet.obd.dao.DeviceDao;
 import cn.voicet.obd.form.DeviceForm;
 
@@ -34,9 +35,29 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String query()
 	{
-		List<Map<String, Object>> list = deviceDao.queryDeviceList(deviceForm);
+		DotSession ds = DotSession.getVTSession(request);
+		if(null==deviceForm.getState() || deviceForm.getState().equals("-1"))
+		{
+			deviceForm.setState(null);
+		}
+		else
+		{
+			deviceForm.setState(deviceForm.getState());
+		}
+		log.info("devno:"+deviceForm.getDevno()+", proxy:"+deviceForm.getProxy()+", sdttm:"+deviceForm.getSdttm()+", edt:"+deviceForm.getEdttm()+", state:"+deviceForm.getState());
+		if(null!=deviceForm.getSdttm() || null!=deviceForm.getEdttm())
+		{
+			ds.cursdttm = deviceForm.getSdttm();
+			ds.curedttm = deviceForm.getEdttm();
+		}
+		log.info("ds cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		List<Map<String, Object>> list = deviceDao.queryDeviceList(ds, deviceForm);
 		request.setAttribute("devList", list);
 		//
+		List<Map<String, Object>> typeList = deviceDao.queryDeviceTypeList(deviceForm);
+		request.setAttribute("typeList", typeList);
+		//
+		
 		return "devicePage";
 	}
 	
@@ -47,7 +68,8 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	public String importDevice()
 	{
 		log.info("import data start");
-		deviceDao.batchImportData(uploadExcel);
+		log.info("type:"+deviceForm.getType());
+		deviceDao.batchImportData(deviceForm,uploadExcel);
 		log.info("import data complete");
 		return null;
 	}

@@ -20,17 +20,21 @@ public class DeviceForm {
 	private String cjurl;	//厂家网址
 	
 	private String typeno;	//设备类型编号
+	
+	private String sdttm;	//开始日期时间
+	private String edttm;	//结束日期时间
+	
 	public String getDevno() {
 		return devno;
 	}
 	public void setDevno(String devno) {
-		this.devno = devno;
+		checkNULLString(devno);
 	}
 	public String getProxy() {
 		return proxy;
 	}
 	public void setProxy(String proxy) {
-		this.proxy = proxy;
+		checkNULLString(proxy);
 	}
 	public int getType() {
 		return type;
@@ -115,5 +119,29 @@ public class DeviceForm {
 	}
 	public void setCjurl(String cjurl) {
 		this.cjurl = cjurl;
+	}
+	public String getSdttm() {
+		return sdttm;
+	}
+	public void setSdttm(String sdttm) {
+		this.sdttm = sdttm;
+	}
+	public String getEdttm() {
+		return edttm;
+	}
+	public void setEdttm(String edttm) {
+		this.edttm = edttm;
+	}
+	
+	public String checkNULLString(String str)
+	{
+		if(str.length()==0)
+		{
+			return null;
+		}
+		else
+		{
+			return str;
+		}
 	}
 }

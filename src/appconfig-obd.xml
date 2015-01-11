@@ -3,17 +3,6 @@
 	fax="02584868924" tel="02584869817" url="http://www.voicet.com.cn"
 	mail="jime6688@163.com" version="1.0">
 	<role roleid="0" describle="未登录">
-		<grp name="日常管理">
-			<fun name="设备列表" action="javascript:;" />
-			<fun name="设备管理" action="javascript:;" />
-			<fun name="车辆管理" action="javascript:;" />
-			<fun name="账号管理" action="javascript:;" />
-			<fun name="代理商管理" action="javascript:;" />
-		</grp>
-		<grp name="统计">
-			<fun name="数据查询" action="javascript:;" />
-			<fun name="数据统计" action="javascript:;" />
-		</grp>
 	</role>
 	<role roleid="1" describle="系统管理员">
 		<grp name="日常管理">
@@ -21,7 +10,7 @@
 			<fun name="设备类型管理" action="device-type.action" />
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
-			<fun name="代理商管理" action="javascript:;" />
+			<fun name="代理商管理" action="proxy-query.action" />
 			<fun name="车辆行程查询" action="trip-query.action" />
 		</grp>
 		<grp name="统计">
@@ -29,30 +18,38 @@
 			<fun name="数据统计" action="javascript:;" />
 		</grp>
 	</role>
-	<role roleid="2" describle="业务管理员">
-	    <grp name="日常工作">
-			<fun name="客户归属查询" action="customer-guishu.action" />
-			<fun name="通话记录查询" action="callrecord-list.action" />
-			<fun name="接听情况统计" action="agentanaly-list.action" />
-			<fun name="外呼情况统计" action="agentanaly-callout.action" />
-			<fun name="跟单结果统计" action="customer-status.action" />
-			<fun name="保费汇总统计" action="customer-baofeianaly.action" />
-	    </grp>
-	    <grp name="维护管理">
-			<fun name="客户资料导入" action="customer-importData.action" />
-	      	<fun name="客户资料管理" action="customer-query.action" />
-	      	<fun name="座席资料维护" action="agent-list.action" />
-	    </grp>
+	<role roleid="2" describle="管理员">
+	    <grp name="日常管理">
+			<fun name="设备管理" action="device-query.action" />
+			<fun name="设备类型管理" action="device-type.action" />
+			<fun name="车辆管理" action="car-query.action" />
+			<fun name="账号管理" action="account-query.action" />
+			<fun name="代理商管理" action="proxy-query.action" />
+			<fun name="车辆行程查询" action="trip-query.action" />
+		</grp>
+		<grp name="统计">
+			<fun name="数据查询" action="javascript:;" />
+			<fun name="数据统计" action="javascript:;" />
+		</grp>
 	</role>
-	<role roleid="3" describle="话务员">
+	<role roleid="3" describle="代理商">
 		<grp name="日常工作">
-			<fun name="客户归属查询" action="customer-guishu.action" />
-			<fun name="我的客户资料" action="customer-query.action" />
-			<fun name="我的通话记录" action="agentanaly-answer.action" />
-			<fun name="座席工作概览" action="customer-workjz.action" />
-			<fun name="未接来电查看" action="customer-missCall.action" />
+			<fun name="账号管理" action="account-query.action" />
+			<fun name="车辆管理" action="car-query.action" />
 	    </grp>
 	</role>
+	<role roleid="4" describle="用户">
+		<grp name="日常工作">
+			<fun name="车辆管理" action="car-query.action" />
+			<fun name="资料维护" action="car-query.action" />
+	    </grp>
+	</role>
+	
+	<list name="dev_state" describle="设备状态">
+		<item id="0" name="停用" />
+		<item id="10" name="未绑定" />
+		<item id="100" name="已绑定" />
+	</list>
 	
 	<list name="callstate" describle="呼叫状态">
 		<item id="0" name="未呼叫" />

@@ -26,61 +26,77 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">子账号管理</h3>
+	<h3 class="h3_title">代理商管理</h3>
    	<form name="form1" action="<c:url value='/account-query.action'/>" method="post">
    	<input type="hidden" id="pageflag" name="pageflag" value=""/>
-	<div class="queryDiv_h80">
+	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
-			<li><label>设备号：</label><input type="text" name="q_pino" class="ipt100 inputDefault" value="${q_pino }" maxlength="20"/></li>
-			<li><label>代理商：</label><input type="text" name="q_caryear" class="ipt60 inputDefault" value="${q_caryear }" maxlength="8"/></li>
-	        <li><label>批次号：</label><input type="text" name="q_chuxcs" class="ipt60 inputDefault" value="${q_chuxcs }" maxlength="8"/></li>
-	        <li><label>导入日期：</label><input type="text" name="q_chephm" class="ipt100 inputDefault" value="${q_chephm }" maxlength="20"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-			<li>
-	        	<label>车牌号码：</label>
-	        	<input type="text" name="q_uname" class="ipt100 inputDefault" value="${q_uname }" maxlength="20"/>
-	        </li>	       
-	        <li>
-	        	<label>用户姓名：</label>
-	        	<input type="text" name="q_mobile" class="ipt100 inputDefault" value="${q_mobile }" maxlength="11"/>
-	        </li>
-	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li><input type="button" onclick="saveAccount('0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
-	        <li></li>
+			<li><input type="button" onclick="history.go(-1)" class="btn4" value="返&nbsp;&nbsp;回"/></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">编号</th>
-                     <th width="4%">AID</th>
-                     <th width="8%">设备号</th>
-                     <th width="4%">PUID</th>
-                     <th width="6%">账号</th>
-                     <th width="4%">级别</th>
-                     <th width="12%">密码</th>
-                     <th width="8%">姓名</th>
-                     <th width="12%">操作</th>
+                     <th width="6%">设备</th>
+                     <th width="4%">姓名</th>
+                     <th width="8%">状态</th>
+                     <th width="6%">厂家</th>
+                     <th width="6%">型号</th>
+                     <th width="4%">模式</th>
+                     <th width="12%">设备数</th>
+                     <th width="12%">创建日期</th>
+                     <th width="12%">分配</th>
                  </tr>
              </thead>
              <tbody class="tab_tbody" id="movies">
-				<c:forEach items="${accList }" var="ls" varStatus="status">
+				<c:forEach items="${devList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.uid }</td>
-					<td>${ls.aid }</td>
 					<td>${ls.dsn }</td>
-					<td>${ls.puid }</td>
-					<td>${ls.acc }</td>
-					<td>${ls.lev }</td>
-					<td>${ls.pwd }</td>
-					<td>${ls.name }</td>
+					<td>${ls.vid }</td>
 					<td>
-						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }'/>">查看车辆</a>
-						<a href="javascript:saveAccount('1','${ls.dsn }','${ls.aid }','${ls.vid }','${ls.state }','${ls.cj }','${ls.xh }','${fn:substring(ls.ydt,0,19) }','${ls.sbm }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteAccount('${ls.dsn }','${status.count }')">删除</a>&nbsp;&nbsp;
+						<c:if test="${ls.state eq 0 }">停用</c:if>
+						<c:if test="${ls.state eq 10 }">未绑定</c:if>
+						<c:if test="${ls.state eq 100 }">已绑定</c:if>
+					</td>
+					<td>${ls.cj }</td>
+					<td>${ls.xh }</td>
+					<td>${ls.sdt }</td>
+					<td>${ls.edt }</td>
+					<td>${ls.cdt }</td>
+					<td>
+						<c:choose>
+							<c:when test="${aid eq ls.aid}">
+								<input type="checkbox" checked="checked" onclick="gouXuan(this,'${aid }','${ls.dsn }')"/>勾选	
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" onclick="gouXuan(this,'${aid }','${ls.dsn }')"/>勾选	
+							</c:otherwise>
+						</c:choose>
+						<script>
+							function gouXuan(obj,aid,dsn)
+							{
+								var o;
+								if(obj.checked==true)
+								{
+									o=1;
+								}
+								else
+								{
+									o=0;
+								}
+								var datajson = {"aid":aid,"devno":dsn,"ischeck":o};
+								var url = 'proxy_selectDev.action';
+								$.ajax({
+							        type: "POST",
+							        url: url,
+							        data: datajson,
+							        success: function(){},
+							        error: function (){alert("操作失败");}
+							    });
+							}
+						</script>
 					</td>
 				</tr>
 				</c:forEach>

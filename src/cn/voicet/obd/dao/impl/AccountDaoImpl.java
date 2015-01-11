@@ -59,4 +59,57 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		});
 	}
 
+	public List<Map<String, Object>> queryCarList(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_car_query_Available(?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setString("uid", ds.roleID);
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				List<Object> list = new ArrayList<Object>();
+				//取多结果集
+				int rid = 0;
+				while(cs.getUpdateCount()!=-1);
+				while((rs=cs.getResultSet())!=null)  
+                {  
+                    while(rs.next())  
+                    {  
+                        if(rid==0)  
+                        {  
+                        	map = new HashMap<String, Object>();
+	   						VTJime.putMapDataByColName(map, rs);
+	   		        		list.add(map); 
+                        }  
+                        else if(rid==1)  
+                        {  
+                        	map = new HashMap<String, Object>();
+   						 	VTJime.putMapDataByColName(map, rs);
+   						 	map.put("flag", "1");
+   						 	list.add(map); 
+                        }
+                    }  
+                    cs.getMoreResults();  
+                    rid++;  
+                }
+				return list;
+			}
+		});
+	}
+
+	public void queryCarList(final AccountForm accountForm) {
+		log.info("sp:web_user_car_share(?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_car_share(?,?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", accountForm.getUid());
+				cs.setInt("cid", accountForm.getCid());
+				cs.setString("dsn", accountForm.getDevno());
+				cs.execute();
+				return null;
+			}
+		});
+	}
+
 }

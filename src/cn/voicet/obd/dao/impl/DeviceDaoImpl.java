@@ -24,6 +24,7 @@ import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.stereotype.Repository;
 
 import cn.voicet.common.dao.impl.BaseDaoImpl;
+import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.ExcelUtil;
 import cn.voicet.common.util.VTJime;
 import cn.voicet.obd.dao.DeviceDao;
@@ -34,17 +35,16 @@ import cn.voicet.obd.form.DeviceForm;
 public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 	public static final Logger log = Logger.getLogger(DeviceDaoImpl.class);
 	
-	public List<Map<String, Object>> queryDeviceList(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_query(?,?,?,?,?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_query(?,?,?,?,?,?)}", new CallableStatementCallback() {
+	public List<Map<String, Object>> queryDeviceList(final DotSession ds, final DeviceForm deviceForm) {
+		log.info("sp:web_dev_query(?,?,?,?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_query(?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("devno", null);
-				cs.setString("agent", null);
-				cs.setString("pch", null);
-				cs.setString("indt", null);
-				cs.setString("cp", null);
-				cs.setString("user", null);
+				cs.setString("devno", deviceForm.getDevno());
+				cs.setString("agent", deviceForm.getProxy());
+				cs.setString("sdt", ds.cursdttm);
+				cs.setString("edt", ds.curedttm);
+				cs.setString("state", deviceForm.getState());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -61,13 +61,13 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		});
 	}
 
-	public void batchImportData(final File uploadExcel) {
-		log.info("sp:web_dev_update(?,?,?,?,?,?,?,?)");
+	public void batchImportData(final DeviceForm deviceForm, final File uploadExcel) {
+		log.info("sp:web_dev_update(?,?,?,?,?,?,?)");
 
 		//excel max column num
 		final int MAX_COL_CHECK = 200;
 		//max_col[] excel actual column num
-		final int COL_ACTUAL_NUM[] = {2,8,6,8,16};
+		final int COL_ACTUAL_NUM[] = {2,8,6,3,16};
 		//
 		this.getJdbcTemplate().execute(new ConnectionCallback() {
 			public Object doInConnection(Connection con) throws SQLException,
@@ -75,7 +75,7 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 				PreparedStatement ps = null;
 				// close session auto commit;
 				con.setAutoCommit(false);
-				ps = con.prepareStatement("{call web_dev_update(?,?,?,?,?,?,?,?)}");
+				ps = con.prepareStatement("{call web_dev_update(?,?,?,?,?,?,?)}");
 				boolean bCheckOK;
 				String cellValues[] = new String[MAX_COL_CHECK];
 				try 
@@ -116,15 +116,49 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 						{
 							for(int j=0; j<COL_ACTUAL_NUM[3]; j++)
 							{
-								if(null==cellValues[j] || ""==cellValues[j])
+								//设备号
+								if(j==0)
 								{
-									ps.setString(j+1, null);
+									if(null==cellValues[j] || ""==cellValues[j])
+									{
+										ps.setString(1, null);
+									}
+									else
+									{
+										ps.setString(1, cellValues[j]);
+									}
 								}
-								else
+								//设备状态
+								else if(j==1)
 								{
-									ps.setString(j+1, cellValues[j]);
+									if(null==cellValues[j] || ""==cellValues[j])
+									{
+										ps.setString(3, null);
+									}
+									else
+									{
+										ps.setString(3, cellValues[j]);
+									}
+								}
+								//有效期
+								else if(j==2)
+								{
+									if(null==cellValues[j] || ""==cellValues[j])
+									{
+										ps.setString(6, null);
+									}
+									else
+									{
+										ps.setString(6, cellValues[j]);
+									}	
 								}
 							}
+							//
+							ps.setInt(2, deviceForm.getType());
+							ps.setString(4, null);
+							ps.setString(5, null);
+							ps.setString(7, null);
+							//
 							ps.addBatch();
 							//
 							if(i % 1000==0){
@@ -174,12 +208,12 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 	}
 
 	public void saveDevice(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_update(?,?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_dev_update(?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_dev_update(?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_dev_update(?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setString("devno", deviceForm.getDevno());
-				cs.setString("aid", deviceForm.getProxy());
+				//cs.setString("aid", deviceForm.getProxy());
 				cs.setInt("devtype", deviceForm.getType());
 				cs.setString("istate", deviceForm.getState());
 				cs.setString("cj", deviceForm.getChangj());
@@ -218,6 +252,7 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 					while (rs.next()) {
 						 map = new HashMap<String, Object>();
 						 VTJime.putMapDataByColName(map, rs);
+						 map.put("vid_name", rs.getString("vid")+":"+rs.getString("dname"));
 		        		 list.add(map);
 					}
 				}
@@ -227,14 +262,13 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 	}
 
 	public void saveDeviceType(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_Type_Update(?,?,?,?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_dev_Type_Update(?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_dev_Type_Update(?,?,?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_dev_Type_Update(?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setString("vid", deviceForm.getTypeno());
-				cs.setString("fat", deviceForm.getTpname());
-				cs.setString("dName", deviceForm.getChangj());
-				cs.setInt("typ", deviceForm.getType());
+				cs.setString("fat", deviceForm.getChangj());
+				cs.setString("dName", deviceForm.getTpname());
 				cs.setString("addr", deviceForm.getAddr());
 				cs.setString("tel", deviceForm.getTelnum());
 				cs.setString("mobile", deviceForm.getMobile());

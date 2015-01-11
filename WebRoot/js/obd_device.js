@@ -57,14 +57,19 @@ function validateExcelUpLoadFile(form)
 //add device
 function saveDevice(s,devno,proxy,type,state,changj,devxh,valdt,identi)
 {
+	//init
+	$("#is_show_devstate")[0].style.display="none";
+	//
 	var tit;
 	if(s==0)
 	{
 		tit="添加设备";
+		$("#is_show_devstate")[0].style.display="none";
 	}
 	else
 	{
 		tit="修改设备信息";
+		$("#is_show_devstate")[0].style.display="block";
 	}
 	//
 	$("#devnox").val(devno);

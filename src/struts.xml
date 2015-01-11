@@ -46,7 +46,16 @@
 		<!-- 用户子账号管理 -->
 		<action name="account-*" class="accountAction" method="{1}">
 			<result name="accountPage">/WEB-INF/page/system/accountList.jsp</result>
+			<result name="accountCarPage">/WEB-INF/page/system/accounCartList.jsp</result>
 		</action>
+		
+		<!-- 代理商管理 -->
+		<action name="proxy-*" class="proxyAction" method="{1}">
+			<result name="proxyPage">/WEB-INF/page/system/proxyList.jsp</result>
+			<result name="devPage">/WEB-INF/page/system/proxy_dev_list.jsp</result>
+		</action>
+		
+		
 		
 		
 		
@@ -83,12 +92,32 @@
 		<action name="deleteDevType" class="deviceAction" method="deleteType">
 			<result type="json"></result>
 		</action>
-		
 		<!--  -->
-		
-		<action name="getmapdata" class="tripAction" method="getmapdata">
+		<action name="proxy_selectDev" class="proxyAction" method="selectDev">
 			<result type="json"></result>
 		</action>
+		<!-- 删除代理商 -->
+		<action name="deleteProxy" class="proxyAction" method="deleteProxy">
+			<result type="json"></result>
+		</action>
+		
+		<action name="getmapdata" class="tripAction" method="deleteProxy">
+			<result type="json"></result>
+		</action>
+		
+		<!-- 删除车辆 -->
+		<action name="deleteCar" class="carAction" method="deleteCar">
+			<result type="json"></result>
+		</action>
+		<!-- 解除车辆设备绑定 -->
+		<action name="unbindDev" class="carAction" method="unbindDev">
+			<result type="json"></result>
+		</action>
+		
+		
+		
+		
+		
 		
 		<!-- 清空数据库日志 -->
 		<action name="dbconfig-empty" class="databaseConfigAction" method="empty">

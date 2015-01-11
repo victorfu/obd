@@ -70,9 +70,15 @@ public class DotSession {
 	
 	public String html;
 	
+	//get server current date 2014-01-09
 	String curDate = String.format("%tF", new Date());
 	public String cursdt = curDate;
 	public String curedt = curDate;
+	
+	//get server current date time 2015-01-09 15:42:02
+	String curDatetime = String.format("%tF %<tT", new Date());
+	public String cursdttm = curDatetime;
+	public String curedttm = curDatetime;
 	
 	public Map<String, Object> lygagtMap1;
 	public Map<String, Object> lygagtMap2;
@@ -555,6 +561,18 @@ public class DotSession {
 	}
 	public void setLygagtMap2(Map<String, Object> lygagtMap2) {
 		this.lygagtMap2 = lygagtMap2;
+	}
+	public String getCursdttm() {
+		return cursdttm;
+	}
+	public void setCursdttm(String cursdttm) {
+		this.cursdttm = cursdttm;
+	}
+	public String getCuredttm() {
+		return curedttm;
+	}
+	public void setCuredttm(String curedttm) {
+		this.curedttm = curedttm;
 	}
 }
 

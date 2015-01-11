@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,14 +25,12 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">设备类型管理</h3>
-   	<form name="form1" action="<c:url value='device-type.action'/>" method="post">
+	<h3 class="h3_title">用户车辆管理</h3>
+   	<form name="form1" action="<c:url value='car-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>类型编号：</label><input type="text" id="typeno" name="typeno" class="ipt100 inputDefault"  value="${typeno }"/></li>
-	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
+	        <li><input type="button" class="btn4" value="返&nbsp;&nbsp;回" onclick="history.go(-1)"/></li>
 	        <li>
-	        	<input type="button" onclick="saveType('0','0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
 	        </li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -42,33 +42,36 @@
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="8%">类型编号</th>
-                     <th width="8%">设备类型名称</th>
-                     <th width="8%">厂家</th>
-                     <th width="6%">地址</th>
-                     <th width="6%">电话</th>
-                     <th width="8%">手机</th>
-                     <th width="8%">QQ</th>
-                     <th width="8%">邮箱</th>
-                     <th width="8%">官网</th>
-                     <th width="8%">操作</th>
+                     <th width="6%">车辆编号</th>
+                     <th width="8%">设备号</th>
+                     <th width="4%">品牌</th>
+                     <th width="4%">型号</th>
+                     <th width="10%">购车日期</th>
+                     <th width="6%">车牌号</th>
+                     <th width="8%">发动机</th>
+                     <th width="4%">颜色</th>
+                     <th width="4%">总里程</th>
+                     <th width="6%">行驶次数</th>
+                     <th width="12%">操作</th>
                  </tr>
              </thead>
              <tbody id="movies">
-               	<c:forEach items="${typeList }" var="ls" varStatus="status">
+               	<c:forEach items="${carList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.vid }</td>
-					<td>${ls.dname }</td>
-					<td>${ls.fat }</td>
-					<td>${ls.addr }</td>
-					<td>${ls.tel }</td>
-					<td>${ls.mobile }</td>
-					<td>${ls.qq }</td>
-					<td>${ls.mail }</td>
-					<td>${ls.url }</td>
+					<td>${ls.cid }</td>
+					<td id="row_devno${ls.cid }">${ls.dsn }</td>
+					<td>${ls.pp }</td>
+					<td>${ls.xh }</td>
+					<td>${fn:substring(ls.gcdt,0,11) }</td>
+					<td>${ls.cph }</td>
+					<td>${ls.fdjh }</td>
+					<td>${ls.ys }</td>
+					<td>${ls.zlc }</td>
+					<td>${ls.xscs }</td>
 					<td>
-						<a href="javascript:saveType('1','${ls.vid }','${ls.fat }','${ls.dname }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.mail }','${ls.url }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteType('${ls.vid }','${status.count }')">删除</a>&nbsp;&nbsp;
+						<c:if test="${ls.flag eq 1 }">
+							<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&devno=${ls.dsn }">分配</a>
+						</c:if>
 					</td>
 				</tr>
 				</c:forEach>
@@ -116,68 +119,77 @@
 	});
 </script>
 
-<div id="popSaveTypeDiv" style="display:none;"> 
-<form id="form2" name="form2" action="<c:url value='/device-saveType.action'/>" method="post">
-	<input type="hidden" id="typenox" name="typeno" value="0"/>
-	<div class="lab_ipt_item">
-  		<span class="lab120">设备类型名称：</span>
+<div id="popSaveCarDiv" style="display:none;"> 
+<form id="form2" name="form2" action="<c:url value='car-saveCar.action'/>" method="post">
+	<input type="hidden" id="cidx" name="cid" value="0"/>
+  	<div class="lab_ipt_item">
+  		<span class="lab120">品牌：</span>
       	<div class="ipt-box">
-      		<input type="text" id="tpnamex" name="tpname" class="ipt_text_w150 inputDefault"  maxlength="15"/>
+      		<input type="text" id="pinpaix" name="pinpai" class="ipt_text_w150 inputDefault" maxlength="15"/>
           	<span class="asterisk">*</span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">厂家：</span>
+  		<span class="lab120">型号：</span>
       	<div class="ipt-box">
-      		<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault" maxlength="15"/>
-          	<span class="asterisk">*</span>
-      	</div>
-  	</div>
-  	<div class="lab_ipt_item">
-  		<span class="lab120">地址：</span>
-      	<div class="ipt-box">
-      		<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+      		<input type="text" id="xinghaox" name="xinghao" class="ipt_text_w150 inputDefault"  maxlength="10"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">电话：</span>
+  		<span class="lab120">购车时间：</span>
       	<div class="ipt-box">
-      		<input type="text" id="telnumx" name="telnum" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="buydtx" name="buydt" onclick="WdatePicker({skin:'whyGreen'})" class="ipt_text_w150 inputDefault"  maxlength="10"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">手机：</span>
+  		<span class="lab120">车牌号：</span>
       	<div class="ipt-box">
-      		<input type="text" id="mobilex" name="mobile" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="chepaix" name="chepai" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+          	<span class="asterisk"></span>
+      	</div>
+  	</div>
+  	<div class="lab_ipt_item">
+  		<span class="lab120">车架：</span>
+      	<div class="ipt-box">
+      		<input type="text" id="chejiax" name="chejia" class="ipt_text_w150 inputDefault"  maxlength="20"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
-  		<span class="lab120">QQ：</span>
+  		<span class="lab120">发动机编号：</span>
       	<div class="ipt-box">
-      		<input type="text" id="qqx" name="qq" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="fadongx" name="fadong" class="ipt_text_w150 inputDefault"  maxlength="20"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">邮箱：</span>
+  		<span class="lab120">颜色：</span>
       	<div class="ipt-box">
-      		<input type="text" id="emailx" name="email" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="colorx" name="color" class="ipt_text_w150 inputDefault"  maxlength="20"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">厂家网址：</span>
+  		<span class="lab120">提醒：</span>
       	<div class="ipt-box">
-      		<input type="text" id="cjurlx" name="cjurl" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="checkbox" id="istipchk" onclick="checkTip(this)" style="margin-top:6px;"/>
+	        <input type="hidden" id="tipx" name="tip" value="0"/>
+          	<span class="asterisk"></span>
+      	</div>
+  	</div>
+  	<div class="lab_ipt_item">
+  		<span class="lab120">警告：</span>
+      	<div class="ipt-box">
+      		<input type="checkbox" id="iswarnchk" onclick="checkWarn(this)" style="margin-top:6px;"/>
+	        <input type="hidden" id="warnx" name="warn" value="0"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
 		<span class="lab120"></span>
-		<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveTypeBtn()"/></div>
+		<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveCarBtn()"/></div>
 		<div class="ipt-box" style="margin-left:20px;"><input type="button" class="btn4" value="取消" onclick="layer.closeAll()"/></div>
 	</div>	
 </form>
@@ -190,6 +202,6 @@
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='layer/extend/layer.ext.js'/>"></script>
 <!-- layer 弹出插件 end -->
-<script type="text/javascript" src="<c:url value='js/obd_device_type.js?v=1'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_car.js?v=3'/>"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	}
 	
 	/**
-	 * 查询设备列表
+	 * 查询用户列表
 	 * @return
 	 */
 	public String query()
@@ -39,5 +39,20 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 		request.setAttribute("accList", list);
 		//
 		return "accountPage";
+	}
+	
+	public String viewCar()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		List<Map<String, Object>> list = accountDao.queryCarList(ds, accountForm);
+		request.setAttribute("carList", list);
+		return "accountCarPage";
+	}
+	
+	public String fenpei()
+	{
+		log.info("uid:"+accountForm.getUid()+", cid:"+accountForm.getCid()+", devno:"+accountForm.getDevno());
+		accountDao.queryCarList(accountForm);
+		return viewCar();
 	}
 }

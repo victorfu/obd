@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">子账号管理</h3>
+	<h3 class="h3_title">代理商管理</h3>
    	<form name="form1" action="<c:url value='/account-query.action'/>" method="post">
    	<input type="hidden" id="pageflag" name="pageflag" value=""/>
 	<div class="queryDiv_h80">
@@ -46,7 +46,7 @@
 	        	<input type="text" name="q_mobile" class="ipt100 inputDefault" value="${q_mobile }" maxlength="11"/>
 	        </li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li><input type="button" onclick="saveAccount('0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
+	        <li><input type="button" onclick="saveProxy('0','0','','','','','','','','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li></li>
 		</ul>
 	</div>
@@ -56,31 +56,31 @@
 			<thead class="tab_head">
                  <tr>
                      <th width="6%">编号</th>
-                     <th width="4%">AID</th>
-                     <th width="8%">设备号</th>
-                     <th width="4%">PUID</th>
-                     <th width="6%">账号</th>
-                     <th width="4%">级别</th>
-                     <th width="12%">密码</th>
-                     <th width="8%">姓名</th>
+                     <th width="4%">姓名</th>
+                     <th width="8%">启用</th>
+                     <th width="4%">地址</th>
+                     <th width="6%">电话</th>
+                     <th width="4%">模式</th>
+                     <th width="12%">设备数</th>
+                     <th width="12%">创建日期</th>
                      <th width="12%">操作</th>
                  </tr>
              </thead>
              <tbody class="tab_tbody" id="movies">
-				<c:forEach items="${accList }" var="ls" varStatus="status">
+				<c:forEach items="${proxyList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.uid }</td>
 					<td>${ls.aid }</td>
-					<td>${ls.dsn }</td>
-					<td>${ls.puid }</td>
-					<td>${ls.acc }</td>
-					<td>${ls.lev }</td>
-					<td>${ls.pwd }</td>
-					<td>${ls.name }</td>
+					<td>${ls.aname }</td>
+					<td>${ls.ienable }</td>
+					<td>${ls.addr }</td>
+					<td>${ls.tel }</td>
+					<td>${ls.mode }</td>
+					<td>${ls.devcount }</td>
+					<td>${ls.crdt }</td>
 					<td>
-						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }'/>">查看车辆</a>
-						<a href="javascript:saveAccount('1','${ls.dsn }','${ls.aid }','${ls.vid }','${ls.state }','${ls.cj }','${ls.xh }','${fn:substring(ls.ydt,0,19) }','${ls.sbm }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteAccount('${ls.dsn }','${status.count }')">删除</a>&nbsp;&nbsp;
+						<a href="<c:url value='proxy-finddev.action?aid=${ls.aid }'/>">分配设备</a>
+						<a href="javascript:saveProxy('1','${ls.aid }','${ls.aname }','${ls.ienable }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.url }','${ls.paid }','${ls.company }','${ls.mode }','${ls.typ }','${ls.stdt }','${ls.etdt }','${ls.pic }','${ls.mony }','${ls.mail }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:deleteProxy('${ls.aid }','${status.count }')">删除</a>&nbsp;&nbsp;
 					</td>
 				</tr>
 				</c:forEach>
@@ -99,67 +99,124 @@
     <!-- jPage end -->
     
     <!--POP ADDDEV START-->
-    <div id="popSaveDeviceDiv" style="display:none;"> 
-		<form id="form2" name="form2" action="<c:url value='/device-saveDevice.action'/>" method="post">
+    <div id="popSaveProxyDiv" style="display:none;"> 
+		<form id="form2" name="form2" action="<c:url value='proxy-saveProxy.action'/>" method="post">
+	    <input type="hidden" id="aidx" name="aid" value="0"/>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">设备编号：</span>
+	    	<span class="lab120">代理商姓名：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="devnox" name="devno" value="0" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	        	<input type="text" id="pnamex" name="pname" value="0" class="ipt_text_w150 inputDefault"  maxlength="10"/>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">代理商：</span>
+	    	<span class="lab120">启用标识：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="proxyx" name="proxy" class="ipt_text_w150 inputDefault"  maxlength="15"/>
+	        	<input type="text" id="ienablex" name="ienable" class="ipt_text_w150 inputDefault"  maxlength="15"/>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">设备类型：</span>
+	    	<span class="lab120">地址：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="typex" name="type" class="ipt_text_w150 inputDefault" maxlength="15"/>
+	        	<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault" maxlength="15"/>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">设备状态：</span>
+	    	<span class="lab120">电话：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="statex" name="state" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	        	<input type="text" id="telnumx" name="telnum" class="ipt_text_w150 inputDefault"  maxlength="10"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">厂家：</span>
+	    	<span class="lab120">手机：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	        	<input type="text" id="mobilex" name="mobile" class="ipt_text_w150 inputDefault"  maxlength="10"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">型号：</span>
+	    	<span class="lab120">QQ：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="devxhx" name="devxh" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="qqx" name="qq" class="ipt_text_w150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">有效期：</span>
+	    	<span class="lab120">网址：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="valdtx" name="valdt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="urlx" name="url" class="ipt_text_w150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">识别码：</span>
+	    	<span class="lab120">父代理号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="identix" name="identi" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="paidx" name="paid" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">公司：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="companyx" name="company" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">模式：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="modex" name="mode" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">类型：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="ptypex" name="ptype" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">开始时间：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="sdtx" name="sdt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">结束时间：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="edtx" name="edt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">图片：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="imgx" name="img" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">金额：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="moneyx" name="money" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class="asterisk"></span>
+	        </div>
+	    </div>
+	    <div class="lab_ipt_item">
+	    	<span class="lab120">邮箱：</span>
+	        <div class="ipt-box">
+	        	<input type="text" id="emailx" name="email" class="ipt_text_w150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 		<div class="lab_ipt_item">
 			<span class="lab120"></span>
-			<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveDeviceBtn()"/></div>
+			<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveProxyBtn()"/></div>
 			<div class="ipt-box" style="margin-left:20px;"><input type="button" class="btn4" value="取消" onclick="layer.closeAll()"/></div>
 		</div>	
 		</form>
@@ -256,6 +313,6 @@ $(function(){
 <!-- layer 弹出插件 end -->
 <!-- ajax file upload -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js?v=5'/>"></script>
-<script type="text/javascript" src="<c:url value='js/obd_device.js?v=2'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_proxy.js?v=2'/>"></script>
 </body>
 </html>
