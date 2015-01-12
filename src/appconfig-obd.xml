@@ -41,7 +41,7 @@
 	<role roleid="4" describle="用户">
 		<grp name="日常工作">
 			<fun name="车辆管理" action="car-query.action" />
-			<fun name="资料维护" action="car-query.action" />
+			<fun name="资料维护" action="account-info.action" />
 	    </grp>
 	</role>
 	

@@ -22,6 +22,7 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	private static Logger log = Logger.getLogger(AccountAction.class);
 	@Resource(name=AccountDao.SERVICE_NAME)
 	private AccountDao accountDao;
+	
 	private AccountForm accountForm = new AccountForm();
 	
 	public AccountForm getModel() {
@@ -37,13 +38,51 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 		DotSession ds = DotSession.getVTSession(request);
 		List<Map<String, Object>> list = accountDao.queryAccountList(ds, accountForm);
 		request.setAttribute("accList", list);
+		//查询代理商
+		List<Map<String, Object>> proxyList = accountDao.queryProxyList(ds);
+		request.setAttribute("proxyList", proxyList);
 		//
 		return "accountPage";
+	}
+	
+	public String addAccount()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		//
+		log.info("uid:"+ds.roleID+", lev:"+ds.userlev+", proxyno:"+accountForm.getProxyno()+", uname:"+accountForm.getUname()+", shareacc:"+accountForm.getShareacc());
+		accountDao.addAccount(ds, accountForm);
+		return query();
+	}
+	
+	public String info()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		Map<String, Object> map = accountDao.getAccountInfo(accountForm);
+		request.setAttribute("accMap", map);
+		log.info("accMap:"+map);
+		return "accountInfoPage";
+	}
+	
+	public String saveAccount()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+accountForm.getUid()+", idcard:"+accountForm.getIdcard());
+		accountDao.saveAccountInfo(ds, accountForm);
+		return null;
+	}
+	
+	public String deleteAccount()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+accountForm.getUid());
+		accountDao.deleteAccount(ds, accountForm);
+		return null;
 	}
 	
 	public String viewCar()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+accountForm.getUid());
 		List<Map<String, Object>> list = accountDao.queryCarList(ds, accountForm);
 		request.setAttribute("carList", list);
 		return "accountCarPage";

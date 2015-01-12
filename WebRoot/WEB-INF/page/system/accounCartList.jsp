@@ -29,7 +29,7 @@
    	<form name="form1" action="<c:url value='car-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-	        <li><input type="button" class="btn4" value="返&nbsp;&nbsp;回" onclick="history.go(-1)"/></li>
+	        <li><input type="button" class="btn4" value="返&nbsp;&nbsp;回" onclick="location.href='<c:url value="account-query.action"/>'"/></li>
 	        <li>
 	        </li>
 		</ul>

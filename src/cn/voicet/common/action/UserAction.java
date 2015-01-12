@@ -45,6 +45,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		//ds.roleName = (String) map.get("rolename");
 		//ds.agttelnum = (String) map.get("telnum");
 		ds.roleID=(String) map.get("uid");
+		ds.userlev = Integer.valueOf((String) map.get("lev"));
+		ds.agentid = Integer.valueOf((String) map.get("anentid"));
 		//
 		ds.password = userForm.getPassword();
 		ds.account=userForm.getAccount();

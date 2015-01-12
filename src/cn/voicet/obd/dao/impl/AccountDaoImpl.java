@@ -18,7 +18,6 @@ import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
 import cn.voicet.obd.dao.AccountDao;
 import cn.voicet.obd.form.AccountForm;
-import cn.voicet.obd.form.DeviceForm;
 
 @Repository(AccountDao.SERVICE_NAME)
 @SuppressWarnings("unchecked")
@@ -47,14 +46,24 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		});
 	}
 	
-	public void deleteDeviceType(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_Type_Del(?)");
-		this.getJdbcTemplate().execute("{call web_dev_Type_Del(?)}", new CallableStatementCallback() {
+	public List<Map<String, Object>> queryProxyList(final DotSession ds) {
+		log.info("sp:web_Agent_Query(?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_Agent_Query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("vid", deviceForm.getTypeno());
+				cs.setString("uid", ds.roleID);
 				cs.execute();
-				return null;
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				List<Object> list = new ArrayList<Object>();
+				if(rs!=null){
+					while (rs.next()) {
+						 map = new HashMap<String, Object>();
+						 VTJime.putMapDataByColName(map, rs);
+		        		 list.add(map);
+					}
+				}
+				return list;
 			}
 		});
 	}
@@ -64,7 +73,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", accountForm.getUid());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -112,4 +121,76 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		});
 	}
 
+	public void addAccount(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_create_account(?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setString("uid", ds.roleID);
+				cs.setInt("lev", ds.userlev);
+				cs.setInt("aid", accountForm.getProxyno());
+				cs.setString("uname", accountForm.getUname());
+				cs.setString("subaccount", accountForm.getShareacc());
+				cs.execute();
+				return null;
+			}
+		});
+	}
+
+	public void deleteAccount(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_Del(?)");
+		this.getJdbcTemplate().execute("{call web_user_Del(?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", accountForm.getUid());
+				cs.execute();
+				return null;
+			}
+		});
+		
+	}
+
+	public Map<String, Object> getAccountInfo(final AccountForm accountForm) {
+		String sql = "select * from tb_user where uid="+accountForm.getUid();
+		log.info("sql:"+sql);
+		return (Map<String, Object>)this.getJdbcTemplate().execute(sql, new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				while(rs.next())
+				{
+					map = new HashMap<String, Object>();
+					VTJime.putMapDataByColName(map, rs);
+				}
+				return map;
+			}
+		});
+	}
+
+	public void saveAccountInfo(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", accountForm.getUid());
+				cs.setInt("lev", accountForm.getUlevel());
+				cs.setInt("aid", accountForm.getAid());
+				cs.setString("account", accountForm.getUacc());
+				cs.setString("uname", accountForm.getUname());
+				cs.setString("ct", accountForm.getIdcardtype());
+				cs.setString("cn", accountForm.getIdcard());
+				cs.setString("qq", accountForm.getQq());
+				cs.setString("mail", accountForm.getEmail());
+				cs.setString("pic", accountForm.getPhoto());
+				cs.setString("addr", accountForm.getAddr());
+				cs.setString("tel", accountForm.getTelnum());
+				cs.setString("mobile", accountForm.getMobile());
+				cs.setString("noteinfo", accountForm.getNoteinfo());
+				cs.execute();
+				return null;
+			}
+		});
+	}
 }
