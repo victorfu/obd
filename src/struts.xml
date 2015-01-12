@@ -24,6 +24,8 @@
 			<result name="show_error">/WEB-INF/page/common/login.jsp</result>
 			<!-- 注册页面 -->
 			<result name="userRegPage">/WEB-INF/page/common/userRegister.jsp</result>
+			<!-- 注册成功 -->
+			<result name="regSuccessPage">/WEB-INF/page/common/userRegisterSucc.jsp</result>
 		</action>
 
 		<!-- 设备管理 -->

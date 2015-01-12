@@ -1,11 +1,18 @@
 //add car
-function saveCar(s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip,warn)
+function saveCar(roleid,s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip,warn)
 {
 	//init
 	$("#istipchk")[0].checked=false;
 	$("#iswarnchk")[0].checked=false;
-	$("#devnox")[0].disabled=false;
-	$("#lab_devnox_r")[0].disabled=false;
+	if(roleid!=4)
+	{
+		$("#devnox")[0].disabled=false;
+		$("#lab_devnox_r")[0].disabled=false;
+	}
+	else
+	{
+		$("#devnox")[0].style.display="block";
+	}
 	//
 	var tit;
 	if(s==0)
@@ -33,20 +40,38 @@ function saveCar(s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip
 	if(tip==1){$("#istipchk")[0].checked=true;}else{$("#istipchk")[0].checked=false;}
 	if(warn==1){$("#iswarnchk")[0].checked=true;}else{$("#iswarnchk")[0].checked=false;}
 	//
-	if(devno.length==0)
+	if(roleid!=4)
 	{
-		$("#lab_devx")[0].style.display="none";
-		$("#devnox")[0].style.display="block";
-		$("#lab_devnox_r")[0].disabled=true;
+		
+		if(devno.length==0)
+		{
+			$("#lab_devx")[0].style.display="none";
+			$("#devnox")[0].style.display="block";
+			$("#lab_devnox_r")[0].disabled=true;
+		}
+		else
+		{
+			$("#lab_devx")[0].style.display="block";
+			$("#lab_devx")[0].innerHTML=devno;
+			$("#devnox")[0].style.display="none";
+			//
+			$("#lab_devnox_r").val(devno);
+			$("#devnox")[0].disabled=true;
+		}
 	}
 	else
 	{
-		$("#lab_devx")[0].style.display="block";
-		$("#lab_devx")[0].innerHTML=devno;
-		$("#devnox")[0].style.display="none";
-		//
-		$("#lab_devnox_r").val(devno);
-		$("#devnox")[0].disabled=true;
+		if(devno.length==0)
+		{
+			$("#lab_devx")[0].style.display="none";
+			$("#devnox")[0].style.display="block";
+		}
+		else
+		{
+			$("#lab_devx")[0].style.display="block";
+			$("#lab_devx")[0].innerHTML=devno;
+			$("#devnox")[0].style.display="none";
+		}
 	}
 	//
 	$.layer({

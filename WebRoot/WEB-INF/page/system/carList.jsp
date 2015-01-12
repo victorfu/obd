@@ -32,7 +32,7 @@
 			<li><label>车辆编号：</label><input type="text" id="typeno" name="typeno" class="ipt100 inputDefault"  value="${typeno }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
-	        	<input type="button" onclick="saveCar('0','0','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
+	        	<input type="button" onclick="saveCar('${sessionScope.vts.roleID }','0','0','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
 	        </li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -79,7 +79,7 @@
 								<a href="javascript:unbindDev('${ls.cid }','${ls.dsn }')">解除绑定</a>&nbsp;&nbsp;
 							</c:otherwise>
 						</c:choose>
-						<a href="javascript:saveCar('1','${ls.cid }','${ls.dsn }','${ls.pp }','${ls.xh }','${fn:substring(ls.gcdt,0,10) }','${ls.cph }','${ls.cjh }','${ls.fdjh }','${ls.ys }','${ls.tx }','${ls.gj }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:saveCar('${sessionScope.vts.roleID }','1','${ls.cid }','${ls.dsn }','${ls.pp }','${ls.xh }','${fn:substring(ls.gcdt,0,10) }','${ls.cph }','${ls.cjh }','${ls.fdjh }','${ls.ys }','${ls.tx }','${ls.gj }')">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteCar('${ls.cid }','${status.count }')">删除</a>&nbsp;&nbsp;
 					</td>
 				</tr>
@@ -134,10 +134,20 @@
 	<div class="lab_ipt_item">
   		<span class="lab120">设备号：</span>
       	<div class="ipt-box">
-      		<input type="hidden" id="lab_devnox_r" name="devno"/>
-      		<label id="lab_devx"></label>
-      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" value="devno"></s:select>
-          	<span class="asterisk">*</span>
+      		<c:choose>
+      			<%-- 普通用户 --%>
+      			<c:when test="${sessionScope.vts.roleID eq 4 }">
+					<label id="lab_devx"></label>
+					<input type="text" id="devnox" name="devno" class="ipt_text_w150 inputDefault" maxlength="15"/>
+      			</c:when>
+				<%-- 管理员， 代理商 --%>
+      			<c:otherwise>
+      				<input type="hidden" id="lab_devnox_r" name="devno"/>
+		      		<label id="lab_devx"></label>
+		      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" value="devno"></s:select>
+		          	<span class="asterisk">*</span>	
+	      			</c:otherwise>	
+      		</c:choose>
       	</div>
   	</div>
   	<div class="lab_ipt_item">

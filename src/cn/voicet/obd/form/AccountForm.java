@@ -6,12 +6,11 @@ public class AccountForm {
 	private String devno;
 	private int proxyno;	//代理商编号
 	private String uname;
-	private String shareacc;
+	private String uacc;
 	
 	//edit acc info
 	private int ulevel;
 	private int aid;
-	private String uacc;
 	private String idcard;
 	private String idcardtype;
 	private String qq;
@@ -46,12 +45,6 @@ public class AccountForm {
 	}
 	public void setProxyno(int proxyno) {
 		this.proxyno = proxyno;
-	}
-	public String getShareacc() {
-		return shareacc;
-	}
-	public void setShareacc(String shareacc) {
-		this.shareacc = shareacc;
 	}
 	public String getUname() {
 		return uname;

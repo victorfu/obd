@@ -81,55 +81,8 @@
 #user_page form input.SUBMIT {font-weight:bold;}
 </style>
 <div id="user_page">
-<form id="form_user" action="<c:url value='user-reg.action'/>" method="post" style="float:left; width:620px;">
-    <h2>用户注册</h2>	
-	<table cellspacing="0" cellpadding="0">
-    	<tbody>
-    	<tr>
-    		<td class="th">账号：</td>		
-    		<td><input type="text" name="account" id="f_name" value="${account }" maxlength="20" class="TEXT" style="width:150px;"/>
-				<span id="name_msg">邮箱或手机号</span>
-			</td>
-    	</tr>
-    	<tr>
-    		<td class="th">登录密码：</td>
-    		<td><input type="password" name="password" id="f_pwd" value="${password }" class="TEXT" style="width:150px;"/>
-				<span id="password_msg">至少6位,必须是字母或特殊符合和数字结合</span>
-			</td>    		
-    	</tr>
-    	<tr>
-    		<td class="th">密码确认：</td>		
-    		<td><input type="password" name="pwd2" id="f_pwd2" class="TEXT" style="width:150px;"/></td>
-    	</tr>
-		<tr id="tr_email">
-    		<td class="th">设备：</td>
-    		<td>
-				<input type="text" name="devno" id="f_email" value="${devno }" class="TEXT" style="width:150px;"/>
-				<span id="email_tip"></span>
-			</td>    			
-    	</tr>
-    	<tr>
-    		<td class="th"></td>		
-			<td style="color:#f00">${errorMsg }</td>
-    	</tr>
-    	<tr class="buttons">
-    		<td class="th"></td>		
-			<td style="padding:20px 0;">
-    		<input type="submit" value="注册新用户 " class="BUTTON SUBMIT"/> <span id="error_msg" class="error_msg" style="display:none"></span>
-			<br/>
-			</td>
-    	</tr>
-	</tbody></table>
-</form>
-<div id="login_tip">
-	已有帐号？ <a href="<c:url value='index.action'/>">直接登录</a>
-	<h3>为什么要注册？</h3>
-	<ol>
-		<li>1.&nbsp;获取汽车最新状态</li>
-		<li>2.&nbsp;</li>
-	</ol>
-</div>
-<div class="clear"></div>
+    <h2>注册成功, 立即<a href="<c:url value='index.action'/>">登录</a>
+    	</h2>
 </div>
 <script type="text/javascript">
 <!--

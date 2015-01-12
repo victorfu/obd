@@ -30,7 +30,7 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -53,7 +53,7 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 		this.getJdbcTemplate().execute("{call web_user_car_update(?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.setInt("cid", carForm.getCid());
 				cs.setString("dsn", carForm.getDevno());
 				cs.setString("pp", carForm.getPinpai());
@@ -76,7 +76,7 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 		this.getJdbcTemplate().execute("{call web_user_car_remove(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.setInt("cid", carForm.getCid());
 				cs.execute();
 				return null;
@@ -89,7 +89,7 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_Dev_Available(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

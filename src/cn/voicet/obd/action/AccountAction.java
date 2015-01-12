@@ -38,10 +38,6 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 		DotSession ds = DotSession.getVTSession(request);
 		List<Map<String, Object>> list = accountDao.queryAccountList(ds, accountForm);
 		request.setAttribute("accList", list);
-		//查询代理商
-		List<Map<String, Object>> proxyList = accountDao.queryProxyList(ds);
-		request.setAttribute("proxyList", proxyList);
-		//
 		return "accountPage";
 	}
 	
@@ -49,7 +45,12 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	{
 		DotSession ds = DotSession.getVTSession(request);
 		//
-		log.info("uid:"+ds.roleID+", lev:"+ds.userlev+", proxyno:"+accountForm.getProxyno()+", uname:"+accountForm.getUname()+", shareacc:"+accountForm.getShareacc());
+		//代理商
+		if(ds.roleID.equals("3"))
+		{
+			accountForm.setUlevel(4);
+		}
+		log.info("uid:"+ds.userid+", ulevel:"+accountForm.getUlevel()+", aid:"+ds.agentid+", shareacc:"+accountForm.getUacc()+", uname:"+accountForm.getUname());
 		accountDao.addAccount(ds, accountForm);
 		return query();
 	}
@@ -57,6 +58,12 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	public String info()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		//普通用户
+		if(ds.roleID.equals("4"))
+		{
+			accountForm.setUid(ds.userid);
+			accountForm.setUlevel(Integer.valueOf(ds.roleID));
+		}
 		Map<String, Object> map = accountDao.getAccountInfo(accountForm);
 		request.setAttribute("accMap", map);
 		log.info("accMap:"+map);

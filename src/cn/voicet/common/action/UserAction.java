@@ -41,12 +41,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		Map<String, Object> map = userDao.userLogin(userForm);
 		log.info("user login map: "+map);
 		//
-		//ds.username=(String) map.get("username");
-		//ds.roleName = (String) map.get("rolename");
-		//ds.agttelnum = (String) map.get("telnum");
-		ds.roleID=(String) map.get("uid");
-		ds.userlev = Integer.valueOf((String) map.get("lev"));
 		ds.agentid = Integer.valueOf((String) map.get("anentid"));
+		ds.userid = Integer.valueOf((String) map.get("uid"));
+		ds.roleID=(String) map.get("lev");
+		ds.username=(String) map.get("name");
+		//ds.carnum=Integer.valueOf((String) map.get("cid"));
+		//ds.devnum=Integer.valueOf((String) map.get("dsn"));
 		//
 		ds.password = userForm.getPassword();
 		ds.account=userForm.getAccount();
@@ -54,7 +54,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		log.info("rand:"+request.getSession().getAttribute("rand"));
 		log.info("roleID:"+ds.roleID);
 		//
-		if(ds.roleID.equals("1") || ds.roleID.equals("2") || ds.roleID.equals("3"))
+		if(ds.roleID.equals("1") || ds.roleID.equals("2") || ds.roleID.equals("3") || ds.roleID.equals("4"))
 		{
 			json.put("status", "ok");
 			log.info("login complete");
@@ -119,14 +119,38 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 	 */
 	public String register()
 	{
-		
 		return "userRegPage";
 	}
 	
 	public String reg()
 	{
-		userDao.registerUser(userForm);
-		return "regSuccessPage";
+		request.setAttribute("errorMsg", "");
+		log.info("account:"+userForm.getAccount()+", password:"+userForm.getPassword()+", devno:"+userForm.getDevno());
+		String res = userDao.registerUser(userForm);
+		log.info("res:"+res);
+		if(res.equals("0"))
+		{
+			return "regSuccessPage";
+		}
+		else if(res.equals("-1"))
+		{
+			request.setAttribute("errorMsg", "账号已存在！");
+			return "userRegPage";
+		}
+		else if(res.equals("-2"))
+		{
+			request.setAttribute("errorMsg", "设备状态不可用！");
+			return "userRegPage";
+		}
+		else if(res.equals("-3"))
+		{
+			request.setAttribute("errorMsg", "设备不存在！");
+			return "userRegPage";
+		}
+		else
+		{
+			return "userRegPage";
+		}
 	}
 	
 }

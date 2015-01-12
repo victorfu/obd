@@ -30,7 +30,7 @@ public class ProxyDaoImpl extends BaseDaoImpl implements ProxyDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_Agent_Query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -52,7 +52,7 @@ public class ProxyDaoImpl extends BaseDaoImpl implements ProxyDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_agent_Query(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.setInt("aid", proxyForm.getAid());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();

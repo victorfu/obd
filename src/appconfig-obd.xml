@@ -11,11 +11,14 @@
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="代理商管理" action="proxy-query.action" />
-			<fun name="车辆行程查询" action="trip-query.action" />
 		</grp>
-		<grp name="统计">
-			<fun name="数据查询" action="javascript:;" />
-			<fun name="数据统计" action="javascript:;" />
+		<grp name="数据查询">
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="车辆提醒" action="tips-query.action" />
+			<fun name="车辆告警" action="warn-query.action" />
+			<fun name="实时数据" action="rt-query.action" />
+			<fun name="驾驶习惯" action="hbt-query.action" />
+			<fun name="专业数据" action="group-query.action" />
 		</grp>
 	</role>
 	<role roleid="2" describle="管理员">
@@ -25,11 +28,14 @@
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="代理商管理" action="proxy-query.action" />
-			<fun name="车辆行程查询" action="trip-query.action" />
 		</grp>
-		<grp name="统计">
-			<fun name="数据查询" action="javascript:;" />
-			<fun name="数据统计" action="javascript:;" />
+		<grp name="数据查询">
+			<fun name="车辆提醒" action="javascript:;" />
+			<fun name="车辆告警" action="javascript:;" />
+			<fun name="实时数据" action="javascript:;" />
+			<fun name="驾驶习惯" action="javascript:;" />
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="专业数据" action="javascript:;" />
 		</grp>
 	</role>
 	<role roleid="3" describle="代理商">
@@ -37,12 +43,28 @@
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 	    </grp>
+	    <grp name="数据查询">
+			<fun name="车辆提醒" action="javascript:;" />
+			<fun name="车辆告警" action="javascript:;" />
+			<fun name="实时数据" action="javascript:;" />
+			<fun name="驾驶习惯" action="javascript:;" />
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="专业数据" action="javascript:;" />
+		</grp>
 	</role>
 	<role roleid="4" describle="用户">
 		<grp name="日常工作">
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="资料维护" action="account-info.action" />
 	    </grp>
+	    <grp name="数据查询">
+			<fun name="车辆提醒" action="javascript:;" />
+			<fun name="车辆告警" action="javascript:;" />
+			<fun name="实时数据" action="javascript:;" />
+			<fun name="驾驶习惯" action="javascript:;" />
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="专业数据" action="javascript:;" />
+		</grp>
 	</role>
 	
 	<list name="dev_state" describle="设备状态">
@@ -50,6 +72,12 @@
 		<item id="10" name="未绑定" />
 		<item id="100" name="已绑定" />
 	</list>
+	<list name="card_type" describle="设备状态">
+		<item id="1" name="身份证" />
+		<item id="2" name="军官证" />
+	</list>
+	
+	
 	
 	<list name="callstate" describle="呼叫状态">
 		<item id="0" name="未呼叫" />

@@ -97,24 +97,29 @@
     <!--POP ADDDEV START-->
     <div id="popAddAccountDiv" style="display:none;"> 
 		<form id="form2" name="form2" action="<c:url value='/account-addAccount.action'/>" method="post">
-	    
-		    <div class="lab_ipt_item">
-		    	<span class="lab120">代理商：</span>
-		        <div class="ipt-box">
-		        	<c:if test="${sessionScope.vts.roleID eq 1 }">
-		        		<s:select id="proxynox" name="proxyno" list="#request.proxyList" cssStyle="width:160px; height:26px;" listKey="aid" listValue="aname" value="proxyno"></s:select>
-		            </c:if>
-		            <c:if test="${sessionScope.vts.roleID eq 2 }">
-						<label>${sessionScope.vts.agentid }</label>	
-						<input type="hidden" name="proxyno" value="${sessionScope.vts.agentid }"/>	            	
-		            </c:if>
-		        </div>
-		    </div>
-	    
+	        	<c:choose>
+	        		<c:when test="${sessionScope.vts.roleID eq 1 }">
+	        			<div class="lab_ipt_item">
+		        			<span class="lab120">用户级别：</span>
+		        			<div class="ipt-box">
+		        			<s:select name="ulevel" list="#{2:'管理员',3:'代理商',4:'用户'}" listKey="key" listValue="value" cssStyle="width:160px; height:26px;"></s:select>
+		        			 </div>
+	   					</div>
+	        		</c:when>
+	        		<c:when test="${sessionScope.vts.roleID eq 2 }">
+	        			<div class="lab_ipt_item">
+	        				<span class="lab120">用户级别：</span>
+	        				<div class="ipt-box">
+			        			<s:select name="ulevel" list="#{3:'代理商',4:'用户'}" listKey="key" listValue="value" cssStyle="width:160px; height:26px;"></s:select>
+			        		 </div>
+	    				</div>
+	    			</c:when>
+	        	</c:choose>
+	       
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">用户名：</span>
+	    	<span class="lab120">账号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="unamex" name="uname" class="ipt_text_w150 inputDefault" maxlength="15"/>
+	        	<input type="text" id="uaccx" name="uacc" class="ipt_text_w150 inputDefault"  maxlength="15"/>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
@@ -125,9 +130,9 @@
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">共享接收者：</span>
+	    	<span class="lab120">用户姓名：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="shareaccx" name="shareacc" class="ipt_text_w150 inputDefault"  maxlength="15"/>
+	        	<input type="text" id="unamex" name="uname" class="ipt_text_w150 inputDefault" maxlength="15"/>
 	            <span class="asterisk">*</span>
 	        </div>
 	    </div>

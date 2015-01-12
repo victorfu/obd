@@ -13,7 +13,6 @@ public interface AccountDao {
 			AccountForm accountForm);
 	void queryCarList(AccountForm accountForm);
 	void addAccount(DotSession ds, AccountForm accountForm);
-	List<Map<String, Object>> queryProxyList(DotSession ds);
 	void deleteAccount(DotSession ds, AccountForm accountForm);
 	Map<String, Object> getAccountInfo(AccountForm accountForm);
 	void saveAccountInfo(DotSession ds, AccountForm accountForm);

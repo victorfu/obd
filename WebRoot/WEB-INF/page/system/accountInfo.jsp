@@ -30,10 +30,7 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">证件类型：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="idcardtypex" name="idcardtype" value="${accMap.ct }" maxlength="10" class="ipt_text_w150 inputDefault" />
-	        	
-	        	
-	        	
+	        	<s:select id="idcardtypex" name="idcardtype" list="#application.vta.GetList('card_type')" listKey="id" cssStyle="width:160px; height:28px;" headerKey="0" headerValue="全部" listValue="str" value="#request.accMap.ct"></s:select>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">

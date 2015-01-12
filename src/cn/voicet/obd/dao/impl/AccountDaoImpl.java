@@ -29,29 +29,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_Query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
-				cs.execute();
-				ResultSet rs = cs.getResultSet();
-				Map<String, Object> map = null;
-				List<Object> list = new ArrayList<Object>();
-				if(rs!=null){
-					while (rs.next()) {
-						 map = new HashMap<String, Object>();
-						 VTJime.putMapDataByColName(map, rs);
-		        		 list.add(map);
-					}
-				}
-				return list;
-			}
-		});
-	}
-	
-	public List<Map<String, Object>> queryProxyList(final DotSession ds) {
-		log.info("sp:web_Agent_Query(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_Agent_Query(?)}", new CallableStatementCallback() {
-			public Object doInCallableStatement(CallableStatement cs)
-					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
+				cs.setInt("uid", ds.userid);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -126,11 +104,11 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", ds.roleID);
-				cs.setInt("lev", ds.userlev);
-				cs.setInt("aid", accountForm.getProxyno());
+				cs.setInt("uid", ds.userid);
+				cs.setInt("lev", accountForm.getUlevel());
+				cs.setInt("aid", ds.agentid);
+				cs.setString("subaccount", accountForm.getUacc());
 				cs.setString("uname", accountForm.getUname());
-				cs.setString("subaccount", accountForm.getShareacc());
 				cs.execute();
 				return null;
 			}

@@ -73,9 +73,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		});
 	}
 
-	public void registerUser(final UserForm userForm) {
-		log.info("sp:web_user_register(?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_register(?,?,?,?,?)}", new CallableStatementCallback() {
+	public String registerUser(final UserForm userForm) {
+		log.info("sp:web_user_register(?,?,?,?,?,?)");
+		return (String)this.getJdbcTemplate().execute("{call web_user_register(?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setString("parentid", "1");
@@ -83,8 +83,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 				cs.setString("account", userForm.getAccount());
 				cs.setString("pwd", userForm.getPassword());
 				cs.setString("devno", userForm.getDevno());
+				cs.registerOutParameter("retv", Types.VARCHAR);
 				cs.execute();
-				return null;
+				return cs.getString("retv");
 			}
 		});
 	}

@@ -31,8 +31,13 @@ public class DotSession {
 	public String roleName;
 	public String agttelnum;
 	public String roleID;
+	public int userid;
 	public int userlev;		//用户级别
 	public int agentid;	//代理商编号
+	public int devnum;
+	public int carnum;
+	
+	
 	public SubPathTitle subPathTitle;
 	
 	
@@ -587,6 +592,24 @@ public class DotSession {
 	}
 	public void setAgentid(int agentid) {
 		this.agentid = agentid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public int getDevnum() {
+		return devnum;
+	}
+	public void setDevnum(int devnum) {
+		this.devnum = devnum;
+	}
+	public int getCarnum() {
+		return carnum;
+	}
+	public void setCarnum(int carnum) {
+		this.carnum = carnum;
 	}
 }
 
