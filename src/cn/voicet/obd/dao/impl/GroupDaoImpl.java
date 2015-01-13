@@ -16,22 +16,23 @@ import org.springframework.stereotype.Repository;
 import cn.voicet.common.dao.impl.BaseDaoImpl;
 import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
-import cn.voicet.obd.dao.TipsDao;
-import cn.voicet.obd.form.TipsForm;
+import cn.voicet.obd.dao.GroupDao;
+import cn.voicet.obd.form.GroupForm;
 
-@Repository(TipsDao.SERVICE_NAME)
+@Repository(GroupDao.SERVICE_NAME)
 @SuppressWarnings("unchecked")
-public class TipsDaoImpl extends BaseDaoImpl implements TipsDao {
-	public static final Logger log = Logger.getLogger(TipsDaoImpl.class);
+public class GroupDaoImpl extends BaseDaoImpl implements GroupDao {
+	public static final Logger log = Logger.getLogger(GroupDaoImpl.class);
 
-	public List<Map<String, Object>> queryTipsList(final DotSession ds, final TipsForm tipsForm) {
-		log.info("sp:dev_Data_Alarm_Query(?,?,?,?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_Data_Alarm_Query(?,?,?,?,?)}", new CallableStatementCallback() {
+	public List<Map<String, Object>> queryGroupList(final DotSession ds, final GroupForm groupForm) {
+		log.info("flag:"+groupForm.getFlag());
+		String sp = "dev_Data_group"+groupForm.getFlag()+"_Query(?,?,?,?)";
+		log.info("sp:"+sp);
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call "+sp+"}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", tipsForm.getChepai());
-				cs.setInt("typs", tipsForm.getType());
+				cs.setString("cph", groupForm.getChepai());
 				cs.setString("sdt", ds.cursdttm);
 				cs.setString("edt", ds.curedttm);
 				cs.execute();

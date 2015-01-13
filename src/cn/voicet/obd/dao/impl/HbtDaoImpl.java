@@ -16,22 +16,21 @@ import org.springframework.stereotype.Repository;
 import cn.voicet.common.dao.impl.BaseDaoImpl;
 import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
-import cn.voicet.obd.dao.TipsDao;
-import cn.voicet.obd.form.TipsForm;
+import cn.voicet.obd.dao.HbtDao;
+import cn.voicet.obd.form.HbtForm;
 
-@Repository(TipsDao.SERVICE_NAME)
+@Repository(HbtDao.SERVICE_NAME)
 @SuppressWarnings("unchecked")
-public class TipsDaoImpl extends BaseDaoImpl implements TipsDao {
-	public static final Logger log = Logger.getLogger(TipsDaoImpl.class);
+public class HbtDaoImpl extends BaseDaoImpl implements HbtDao {
+	public static final Logger log = Logger.getLogger(HbtDaoImpl.class);
 
-	public List<Map<String, Object>> queryTipsList(final DotSession ds, final TipsForm tipsForm) {
-		log.info("sp:dev_Data_Alarm_Query(?,?,?,?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_Data_Alarm_Query(?,?,?,?,?)}", new CallableStatementCallback() {
+	public List<Map<String, Object>> queryHbtList(final DotSession ds, final HbtForm hbtForm) {
+		log.info("sp:dev_Data_HBT_Query(?,?,?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_Data_HBT_Query(?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", tipsForm.getChepai());
-				cs.setInt("typs", tipsForm.getType());
+				cs.setString("cph", hbtForm.getChepai());
 				cs.setString("sdt", ds.cursdttm);
 				cs.setString("edt", ds.curedttm);
 				cs.execute();

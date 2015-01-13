@@ -33,7 +33,7 @@
    	<form action="<c:url value='trip-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-	   		<li><label>车辆编号：</label><input type="text" name="cid" value="${cid }" class="ipt100 inputDefault"/></li>
+	   		<li><label>车牌号码：</label><input type="text" name="chepai" value="${chepai }" class="ipt100 inputDefault"/></li>
 			<li><label>开始日期：</label><input type="text" id="sdt" name="sdt" class="Wdate inputDefault" style="width:90px; height:18px;" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'edt\')||\'2050-01-01\'}',skin:'whyGreen'})" value="<s:property value="#session.vts.cursdt"/>"/></li>
 	        <li><label>结束日期：</label><input type="text" id="edt" name="edt" class="Wdate inputDefault" style="width:90px; height:18px;" onclick="WdatePicker({minDate:'#F{$dp.$D(\'sdt\')}',maxDate:'%y-%M-%d',skin:'whyGreen'})" value="<s:property value="#session.vts.curedt"/>"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
@@ -51,7 +51,7 @@
 			<thead class="tab_head">
                  <tr>
                      <th width="8%">行程编号</th>
-                     <th width="8%">车辆编号</th>
+                     <th width="8%">车牌号码</th>
                      <th width="12%">开始时间</th>
                      <th width="12%">结束时间</th>
                      <th width="6%">电瓶电压</th>
@@ -63,7 +63,7 @@
                	<c:forEach items="${tripList }" var="ls">
 				<tr align="center">
 					<td>${ls.tid }</td>
-					<td>${ls.cid }</td>
+					<td>${ls.cph }</td>
 					<td>${fn:substring(ls.sdt,0,19) }</td>
 					<td>${fn:substring(ls.edt,0,19) }</td>
 					<td>${ls.v1 }</td>

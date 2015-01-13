@@ -1,8 +1,8 @@
 package cn.voicet.obd.form;
 
-public class TipsForm {
+public class WarnForm {
 	private String chepai;	//车牌
-	private int type = -1;	//提醒类型	-1:所有提醒,2:启动,3:熄火,4:休眠,5:设备掉电,6:协议不支持或通讯失败
+	private int type=0;		//告警类型	0:所有告警,7:超速,8:低电压,9:车辆碰撞,11:车辆震动
 	private String sdttm;
 	private String edttm;
 	public String getChepai() {

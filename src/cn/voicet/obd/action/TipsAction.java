@@ -30,11 +30,18 @@ public class TipsAction extends BaseAction implements ModelDriven<TipsForm>{
 	
 	/**
 	 * 查询车辆列表
+	 * @param deviceForm 
 	 * @return
 	 */
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		if(null!=tipsForm.getSdttm() || null!=tipsForm.getEdttm())
+		{
+			ds.cursdttm = tipsForm.getSdttm();
+			ds.curedttm = tipsForm.getEdttm();
+		}
+		log.info("chepai:"+tipsForm.getChepai()+", type:"+tipsForm.getType()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
 		List<Map<String, Object>> list = tipsDao.queryTipsList(ds, tipsForm);
 		request.setAttribute("tipList", list);
 		return "tipsPage";

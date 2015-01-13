@@ -18,7 +18,10 @@
 			<fun name="车辆告警" action="warn-query.action" />
 			<fun name="实时数据" action="rt-query.action" />
 			<fun name="驾驶习惯" action="hbt-query.action" />
-			<fun name="专业数据" action="group-query.action" />
+			<fun name="专业数据1" action="group-query.action?flag=1" />
+			<fun name="专业数据2" action="group-query.action?flag=2" />
+			<fun name="专业数据3" action="group-query.action?flag=3" />
+			<fun name="专业数据4" action="group-query.action?flag=4" />
 		</grp>
 	</role>
 	<role roleid="2" describle="管理员">
@@ -76,6 +79,23 @@
 		<item id="1" name="身份证" />
 		<item id="2" name="军官证" />
 	</list>
+	<list name="tips_type" describle="车辆提醒">
+		<item id="-1" name="所有"/>
+		<item id="2" name="启动"/>
+		<item id="3" name="熄火"/>
+		<item id="4" name="休眠"/>
+		<item id="5" name="设备掉电"/>
+		<item id="6" name="协议不支持或通讯失败"/>
+	</list>
+	<list name="warn_type" describle="车辆告警">
+		<item id="0" name="所有"/>
+		<item id="7" name="超速"/>
+		<item id="8" name="低电压"/>
+		<item id="9" name="车辆碰撞"/>
+		<item id="11" name="车辆震动"/>
+	</list>
+	
+	
 	
 	
 	

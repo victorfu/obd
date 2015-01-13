@@ -5,6 +5,7 @@ public class TripForm {
 	private String cid;
 	private String sdt;
 	private String edt;
+	private String chepai;
 	public String getCid() {
 		return cid;
 	}
@@ -22,5 +23,18 @@ public class TripForm {
 	}
 	public void setEdt(String edt) {
 		this.edt = edt;
+	}
+	public String getChepai() {
+		return chepai;
+	}
+	public void setChepai(String chepai) {
+		if(chepai.length()==0)
+		{
+			this.chepai = null;
+		}
+		else
+		{
+			this.chepai = chepai;			
+		}
 	}
 }

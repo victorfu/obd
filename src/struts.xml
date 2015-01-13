@@ -38,13 +38,6 @@
 		<action name="car-*" class="carAction" method="{1}">
 			<result name="carPage">/WEB-INF/page/system/carList.jsp</result>
 		</action>
-		
-		<!-- 车辆行程查询 -->
-		<action name="trip-*" class="tripAction" method="{1}">
-			<result name="tripPage">/WEB-INF/page/system/tripList.jsp</result>
-			<result name="mapPage">/WEB-INF/page/system/mapList.jsp</result>
-		</action>
-		
 		<!-- 用户子账号管理 -->
 		<action name="account-*" class="accountAction" method="{1}">
 			<result name="accountPage">/WEB-INF/page/system/accountList.jsp</result>
@@ -56,6 +49,36 @@
 		<action name="proxy-*" class="proxyAction" method="{1}">
 			<result name="proxyPage">/WEB-INF/page/system/proxyList.jsp</result>
 			<result name="devPage">/WEB-INF/page/system/proxy_dev_list.jsp</result>
+		</action>
+		
+		
+		<!-- 车辆行程查询 -->
+		<action name="trip-*" class="tripAction" method="{1}">
+			<result name="tripPage">/WEB-INF/page/system/tripList.jsp</result>
+			<result name="mapPage">/WEB-INF/page/system/mapList.jsp</result>
+		</action>
+		<!-- 车辆提醒查询 -->
+		<action name="tips-*" class="tipsAction" method="{1}">
+			<result name="tipsPage">/WEB-INF/page/system/tipsList.jsp</result>
+		</action>
+		<!-- 车辆告警查询 -->
+		<action name="warn-*" class="warnAction" method="{1}">
+			<result name="warnPage">/WEB-INF/page/system/warnList.jsp</result>
+		</action>
+		<!-- 实时数据查询 -->
+		<action name="rt-*" class="rtAction" method="{1}">
+			<result name="rtPage">/WEB-INF/page/system/rtList.jsp</result>
+		</action>
+		<!-- 驾驶习惯查询 -->
+		<action name="hbt-*" class="hbtAction" method="{1}">
+			<result name="hbtPage">/WEB-INF/page/system/hbtList.jsp</result>
+		</action>
+		<!-- 专业数据查询 -->
+		<action name="group-*" class="groupAction" method="{1}">
+			<result name="groupPage1">/WEB-INF/page/system/group1List.jsp</result>
+			<result name="groupPage2">/WEB-INF/page/system/group2List.jsp</result>
+			<result name="groupPage3">/WEB-INF/page/system/group3List.jsp</result>
+			<result name="groupPage4">/WEB-INF/page/system/group4List.jsp</result>
 		</action>
 		
 		
@@ -103,8 +126,8 @@
 		<action name="deleteProxy" class="proxyAction" method="deleteProxy">
 			<result type="json"></result>
 		</action>
-		
-		<action name="getmapdata" class="tripAction" method="deleteProxy">
+		<!-- 获取地图数据 -->
+		<action name="getmapdata" class="tripAction" method="getmapdata">
 			<result type="json"></result>
 		</action>
 		

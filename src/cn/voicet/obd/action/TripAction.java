@@ -38,7 +38,7 @@ public class TripAction extends BaseAction implements ModelDriven<TripForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		log.info("cid:"+tripForm.getCid()+", sdt:"+tripForm.getSdt()+", edt:"+tripForm.getEdt());
+		log.info("chepai:"+tripForm.getChepai()+", sdt:"+tripForm.getSdt()+", edt:"+tripForm.getEdt());
 		if(null!=tripForm.getSdt() || null!=tripForm.getEdt())
 		{
 			ds.cursdt = tripForm.getSdt();

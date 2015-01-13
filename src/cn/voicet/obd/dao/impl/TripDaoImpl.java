@@ -25,22 +25,12 @@ public class TripDaoImpl extends BaseDaoImpl implements TripDao {
 	public static final Logger log = Logger.getLogger(TripDaoImpl.class);
 
 	public List<Map<String, Object>> queryTripList(final DotSession ds, final TripForm tripForm) {
-		log.info("sp:dev_data_trip_query(?,?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_data_trip_query(?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:dev_data_trip_query(?,?,?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_data_trip_query(?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				if("".equals(tripForm.getCid()))
-				{
-					cs.setString("cid", null);
-				}
-				else if(null!=tripForm.getCid())
-				{
-					cs.setString("cid", tripForm.getCid());
-				}
-				else
-				{
-					cs.setString("cid", null);
-				}
+				cs.setInt("uid", ds.userid);
+				cs.setString("cph", tripForm.getChepai());
 				cs.setString("sdt", ds.cursdt);
 				cs.setString("edt", ds.curedt);
 				cs.execute();

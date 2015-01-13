@@ -57,10 +57,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<bean id="huiFangDao" class="cn.voicet.gc.dao.impl.HuiFangDaoImpl">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	
 	<!-- jdbc事务管理器 -->  
   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
     	<property name="dataSource" ref ="dataSource"/>  

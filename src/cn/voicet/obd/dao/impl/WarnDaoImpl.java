@@ -16,22 +16,22 @@ import org.springframework.stereotype.Repository;
 import cn.voicet.common.dao.impl.BaseDaoImpl;
 import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
-import cn.voicet.obd.dao.TipsDao;
-import cn.voicet.obd.form.TipsForm;
+import cn.voicet.obd.dao.WarnDao;
+import cn.voicet.obd.form.WarnForm;
 
-@Repository(TipsDao.SERVICE_NAME)
+@Repository(WarnDao.SERVICE_NAME)
 @SuppressWarnings("unchecked")
-public class TipsDaoImpl extends BaseDaoImpl implements TipsDao {
-	public static final Logger log = Logger.getLogger(TipsDaoImpl.class);
+public class WarnDaoImpl extends BaseDaoImpl implements WarnDao {
+	public static final Logger log = Logger.getLogger(WarnDaoImpl.class);
 
-	public List<Map<String, Object>> queryTipsList(final DotSession ds, final TipsForm tipsForm) {
+	public List<Map<String, Object>> queryWarnList(final DotSession ds, final WarnForm warnForm) {
 		log.info("sp:dev_Data_Alarm_Query(?,?,?,?,?)");
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call dev_Data_Alarm_Query(?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", tipsForm.getChepai());
-				cs.setInt("typs", tipsForm.getType());
+				cs.setString("cph", warnForm.getChepai());
+				cs.setInt("typs", warnForm.getType());
 				cs.setString("sdt", ds.cursdttm);
 				cs.setString("edt", ds.curedttm);
 				cs.execute();
