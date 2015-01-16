@@ -11,9 +11,6 @@
 	<link type="text/css" rel="stylesheet" href="<c:url value='css/dtree.css'/>" />
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='js/CM.dtree.js'/>"></script>
-	<!-- menu plugin start -->
-	<link type="text/css" href="<c:url value='css/menu.css'/>" rel="stylesheet" />
-	<script type="text/javascript" src="<c:url value='js/menu.js?v=8'/>"></script>
 </head>
 <body>
 <div id="container">

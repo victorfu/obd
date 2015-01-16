@@ -69,9 +69,14 @@
 					<td>${ls.zlc }</td>
 					<td>${ls.xscs }</td>
 					<td>
-						<c:if test="${ls.flag eq 1 }">
-							<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&devno=${ls.dsn }">分配</a>
-						</c:if>
+						<c:choose>
+							<c:when test="${ls.flag eq 1 }">
+								<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&isbind=1&parentid=${parentid }">分配</a>	
+							</c:when>
+							<c:otherwise>
+								<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&isbind=0&parentid=${parentid }">取消</a>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				</c:forEach>

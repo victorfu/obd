@@ -26,26 +26,16 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">代理商管理</h3>
-   	<form name="form1" action="<c:url value='/account-query.action'/>" method="post">
-   	<input type="hidden" id="pageflag" name="pageflag" value=""/>
-	<div class="queryDiv">
-	   	<ul class="queryWrap_ul">
-			<li><input type="button" onclick="history.go(-1)" class="btn4" value="返&nbsp;&nbsp;回"/></li>
-		</ul>
-	</div>
-    </form>
-	<div class="content_List568">
+	<h3 class="h3_title">分配设备<input type="button" onclick="history.go(-1)" value="返回"/></h3>
+	<div class="content_List615">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">设备</th>
-                     <th width="4%">姓名</th>
+                     <th width="6%">设备号</th>
                      <th width="8%">状态</th>
                      <th width="6%">厂家</th>
                      <th width="6%">型号</th>
-                     <th width="4%">模式</th>
-                     <th width="12%">设备数</th>
+                     <th width="12%">有效期</th>
                      <th width="12%">创建日期</th>
                      <th width="12%">分配</th>
                  </tr>
@@ -54,7 +44,6 @@
 				<c:forEach items="${devList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.dsn }</td>
-					<td>${ls.vid }</td>
 					<td>
 						<c:if test="${ls.state eq 0 }">停用</c:if>
 						<c:if test="${ls.state eq 10 }">未绑定</c:if>
@@ -62,9 +51,8 @@
 					</td>
 					<td>${ls.cj }</td>
 					<td>${ls.xh }</td>
-					<td>${ls.sdt }</td>
-					<td>${ls.edt }</td>
-					<td>${ls.cdt }</td>
+					<td>${fn:substring(ls.ydt,0,19) }</td>
+					<td>${fn:substring(ls.cdt,0,19) }</td>
 					<td>
 						<c:choose>
 							<c:when test="${aid eq ls.aid}">

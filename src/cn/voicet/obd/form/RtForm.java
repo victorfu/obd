@@ -1,6 +1,9 @@
 package cn.voicet.obd.form;
 
 public class RtForm {
+	private String curid;
+	private String qchepai;
+	
 	private String chepai;	//车牌
 	private int type=0;		//告警类型	0:所有告警,7:超速,8:低电压,9:车辆碰撞,11:车辆震动
 	private String sdttm;
@@ -35,5 +38,17 @@ public class RtForm {
 	}
 	public void setEdttm(String edttm) {
 		this.edttm = edttm;
+	}
+	public String getCurid() {
+		return curid;
+	}
+	public void setCurid(String curid) {
+		this.curid = curid;
+	}
+	public String getQchepai() {
+		return qchepai;
+	}
+	public void setQchepai(String qchepai) {
+		this.qchepai = qchepai;
 	}
 }

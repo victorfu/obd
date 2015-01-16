@@ -50,8 +50,8 @@
 		
 	<div class="content_List450" id="mapview">
 		<input type="hidden" id="cidx" value="${cid }"/>
-		<input type="hidden" id="sdtx" value="${sdt }"/>
-		<input type="hidden" id="edtx" value="${edt }"/>
+		<input type="hidden" id="sdtx" value="${sdttm }"/>
+		<input type="hidden" id="edtx" value="${edttm }"/>
 		<div id="allmap"></div>
 	</div>
 	<div id="mapdata"></div>
@@ -104,7 +104,7 @@
 		var e = $("#edtx").val();
 		$.ajax({
 			url : 'getmapdata.action',
-			data:{cid:c,sdt:s,edt:e},
+			data:{cid:c,sdttm:s,edttm:e},
 			type : "post",
 			cache : false,
 			success : function(data) {

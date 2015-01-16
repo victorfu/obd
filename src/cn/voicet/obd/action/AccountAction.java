@@ -89,7 +89,7 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	public String viewCar()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		log.info("uid:"+accountForm.getUid());
+		log.info("uid:"+accountForm.getUid()+", parentid:"+accountForm.getParentid());
 		List<Map<String, Object>> list = accountDao.queryCarList(ds, accountForm);
 		request.setAttribute("carList", list);
 		return "accountCarPage";
@@ -97,8 +97,8 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	
 	public String fenpei()
 	{
-		log.info("uid:"+accountForm.getUid()+", cid:"+accountForm.getCid()+", devno:"+accountForm.getDevno());
-		accountDao.queryCarList(accountForm);
+		log.info("uid:"+accountForm.getUid()+", cid:"+accountForm.getCid()+", isbind:"+accountForm.getIsbind());
+		accountDao.bindCar(accountForm);
 		return viewCar();
 	}
 }

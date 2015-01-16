@@ -36,21 +36,20 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null==deviceForm.getState() || deviceForm.getState().equals("-1"))
+		if(null==deviceForm.getQstate() || deviceForm.getQstate().equals("-1"))
 		{
 			deviceForm.setState(null);
 		}
 		else
 		{
-			deviceForm.setState(deviceForm.getState());
+			deviceForm.setQstate(deviceForm.getQstate());
 		}
-		log.info("devno:"+deviceForm.getDevno()+", proxy:"+deviceForm.getProxy()+", sdttm:"+deviceForm.getSdttm()+", edt:"+deviceForm.getEdttm()+", state:"+deviceForm.getState());
-		if(null!=deviceForm.getSdttm() || null!=deviceForm.getEdttm())
+		if(null!=deviceForm.getQsdttm() || null!=deviceForm.getQedttm())
 		{
-			ds.cursdttm = deviceForm.getSdttm();
-			ds.curedttm = deviceForm.getEdttm();
+			ds.cursdttm = deviceForm.getQsdttm();
+			ds.curedttm = deviceForm.getQedttm();
 		}
-		log.info("ds cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		log.info("agentid:"+ds.agentid+", qdevno:"+deviceForm.getQdevno()+", sdttm:"+ds.cursdttm+", edt:"+ds.curedttm+", qstate:"+deviceForm.getQstate());
 		List<Map<String, Object>> list = deviceDao.queryDeviceList(ds, deviceForm);
 		request.setAttribute("devList", list);
 		//
@@ -110,7 +109,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String saveDevice()
 	{
-		log.info("devno:"+deviceForm.getDevno()+",proxy:"+deviceForm.getProxy()+", type:"+deviceForm.getType()+", state:"+deviceForm.getState()+", devxy:"+deviceForm.getDevxh()+", valdt:"+deviceForm.getValdt()+", identi:"+deviceForm.getIdenti());
+		log.info("devno:"+deviceForm.getDevno()+",changj:"+deviceForm.getChangj()+", type:"+deviceForm.getType()+", state:"+deviceForm.getState()+", devxy:"+deviceForm.getDevxh()+", valdt:"+deviceForm.getValdt()+", identi:"+deviceForm.getIdenti());
 		deviceDao.saveDevice(deviceForm);
 		log.info("save device["+deviceForm.getDevno()+"] complete");
 		return query();
@@ -133,7 +132,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String type()
 	{
-		log.info("typeno:"+deviceForm.getTypeno());
+		log.info("qtpname:"+deviceForm.getQtpname());
 		List<Map<String, Object>> list = deviceDao.queryDeviceTypeList(deviceForm);
 		request.setAttribute("typeList", list);
 		return "deviceTypePage";

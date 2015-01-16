@@ -27,41 +27,25 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">代理商管理</h3>
-   	<form name="form1" action="<c:url value='/account-query.action'/>" method="post">
-   	<input type="hidden" id="pageflag" name="pageflag" value=""/>
-	<div class="queryDiv_h80">
-	   	<ul class="queryWrap_ul">
-			<li><label>设备号：</label><input type="text" name="q_pino" class="ipt100 inputDefault" value="${q_pino }" maxlength="20"/></li>
-			<li><label>代理商：</label><input type="text" name="q_caryear" class="ipt60 inputDefault" value="${q_caryear }" maxlength="8"/></li>
-	        <li><label>批次号：</label><input type="text" name="q_chuxcs" class="ipt60 inputDefault" value="${q_chuxcs }" maxlength="8"/></li>
-	        <li><label>导入日期：</label><input type="text" name="q_chephm" class="ipt100 inputDefault" value="${q_chephm }" maxlength="20"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-			<li>
-	        	<label>车牌号码：</label>
-	        	<input type="text" name="q_uname" class="ipt100 inputDefault" value="${q_uname }" maxlength="20"/>
-	        </li>	       
-	        <li>
-	        	<label>用户姓名：</label>
-	        	<input type="text" name="q_mobile" class="ipt100 inputDefault" value="${q_mobile }" maxlength="11"/>
-	        </li>
+   	<form name="form1" action="<c:url value='/proxy-query.action'/>" method="post">
+	<div class="queryDiv">
+		<ul class="queryWrap_ul">
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li><input type="button" onclick="saveProxy('0','0','','','','','','','','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">编号</th>
                      <th width="4%">姓名</th>
                      <th width="8%">启用</th>
-                     <th width="4%">地址</th>
+                     <th width="8%">地址</th>
                      <th width="6%">电话</th>
                      <th width="4%">模式</th>
-                     <th width="12%">设备数</th>
+                     <th width="4%">设备数</th>
                      <th width="12%">创建日期</th>
                      <th width="12%">操作</th>
                  </tr>
@@ -69,18 +53,17 @@
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${proxyList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.aid }</td>
 					<td>${ls.aname }</td>
 					<td>${ls.ienable }</td>
 					<td>${ls.addr }</td>
 					<td>${ls.tel }</td>
 					<td>${ls.mode }</td>
 					<td>${ls.devcount }</td>
-					<td>${ls.crdt }</td>
+					<td>${fn:substring(ls.crdt,0,19) }</td>
 					<td>
-						<a href="<c:url value='proxy-finddev.action?aid=${ls.aid }'/>">分配设备</a>
+						<a href="<c:url value='proxy-finddev.action?aid=${ls.aid }'/>">分配设备</a>&nbsp;&nbsp;
 						<a href="javascript:saveProxy('1','${ls.aid }','${ls.aname }','${ls.ienable }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.url }','${ls.paid }','${ls.company }','${ls.mode }','${ls.typ }','${ls.stdt }','${ls.etdt }','${ls.pic }','${ls.mony }','${ls.mail }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteProxy('${ls.aid }','${status.count }')">删除</a>&nbsp;&nbsp;
+						<a href="javascript:deleteProxy('${ls.aid }','${status.count }')">删除</a>
 					</td>
 				</tr>
 				</c:forEach>

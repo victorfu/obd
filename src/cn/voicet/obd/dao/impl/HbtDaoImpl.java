@@ -48,4 +48,71 @@ public class HbtDaoImpl extends BaseDaoImpl implements HbtDao {
 			}
 		});
 	}
+
+	public List<Map<String, Object>> queryCarList(final DotSession ds, final HbtForm hbtForm) {
+		log.info("sp:web_car_query(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_car_query(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
+				cs.setString("cph", hbtForm.getQchepai());
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				List<Object> list = new ArrayList<Object>();
+				if(rs!=null){
+					while (rs.next()) {
+						 map = new HashMap<String, Object>();
+						 VTJime.putMapDataByColName(map, rs);
+		        		 list.add(map);
+					}
+				}
+				return list;
+			}
+		});
+	}
+
+	public Map<String, Object> getMonitorDataMap(final DotSession ds, final HbtForm hbtForm) {
+		log.info("sp:Car_Monitoring_HBT(?,?)");
+		return (Map<String, Object>)this.getJdbcTemplate().execute("{call Car_Monitoring_HBT(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setString("cph", hbtForm.getQchepai());
+				cs.setString("rid", hbtForm.getCurid());
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> ecMap = null;
+				if(rs!=null){
+					while (rs.next()) {
+						ecMap = new HashMap<String, Object>();
+						ecMap.put("curid", rs.getString("id"));
+						ecMap.put("rec",rs.getString("recvdate").substring(11,19));
+						ecMap.put("tot",rs.getString("totallgnition"));
+						ecMap.put("acct",rs.getString("accumulativetime"));
+						ecMap.put("acci",rs.getString("accumulativeidletime"));
+						ecMap.put("aveh",rs.getString("averageheating"));
+						ecMap.put("aves",rs.getString("averagespeed"));
+						ecMap.put("maxs",rs.getString("maxspeed"));
+						ecMap.put("hig",rs.getString("highestspeed"));
+						ecMap.put("acce",rs.getString("acceleration"));
+						ecMap.put("tde",rs.getString("tdeceleration"));
+						ecMap.put("tsw",rs.getString("tswerve"));
+						//
+			    		if(rs.getString("id").equals(hbtForm.getCurid()))
+			    		{
+			    			ecMap.put("isgetdata", false);
+			    			log.info("stop get data");
+			    		}
+			    		else
+			    		{
+			    			ecMap.put("isgetdata", true);
+			    			log.info("start get data");
+			    		}
+					}
+				}
+				return ecMap;
+			}
+		});
+	}
+	
 }

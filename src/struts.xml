@@ -37,6 +37,9 @@
 		<!-- 车辆管理 -->
 		<action name="car-*" class="carAction" method="{1}">
 			<result name="carPage">/WEB-INF/page/system/carList.jsp</result>
+			<result name="carMonitorPage">/WEB-INF/page/system/carMonitor.jsp</result>
+			<result name="carMonitorDataPage">/WEB-INF/page/system/carMonitorDataList.jsp</result>
+			<result name="carTripTotalPage">/WEB-INF/page/system/carTripTotal.jsp</result>
 		</action>
 		<!-- 用户子账号管理 -->
 		<action name="account-*" class="accountAction" method="{1}">
@@ -68,10 +71,12 @@
 		<!-- 实时数据查询 -->
 		<action name="rt-*" class="rtAction" method="{1}">
 			<result name="rtPage">/WEB-INF/page/system/rtList.jsp</result>
+			<result name="rtMonitorPage">/WEB-INF/page/system/rtMonitor.jsp</result>
 		</action>
 		<!-- 驾驶习惯查询 -->
 		<action name="hbt-*" class="hbtAction" method="{1}">
 			<result name="hbtPage">/WEB-INF/page/system/hbtList.jsp</result>
+			<result name="hbtMonitorPage">/WEB-INF/page/system/hbtMonitor.jsp</result>
 		</action>
 		<!-- 专业数据查询 -->
 		<action name="group-*" class="groupAction" method="{1}">
@@ -146,6 +151,18 @@
 		<action name="saveAccount" class="accountAction" method="saveAccount">
 			<result type="json"></result>
 		</action>
+		
+		
+		<!-- ajax获取驾驶习惯数据 -->
+		<action name="gethbtdata" class="hbtAction" method="gethbtdata">
+			<result type="json"></result>
+		</action>
+		<!-- ajax获取实时数据 -->
+		<action name="getrtdata" class="rtAction" method="getrtdata">
+			<result type="json"></result>
+		</action>
+		
+		
 		
 		
 		<!-- 清空数据库日志 -->

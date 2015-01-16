@@ -1,6 +1,12 @@
 package cn.voicet.obd.form;
 
 public class CarForm {
+	
+	//查询参数
+	private String qchepai;
+	private String sdttm;
+	private String edttm;
+	
 	private int cid;		//车辆编号
 	private String devno;	//设备号
 	private String pinpai;	//品牌
@@ -46,7 +52,14 @@ public class CarForm {
 		return chepai;
 	}
 	public void setChepai(String chepai) {
-		this.chepai = chepai;
+		if(chepai.length()==0)
+		{
+			this.chejia = null;
+		}
+		else
+		{
+			this.chepai = chepai;
+		}
 	}
 	public String getChejia() {
 		return chejia;
@@ -81,4 +94,30 @@ public class CarForm {
 	public void setBuydt(String buydt) {
 		this.buydt = buydt;
 	}
+	public String getQchepai() {
+		return qchepai;
+	}
+	public void setQchepai(String qchepai) {
+		if(qchepai.length()==0)
+		{
+			this.qchepai = null;
+		}
+		else
+		{
+			this.qchepai = qchepai;	
+		}
+	}
+	public String getSdttm() {
+		return sdttm;
+	}
+	public void setSdttm(String sdttm) {
+		this.sdttm = sdttm;
+	}
+	public String getEdttm() {
+		return edttm;
+	}
+	public void setEdttm(String edttm) {
+		this.edttm = edttm;
+	}
+	
 }

@@ -40,11 +40,11 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_query(?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("devno", deviceForm.getDevno());
-				cs.setString("agent", deviceForm.getProxy());
+				cs.setString("devno", deviceForm.getQdevno());
+				cs.setInt("uid", ds.userid);
 				cs.setString("sdt", ds.cursdttm);
 				cs.setString("edt", ds.curedttm);
-				cs.setString("state", deviceForm.getState());
+				cs.setString("state", deviceForm.getQstate());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -213,7 +213,6 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setString("devno", deviceForm.getDevno());
-				//cs.setString("aid", deviceForm.getProxy());
 				cs.setInt("devtype", deviceForm.getType());
 				cs.setString("istate", deviceForm.getState());
 				cs.setString("cj", deviceForm.getChangj());
@@ -243,7 +242,7 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_Type_query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("vid", deviceForm.getTypeno());
+				cs.setString("nam", deviceForm.getQtpname());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

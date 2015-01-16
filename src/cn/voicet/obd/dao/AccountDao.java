@@ -11,7 +11,7 @@ public interface AccountDao {
 	List<Map<String, Object>> queryAccountList(DotSession ds, AccountForm accountForm);
 	List<Map<String, Object>> queryCarList(DotSession ds,
 			AccountForm accountForm);
-	void queryCarList(AccountForm accountForm);
+	void bindCar(AccountForm accountForm);
 	void addAccount(DotSession ds, AccountForm accountForm);
 	void deleteAccount(DotSession ds, AccountForm accountForm);
 	Map<String, Object> getAccountInfo(AccountForm accountForm);

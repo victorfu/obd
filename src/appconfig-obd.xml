@@ -5,13 +5,6 @@
 	<role roleid="0" describle="未登录">
 	</role>
 	<role roleid="1" describle="系统管理员">
-		<grp name="日常管理">
-			<fun name="设备管理" action="device-query.action" />
-			<fun name="设备类型管理" action="device-type.action" />
-			<fun name="车辆管理" action="car-query.action" />
-			<fun name="账号管理" action="account-query.action" />
-			<fun name="代理商管理" action="proxy-query.action" />
-		</grp>
 		<grp name="数据查询">
 			<fun name="车辆行程" action="trip-query.action" />
 			<fun name="车辆提醒" action="tips-query.action" />
@@ -23,51 +16,73 @@
 			<fun name="专业数据3" action="group-query.action?flag=3" />
 			<fun name="专业数据4" action="group-query.action?flag=4" />
 		</grp>
-	</role>
-	<role roleid="2" describle="管理员">
-	    <grp name="日常管理">
-			<fun name="设备管理" action="device-query.action" />
+		<grp name="日常管理">
 			<fun name="设备类型管理" action="device-type.action" />
+			<fun name="设备管理" action="device-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="代理商管理" action="proxy-query.action" />
 		</grp>
+		<grp name="实时监测">
+			<fun name="车辆数据监测" action="car-querymonitorcar.action" />
+		</grp>
+		<grp name="数据统计">
+			<fun name="行程统计" action="car-triptotal.action" />
+		</grp>
+	</role>
+	<role roleid="2" describle="管理员">
 		<grp name="数据查询">
-			<fun name="车辆提醒" action="javascript:;" />
-			<fun name="车辆告警" action="javascript:;" />
-			<fun name="实时数据" action="javascript:;" />
-			<fun name="驾驶习惯" action="javascript:;" />
 			<fun name="车辆行程" action="trip-query.action" />
-			<fun name="专业数据" action="javascript:;" />
+			<fun name="车辆提醒" action="tips-query.action" />
+			<fun name="车辆告警" action="warn-query.action" />
+			<fun name="实时数据" action="rt-query.action" />
+			<fun name="驾驶习惯" action="hbt-query.action" />
+			<fun name="专业数据1" action="group-query.action?flag=1" />
+			<fun name="专业数据2" action="group-query.action?flag=2" />
+			<fun name="专业数据3" action="group-query.action?flag=3" />
+			<fun name="专业数据4" action="group-query.action?flag=4" />
+		</grp>
+	    <grp name="日常管理">
+			<fun name="设备类型管理" action="device-type.action" />
+			<fun name="设备管理" action="device-query.action" />
+			<fun name="车辆管理" action="car-query.action" />
+			<fun name="账号管理" action="account-query.action" />
+			<fun name="代理商管理" action="proxy-query.action" />
 		</grp>
 	</role>
 	<role roleid="3" describle="代理商">
+		<grp name="数据查询">
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="车辆提醒" action="tips-query.action" />
+			<fun name="车辆告警" action="warn-query.action" />
+			<fun name="实时数据" action="rt-query.action" />
+			<fun name="驾驶习惯" action="hbt-query.action" />
+			<fun name="专业数据1" action="group-query.action?flag=1" />
+			<fun name="专业数据2" action="group-query.action?flag=2" />
+			<fun name="专业数据3" action="group-query.action?flag=3" />
+			<fun name="专业数据4" action="group-query.action?flag=4" />
+		</grp>
 		<grp name="日常工作">
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 	    </grp>
-	    <grp name="数据查询">
-			<fun name="车辆提醒" action="javascript:;" />
-			<fun name="车辆告警" action="javascript:;" />
-			<fun name="实时数据" action="javascript:;" />
-			<fun name="驾驶习惯" action="javascript:;" />
-			<fun name="车辆行程" action="trip-query.action" />
-			<fun name="专业数据" action="javascript:;" />
-		</grp>
 	</role>
 	<role roleid="4" describle="用户">
+		<grp name="数据查询">
+			<fun name="车辆行程" action="trip-query.action" />
+			<fun name="车辆提醒" action="tips-query.action" />
+			<fun name="车辆告警" action="warn-query.action" />
+			<fun name="实时数据" action="rt-query.action" />
+			<fun name="驾驶习惯" action="hbt-query.action" />
+			<fun name="专业数据1" action="group-query.action?flag=1" />
+			<fun name="专业数据2" action="group-query.action?flag=2" />
+			<fun name="专业数据3" action="group-query.action?flag=3" />
+			<fun name="专业数据4" action="group-query.action?flag=4" />
+		</grp>
 		<grp name="日常工作">
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="资料维护" action="account-info.action" />
 	    </grp>
-	    <grp name="数据查询">
-			<fun name="车辆提醒" action="javascript:;" />
-			<fun name="车辆告警" action="javascript:;" />
-			<fun name="实时数据" action="javascript:;" />
-			<fun name="驾驶习惯" action="javascript:;" />
-			<fun name="车辆行程" action="trip-query.action" />
-			<fun name="专业数据" action="javascript:;" />
-		</grp>
 	</role>
 	
 	<list name="dev_state" describle="设备状态">

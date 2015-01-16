@@ -35,6 +35,7 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	 */
 	public String query()
 	{
+		
 		DotSession ds = DotSession.getVTSession(request);
 		List<Map<String, Object>> list = carDao.queryCarList(ds, carForm);
 		request.setAttribute("carList", list);
@@ -62,8 +63,51 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	
 	public String unbindDev()
 	{
+		log.info("cid:"+carForm.getCid()+", devno:"+carForm.getDevno());
 		DotSession ds = DotSession.getVTSession(request);
 		carDao.unbindDev(ds, carForm);
 		return null;
+	}
+	
+	
+	/**
+	 * 车辆定位监控
+	 */
+	public String monitor()
+	{
+		//clear rt data
+		DotSession ds = DotSession.getVTSession(request);
+		return "carMonitorPage";
+	}
+	
+	/**
+	 * 查询需要监测的车辆
+	 * @return
+	 */
+	public String querymonitorcar()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		List<Map<String, Object>> list = carDao.queryCarList(ds, carForm);
+		request.setAttribute("carList", list);
+		return "carMonitorDataPage";
+	}
+	
+	/**
+	 * 车辆行程统计
+	 * @return
+	 */
+	public String triptotal()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		if(null!=carForm.getSdttm() || null!=carForm.getEdttm())
+		{
+			ds.cursdttm = carForm.getSdttm();
+			ds.curedttm = carForm.getEdttm();
+		}
+		log.info("userid:"+ds.userid+", qchepai:"+carForm.getQchepai()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		String tripData = carDao.queryTripTotal(ds, carForm);
+		log.info("tripData:"+tripData);
+		request.setAttribute("tripData", "11, 20, 13, 40, 15, 60,17,80,19,10,17,42,23,64,15");
+		return "carTripTotalPage";
 	}
 }

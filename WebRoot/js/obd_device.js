@@ -55,7 +55,7 @@ function validateExcelUpLoadFile(form)
 }
 
 //add device
-function saveDevice(s,devno,proxy,type,state,changj,devxh,valdt,identi)
+function saveDevice(s,devno,type,state,changj,devxh,valdt,identi)
 {
 	//init
 	$("#is_show_devstate")[0].style.display="none";
@@ -73,7 +73,6 @@ function saveDevice(s,devno,proxy,type,state,changj,devxh,valdt,identi)
 	}
 	//
 	$("#devnox").val(devno);
-	$("#proxyx").val(proxy);
 	$("#typex").val(type);
 	$("#statex").val(state);
 	$("#changjx").val(changj);

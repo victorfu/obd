@@ -38,13 +38,13 @@ public class TripAction extends BaseAction implements ModelDriven<TripForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		log.info("chepai:"+tripForm.getChepai()+", sdt:"+tripForm.getSdt()+", edt:"+tripForm.getEdt());
-		if(null!=tripForm.getSdt() || null!=tripForm.getEdt())
+		log.info("chepai:"+tripForm.getChepai()+", sdt:"+tripForm.getSdttm()+", edt:"+tripForm.getEdttm());
+		if(null!=tripForm.getSdttm() || null!=tripForm.getEdttm())
 		{
-			ds.cursdt = tripForm.getSdt();
-			ds.curedt = tripForm.getEdt();
+			ds.cursdttm = tripForm.getSdttm();
+			ds.curedttm = tripForm.getEdttm();
 		}
-		log.info("ds cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
+		log.info("ds cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
 		List<Map<String, Object>> list = tripDao.queryTripList(ds,tripForm);
 		request.setAttribute("tripList", list);
 		//
@@ -58,8 +58,8 @@ public class TripAction extends BaseAction implements ModelDriven<TripForm>{
 	
 	public void getmapdata() throws IOException
 	{
-		log.info("cid:"+tripForm.getCid()+", sdt:"+tripForm.getSdt()+", edt:"+tripForm.getEdt());
-		tripForm.setEdt("2015-01-07 10:01:06");
+		log.info("cid:"+tripForm.getCid()+", sdt:"+tripForm.getSdttm()+", edt:"+tripForm.getEdttm());
+		tripForm.setEdttm("2015-01-07 10:01:06");
 		List<Map<String, Object>> list = tripDao.queryGpsList(tripForm);
 		String jsonstr = null;
 		jsonstr = new Gson().toJson(list);

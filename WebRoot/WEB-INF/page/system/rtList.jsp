@@ -14,10 +14,6 @@
  	<meta http-equiv="cache-control" content="no-cache"/>
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
-	<!-- 日期控件 start -->
-    <link type="text/css" href="<c:url value='datetimepicker/jquery.datetimepicker.css?v=1'/>" rel="stylesheet" />
-	<script type="text/javascript" src="<c:url value='datetimepicker/jquery.datetimepicker.js?v=1'/>"></script>
-    <!-- 日期控件 end -->
     <!-- 日期控件开始 -->
     <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
@@ -31,57 +27,57 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">实时数据查询</h3>
-   	<form name="form1" action="<c:url value='warn-query.action'/>" method="post">
-	<div class="queryDiv_h80">
+   	<form name="form1" action="<c:url value='rt-query.action'/>" method="post">
+	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
 			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
-	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" class="ipt120 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="8"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" class="ipt120 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20"/></li>
-	        <script>
-	        	$("#sdttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        	$("#edttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        </script>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-	        <li></li>
+	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
-			<thead class="tab_head">
+			<thead class="tab_head2">
                  <tr>
-                     <th width="4%">编号</th>
-                     <th width="8%">车牌号码</th>
-                     <th width="12%">日期时间</th>
-                     <th width="6%">告警类型</th>
-                     <th width="6%">定位类型</th>
-                     <th width="12%">经度</th>
-                     <th width="12%">纬度</th>
+                     <th width="6%">车牌号码</th>
+                     <th width="6%">接收时间</th>
+                     <th width="4%">电瓶<br/>电压</th>
+                     <th width="4%">发动机<br/>转速</th>
+                     <th width="4%">行驶<br/>车速</th>
+                     <th width="4%">节气门<br/>开度</th>
+                     <th width="4%">发动机<br/>负荷</th>
+                     <th width="4%">冷却液<br/>温度</th>
+                     <th width="4%">瞬时<br/>油耗</th>
+                     <th width="4%">本次行<br/>驶里程</th>
+                     <th width="4%">总里程</th>
+                     <th width="4%">本次耗<br/>油量</th>
+                     <th width="4%">累计耗<br/>油量</th>
+                     <th width="4%">故障码<br/>数量</th>
+                     <th width="4%">本次<br/>急加速</th>
+                     <th width="4%">本次<br/>急减速</th>
                  </tr>
              </thead>
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${rtList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.lid }</td>
-					<td>${ls.cid }</td>
-					<td>${ls.dt }</td>
-					<td>
-						<c:if test="${ls.dm eq 7 }">超速</c:if>
-						<c:if test="${ls.dm eq 8 }">低电压</c:if>
-						<c:if test="${ls.dm eq 9 }">车辆碰撞</c:if>
-						<c:if test="${ls.dm eq 11 }">车辆震动</c:if>
-					</td>
-					<td>
-						<c:choose>
-							<c:when test="${ls.lx eq 1 }">GPS</c:when>
-							<c:when test="${ls.lx eq 2 }">LBS</c:when>
-							<c:otherwise>其它</c:otherwise>
-						</c:choose>
-					</td>
-					<td>${ls.jd }</td>
-					<td>${ls.wd }</td>
+					<td>${ls.cph }</td>
+					<td>${fn:substring(ls.rdt,11,19) }</td>
+					<td>${ls.vt }</td>
+					<td>${ls.ep }</td>
+					<td>${ls.rs }</td>
+					<td>${ls.sd }</td>
+					<td>${ls.el }</td>
+					<td>${ls.ct }</td>
+					<td>${ls.co }</td>
+					<td>${ls.ao }</td>
+					<td>${ls.mg }</td>
+					<td>${ls.tm }</td>
+					<td>${ls.fo }</td>
+					<td>${ls.ao }</td>
+					<td>${ls.ec }</td>
+					<td>${ls.at }</td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -1,6 +1,7 @@
 package cn.voicet.obd.dao.impl;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;
+import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.stereotype.Repository;
 
 import cn.voicet.common.dao.impl.BaseDaoImpl;
@@ -47,11 +49,12 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	}
 
 	public List<Map<String, Object>> queryCarList(final DotSession ds, final AccountForm accountForm) {
-		log.info("sp:web_user_car_query_Available(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?)}", new CallableStatementCallback() {
+		log.info("sp:web_user_car_query_Available(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", accountForm.getUid());
+				cs.setInt("puid", accountForm.getParentid());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -85,18 +88,34 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		});
 	}
 
-	public void queryCarList(final AccountForm accountForm) {
-		log.info("sp:web_user_car_share(?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_car_share(?,?,?)}", new CallableStatementCallback() {
-			public Object doInCallableStatement(CallableStatement cs)
-					throws SQLException, DataAccessException {
+	public void bindCar(final AccountForm accountForm) {
+		this.getJdbcTemplate().execute(new ConnectionCallback() {
+			public Object doInConnection(Connection con) throws SQLException,
+					DataAccessException {
+				CallableStatement cs = null;
+				//分配
+				if(accountForm.getIsbind()==1)
+				{
+					cs = con.prepareCall("{call web_user_car_share(?,?)}");
+				}
+				else if(accountForm.getIsbind()==0)
+				{
+					cs = con.prepareCall("{call web_user_car_share_remove(?,?)}");
+				}
+				//取消分配
+				else
+				{
+					System.out.println("isbind error");
+				}
 				cs.setInt("uid", accountForm.getUid());
 				cs.setInt("cid", accountForm.getCid());
-				cs.setString("dsn", accountForm.getDevno());
 				cs.execute();
 				return null;
 			}
 		});
+		
+		
+		
 	}
 
 	public void addAccount(final DotSession ds, final AccountForm accountForm) {

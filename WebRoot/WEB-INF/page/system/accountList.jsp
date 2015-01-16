@@ -29,52 +29,43 @@
 	<h3 class="h3_title">账号管理</h3>
    	<form name="form1" action="<c:url value='/account-query.action'/>" method="post">
    	<input type="hidden" id="pageflag" name="pageflag" value=""/>
-	<div class="queryDiv_h80">
-	   	<ul class="queryWrap_ul">
-			<li><label>设备号：</label><input type="text" name="q_pino" class="ipt100 inputDefault" value="${q_pino }" maxlength="20"/></li>
-			<li><label>代理商：</label><input type="text" name="q_caryear" class="ipt60 inputDefault" value="${q_caryear }" maxlength="8"/></li>
-	        <li><label>批次号：</label><input type="text" name="q_chuxcs" class="ipt60 inputDefault" value="${q_chuxcs }" maxlength="8"/></li>
-	        <li><label>导入日期：</label><input type="text" name="q_chephm" class="ipt100 inputDefault" value="${q_chephm }" maxlength="20"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-			<li>
-	        	<label>车牌号码：</label>
-	        	<input type="text" name="q_uname" class="ipt100 inputDefault" value="${q_uname }" maxlength="20"/>
-	        </li>	       
-	        <li>
-	        	<label>用户姓名：</label>
-	        	<input type="text" name="q_mobile" class="ipt100 inputDefault" value="${q_mobile }" maxlength="11"/>
-	        </li>
+	<div class="queryDiv">
+		<ul class="queryWrap_ul">
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li><input type="button" onclick="addAccount()" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">编号</th>
                      <th width="6%">账号</th>
-                     <th width="4%">代理</th>
-                     <th width="4%">级别</th>
-                     <th width="12%">密码</th>
-                     <th width="8%">共享账号</th>
-                     <th width="12%">操作</th>
+                     <th width="6%">级别</th>
+                     <th width="6%">密码</th>
+                     <th width="6%">姓名</th>
+                     <th width="6%">车辆数</th>
+                     <th width="6%">邮箱</th>
+                     <th width="10%">操作</th>
                  </tr>
              </thead>
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${accList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.uid }</td>
 					<td>${ls.acc }</td>
-					<td>${ls.aid }</td>
-					<td>${ls.lev }</td>
+					<td>
+						<c:if test="${ls.lev eq 1 }">系统管理员</c:if>
+						<c:if test="${ls.lev eq 2 }">管理员</c:if>
+						<c:if test="${ls.lev eq 3 }">代理商</c:if>
+						<c:if test="${ls.lev eq 4 }">用户</c:if>
+					</td>
 					<td>${ls.pwd }</td>
 					<td>${ls.name }</td>
+					<td>${ls.carcount }</td>
+					<td>${ls.mail }</td>
 					<td>
-						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }'/>">查看车辆</a>&nbsp;&nbsp;
+						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }&parentid=${ls.puid }'/>">查看车辆</a>&nbsp;&nbsp;
 						<a href="<c:url value='account-info.action?uid=${ls.uid }&aid=${ls.aid }&ulevel=${ls.lev }'/>">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteAccount('${ls.uid }','${status.count }')">删除</a>
 					</td>

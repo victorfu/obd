@@ -31,8 +31,8 @@ public class TripDaoImpl extends BaseDaoImpl implements TripDao {
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
 				cs.setString("cph", tripForm.getChepai());
-				cs.setString("sdt", ds.cursdt);
-				cs.setString("edt", ds.curedt);
+				cs.setString("sdt", ds.cursdttm);
+				cs.setString("edt", ds.curedttm);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -55,8 +55,8 @@ public class TripDaoImpl extends BaseDaoImpl implements TripDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setString("cid", tripForm.getCid());
-				cs.setString("sdt", tripForm.getSdt());
-				cs.setString("edt", tripForm.getEdt());
+				cs.setString("sdt", tripForm.getSdttm());
+				cs.setString("edt", tripForm.getEdttm());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

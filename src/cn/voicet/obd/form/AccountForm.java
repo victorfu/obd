@@ -22,6 +22,9 @@ public class AccountForm {
 	private String noteinfo;
 	
 	
+	private int isbind;	//1:分配, 0:取消分配 
+	private int parentid;	
+	
 	public int getUid() {
 		return uid;
 	}
@@ -38,7 +41,14 @@ public class AccountForm {
 		return devno;
 	}
 	public void setDevno(String devno) {
-		this.devno = devno;
+		if(devno.length()==0)
+		{
+			this.devno = null;
+		}
+		else
+		{
+			this.devno = devno;
+		}
 	}
 	public int getProxyno() {
 		return proxyno;
@@ -124,4 +134,17 @@ public class AccountForm {
 	public void setAid(int aid) {
 		this.aid = aid;
 	}
+	public int getIsbind() {
+		return isbind;
+	}
+	public void setIsbind(int isbind) {
+		this.isbind = isbind;
+	}
+	public int getParentid() {
+		return parentid;
+	}
+	public void setParentid(int parentid) {
+		this.parentid = parentid;
+	}
+	
 }

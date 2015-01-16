@@ -22,6 +22,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import cn.voicet.obd.model.HbtModel;
+import cn.voicet.obd.model.RtModel;
+
 @SuppressWarnings("unchecked")
 public class DotSession {
 
@@ -84,8 +87,8 @@ public class DotSession {
 	
 	//get server current date time 2015-01-09 15:42:02
 	String curDatetime = String.format("%tF %<tT", new Date());
-	public String cursdttm = curDatetime;
-	public String curedttm = curDatetime;
+	public String cursdttm = curDate+" 00:00:00";
+	public String curedttm = curDate+" 23:59:59";
 	
 	public Map<String, Object> lygagtMap1;
 	public Map<String, Object> lygagtMap2;
@@ -611,5 +614,6 @@ public class DotSession {
 	public void setCarnum(int carnum) {
 		this.carnum = carnum;
 	}
+	public int requestCount;
 }
 

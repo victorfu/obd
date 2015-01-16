@@ -3,8 +3,8 @@ package cn.voicet.obd.form;
 public class TripForm {
 
 	private String cid;
-	private String sdt;
-	private String edt;
+	private String sdttm;
+	private String edttm;
 	private String chepai;
 	public String getCid() {
 		return cid;
@@ -12,17 +12,17 @@ public class TripForm {
 	public void setCid(String cid) {
 		this.cid = cid;
 	}
-	public String getSdt() {
-		return sdt;
+	public String getSdttm() {
+		return sdttm;
 	}
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
+	public void setSdttm(String sdttm) {
+		this.sdttm = sdttm;
 	}
-	public String getEdt() {
-		return edt;
+	public String getEdttm() {
+		return edttm;
 	}
-	public void setEdt(String edt) {
-		this.edt = edt;
+	public void setEdttm(String edttm) {
+		this.edttm = edttm;
 	}
 	public String getChepai() {
 		return chepai;

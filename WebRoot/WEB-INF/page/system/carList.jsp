@@ -29,7 +29,7 @@
    	<form name="form1" action="<c:url value='car-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>车辆编号：</label><input type="text" id="typeno" name="typeno" class="ipt100 inputDefault"  value="${typeno }"/></li>
+			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
 	        	<input type="button" onclick="saveCar('${sessionScope.vts.roleID }','0','0','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
@@ -44,28 +44,26 @@
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">车辆编号</th>
+                     <th width="6%">车牌号</th>
                      <th width="8%">设备号</th>
                      <th width="4%">品牌</th>
                      <th width="4%">型号</th>
-                     <th width="10%">购车日期</th>
-                     <th width="6%">车牌号</th>
-                     <th width="8%">发动机</th>
+                     <th width="6%">购车日期</th>
+                     <th width="8%">发动机编号</th>
                      <th width="4%">颜色</th>
                      <th width="4%">总里程</th>
-                     <th width="6%">行驶次数</th>
+                     <th width="4%">行驶次数</th>
                      <th width="12%">操作</th>
                  </tr>
              </thead>
              <tbody id="movies">
                	<c:forEach items="${carList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.cid }</td>
+					<td>${ls.cph }</td>
 					<td id="row_devno${ls.cid }">${ls.dsn }</td>
 					<td>${ls.pp }</td>
 					<td>${ls.xh }</td>
 					<td>${fn:substring(ls.gcdt,0,11) }</td>
-					<td>${ls.cph }</td>
 					<td>${ls.fdjh }</td>
 					<td>${ls.ys }</td>
 					<td>${ls.zlc }</td>
@@ -145,7 +143,7 @@
       				<input type="hidden" id="lab_devnox_r" name="devno"/>
 		      		<label id="lab_devx"></label>
 		      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" value="devno"></s:select>
-		          	<span class="asterisk">*</span>	
+		          	<span class=""></span>	
 	      			</c:otherwise>	
       		</c:choose>
       	</div>
@@ -154,7 +152,7 @@
   		<span class="lab120">品牌：</span>
       	<div class="ipt-box">
       		<input type="text" id="pinpaix" name="pinpai" class="ipt_text_w150 inputDefault" maxlength="15"/>
-          	<span class="asterisk">*</span>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">

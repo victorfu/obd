@@ -14,10 +14,6 @@
  	<meta http-equiv="cache-control" content="no-cache"/>
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
-	<!-- 日期控件 start -->
-    <link type="text/css" href="<c:url value='datetimepicker/jquery.datetimepicker.css?v=1'/>" rel="stylesheet" />
-	<script type="text/javascript" src="<c:url value='datetimepicker/jquery.datetimepicker.js?v=1'/>"></script>
-    <!-- 日期控件 end -->
     <!-- 日期控件开始 -->
     <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
@@ -35,12 +31,8 @@
 	<div class="queryDiv_h80">
 	   	<ul class="queryWrap_ul">
 			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
-	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" class="ipt120 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="8"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" class="ipt120 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20"/></li>
-	        <script>
-	        	$("#sdttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        	$("#edttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        </script>
+	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
 		</ul>
 		<ul class="queryWrap_ul" style="margin-top:-4px;">
 	        <li></li>

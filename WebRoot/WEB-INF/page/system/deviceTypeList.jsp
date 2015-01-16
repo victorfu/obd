@@ -27,7 +27,7 @@
    	<form name="form1" action="<c:url value='device-type.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>类型编号：</label><input type="text" id="typeno" name="typeno" class="ipt100 inputDefault"  value="${typeno }"/></li>
+			<li><label>类型名称：</label><input type="text" id="qtpnamex" name="qtpname" class="ipt100 inputDefault"  value="${qtpname }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
 	        	<input type="button" onclick="saveType('0','0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
@@ -42,8 +42,7 @@
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="8%">类型编号</th>
-                     <th width="8%">设备类型名称</th>
+                     <th width="8%">类型名称</th>
                      <th width="8%">厂家</th>
                      <th width="6%">地址</th>
                      <th width="6%">电话</th>
@@ -57,7 +56,6 @@
              <tbody id="movies">
                	<c:forEach items="${typeList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.vid }</td>
 					<td>${ls.dname }</td>
 					<td>${ls.fat }</td>
 					<td>${ls.addr }</td>
@@ -67,7 +65,7 @@
 					<td>${ls.mail }</td>
 					<td>${ls.url }</td>
 					<td>
-						<a href="javascript:saveType('1','${ls.vid }','${ls.fat }','${ls.dname }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.mail }','${ls.url }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:saveType('1','${ls.vid }','${ls.dname }','${ls.fat }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.mail }','${ls.url }')">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteType('${ls.vid }','${status.count }')">删除</a>&nbsp;&nbsp;
 					</td>
 				</tr>

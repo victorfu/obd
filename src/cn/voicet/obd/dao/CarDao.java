@@ -13,4 +13,5 @@ public interface CarDao {
 	void deleteCar(DotSession ds, CarForm carForm);
 	List<Map<String, Object>> queryUsableDeviceList(DotSession ds);
 	void unbindDev(DotSession ds, CarForm carForm);
+	String queryTripTotal(DotSession ds, CarForm carForm);
 }

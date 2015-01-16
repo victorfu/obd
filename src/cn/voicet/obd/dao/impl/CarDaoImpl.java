@@ -18,7 +18,6 @@ import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
 import cn.voicet.obd.dao.CarDao;
 import cn.voicet.obd.form.CarForm;
-import cn.voicet.obd.form.DeviceForm;
 
 @Repository(CarDao.SERVICE_NAME)
 @SuppressWarnings("unchecked")
@@ -26,11 +25,12 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 	public static final Logger log = Logger.getLogger(CarDaoImpl.class);
 
 	public List<Map<String, Object>> queryCarList(final DotSession ds, final CarForm carForm) {
-		log.info("sp:web_user_car_query(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query(?)}", new CallableStatementCallback() {
+		log.info("sp:web_car_query(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_car_query(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
+				cs.setString("cph", carForm.getQchepai());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -49,8 +49,8 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 	
 	public void saveCar(final DotSession ds, final CarForm carForm) {
 		//
-		log.info("sp:web_user_car_update(?,?,?,?,?,?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_car_update(?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_car_update(?,?,?,?,?,?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_car_update(?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
@@ -72,8 +72,8 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 	}
 	
 	public void deleteCar(final DotSession ds, final CarForm carForm) {
-		log.info("sp:web_user_car_remove(?,?)");
-		this.getJdbcTemplate().execute("{call web_user_car_remove(?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_car_Del(?,?)");
+		this.getJdbcTemplate().execute("{call web_car_Del(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
@@ -85,8 +85,8 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 	}
 
 	public List<Map<String, Object>> queryUsableDeviceList(final DotSession ds) {
-		log.info("sp:web_user_car_Dev_Available(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_Dev_Available(?)}", new CallableStatementCallback() {
+		log.info("sp:web_car_Dev_Available(?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_car_Dev_Available(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
@@ -115,6 +115,43 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 				cs.setString("dsn", carForm.getDevno());
 				cs.execute();
 				return null;
+			}
+		});
+	}
+
+	@Override
+	public String queryTripTotal(final DotSession ds, final CarForm carForm) {
+		log.info("sp:Car_trip_Total(?,?,?,?)");
+		return (String)this.getJdbcTemplate().execute("{call Car_trip_Total(?,?,?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
+				cs.setString("cph", carForm.getQchepai());
+				cs.setString("sdt", ds.cursdttm);
+				cs.setString("edt", ds.curedttm);
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				String tripTotalData = "";
+				if(rs!=null){
+					while (rs.next()) {
+						tripTotalData = rs.getString("rc")+","
+							+rs.getString("v1")+","
+							+rs.getString("hct")+","
+							+rs.getString("st")+","
+							+rs.getString("rt")+","
+							+rs.getString("trkm")+","
+							+rs.getString("so")+","
+							+rs.getString("ro")+","
+							+rs.getString("mrt")+","
+							+rs.getString("ms")+","
+							+rs.getString("at")+","
+							+rs.getString("dt")+","
+							+rs.getString("tt")+","
+							+rs.getString("ao")+","
+							+rs.getString("tkm");
+					}
+				}
+				return tripTotalData;
 			}
 		});
 	}

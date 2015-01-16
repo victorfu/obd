@@ -210,7 +210,7 @@ public class DotRoleMenu {
 			}
 			funList = grpList.get(i).funInfoList;
 			for(int j=0; funList!=null && j<funList.size(); j++) {
-				if(j==0)
+				if(i==0 && j==0)
 				{
 					a_up="up";
 				}

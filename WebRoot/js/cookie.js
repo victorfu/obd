@@ -1,4 +1,4 @@
-  !function() {
+!function() {
     var x = function(x) { return (x + x).slice(1,3); };
     window.encrypt = function (s) {
         return function() { return this; }()
@@ -49,10 +49,18 @@ var Cookie = {
 		}
 	}
 };
-
-var logout=function(){
-	//Cookie.clearCookie("email");
-	//Cookie.clearCookie("password");
-	window.location.href="logout.action";
+//get my_cookie data
+function getCkData(f,s,d)
+{
+	var cd = Cookie.getCookie(f+"_"+s);
+	if(cd==null)
+	{
+		Cookie.setCookie(f+"_"+s,d);	
+	}
+	else
+	{
+		Cookie.setCookie(f+"_"+s,cd+","+d);	
+	}
+	return cd;
 }
 	

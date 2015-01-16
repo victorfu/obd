@@ -1,5 +1,5 @@
 //save device type
-function saveType(s,typeno,tpname,changj,type,addr,telnum,mobile,qq,email,cjurl)
+function saveType(s,typeno,tpname,changj,addr,telnum,mobile,qq,email,cjurl)
 {
 	var tit;
 	if(s==0)
@@ -14,7 +14,6 @@ function saveType(s,typeno,tpname,changj,type,addr,telnum,mobile,qq,email,cjurl)
 	$("#typenox").val(typeno);
 	$("#tpnamex").val(tpname);
 	$("#changjx").val(changj);
-	$("#typex").val(type);
 	$("#addrx").val(addr);
 	$("#telnumx").val(telnum);
 	$("#mobilex").val(mobile);

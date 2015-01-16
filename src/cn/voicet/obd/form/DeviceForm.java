@@ -2,6 +2,12 @@ package cn.voicet.obd.form;
 
 public class DeviceForm {
 
+	//查询参数
+	private String qdevno;
+	private String qstate;
+	private String qsdttm;
+	private String qedttm;
+	
 	private String devno;	//设备号
 	private String proxy;	//代理商
 	private int type;		//设备类型
@@ -11,6 +17,7 @@ public class DeviceForm {
 	private String valdt;	//有效期
 	private String identi;	//识别码
 	
+	private String qtpname;	//查询参数
 	private String tpname;	//设备类型名称
 	private String addr;	//地址
 	private String telnum;	//电话
@@ -28,13 +35,27 @@ public class DeviceForm {
 		return devno;
 	}
 	public void setDevno(String devno) {
-		checkNULLString(devno);
+		if(devno.length()==0)
+		{
+			this.devno = null;
+		}
+		else
+		{
+			this.devno = devno;
+		}
 	}
 	public String getProxy() {
 		return proxy;
 	}
 	public void setProxy(String proxy) {
-		checkNULLString(proxy);
+		if(proxy.length()==0)
+		{
+			this.proxy = null;
+		}
+		else
+		{
+			this.proxy =proxy;
+		}
 	}
 	public int getType() {
 		return type;
@@ -132,16 +153,48 @@ public class DeviceForm {
 	public void setEdttm(String edttm) {
 		this.edttm = edttm;
 	}
-	
-	public String checkNULLString(String str)
-	{
-		if(str.length()==0)
+	public String getQdevno() {
+		return qdevno;
+	}
+	public void setQdevno(String qdevno) {
+		if(qdevno.length()==0)
 		{
-			return null;
+			this.qdevno = null;
 		}
 		else
 		{
-			return str;
+			this.qdevno = qdevno;
+		}
+	}
+	public String getQstate() {
+		return qstate;
+	}
+	public void setQstate(String qstate) {
+		this.qstate = qstate;
+	}
+	public String getQsdttm() {
+		return qsdttm;
+	}
+	public void setQsdttm(String qsdttm) {
+		this.qsdttm = qsdttm;
+	}
+	public String getQedttm() {
+		return qedttm;
+	}
+	public void setQedttm(String qedttm) {
+		this.qedttm = qedttm;
+	}
+	public String getQtpname() {
+		return qtpname;
+	}
+	public void setQtpname(String qtpname) {
+		if(qtpname.length()==0)
+		{
+			this.qtpname = null;
+		}
+		else
+		{
+			this.qtpname = qtpname;
 		}
 	}
 }

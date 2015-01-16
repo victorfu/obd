@@ -14,10 +14,6 @@
  	<meta http-equiv="cache-control" content="no-cache"/>
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
-	<!-- 日期控件 start -->
-    <link type="text/css" href="<c:url value='datetimepicker/jquery.datetimepicker.css?v=1'/>" rel="stylesheet" />
-	<script type="text/javascript" src="<c:url value='datetimepicker/jquery.datetimepicker.js?v=1'/>"></script>
-    <!-- 日期控件 end -->
     <!-- 日期控件开始 -->
     <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
@@ -34,23 +30,18 @@
    	<form name="form1" action="<c:url value='/device-query.action'/>" method="post">
 	<div class="queryDiv_h80">
 	   	<ul class="queryWrap_ul">
-			<li><label>设备号：</label><input type="text" name="devno" class="ipt100 inputDefault" value="${devno }" maxlength="20"/></li>
-			<li><label>代理商：</label><input type="text" name="proxy" class="ipt60 inputDefault" value="${proxy }" maxlength="8"/></li>
-	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" class="ipt120 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="8"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" class="ipt120 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20"/></li>
-	        <script>
-	        	$("#sdttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        	$("#edttm").datetimepicker({lang:'ch',step:10,format:'Y-m-d H:i:s'});
-	        </script>
+			<li><label>设备号：</label><input type="text" name="qdevno" class="ipt100 inputDefault" value="${qdevno }" maxlength="20"/></li>
+	       	<li><label>有效期：</label><input type="text" id="sdttm" name="qsdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
+	        <li><label>-&nbsp;&nbsp;</label><input type="text" id="edttm" name="qedttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
 		</ul>
 		<ul class="queryWrap_ul" style="margin-top:-4px;">
 			<li>
 				<label>状态</label>
-				<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:80px; height:22px;" headerKey="-1" headerValue="全部" listValue="str" value="state"></s:select>
+				<s:select id="qstatex" name="qstate" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:80px; height:22px;" headerKey="-1" headerValue="全部" listValue="str" value="qstate"></s:select>
 			</li>	       
 	        <li></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li><input type="button" onclick="saveDevice('0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
+	        <li><input type="button" onclick="saveDevice('0','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li>
 	        	<span class="down">点击<a href="${pageContext.request.contextPath }/excelTemplate/device_importTemplate.xls">下载</a>模板文件</span>
 	        </li>
@@ -62,9 +53,8 @@
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">设备编号</th>
-                     <th width="6%">代理商编号</th>
-                     <th width="6%">类型名称</th>
+                     <th width="6%">设备号</th>
+                     <th width="6%">类型</th>
                      <th width="4%">状态</th>
                      <th width="6%">型号</th>
                      <th width="12%">初次使用</th>
@@ -78,8 +68,7 @@
 				<c:forEach items="${devList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.dsn }</td>
-					<td>${ls.aid }</td>
-					<td>${ls.vname }</td>
+					<td>${ls.dname }</td>
 					<td>
 						<c:if test="${ls.state eq 0 }">停用</c:if>
 						<c:if test="${ls.state eq 10 }">未绑定</c:if>
@@ -91,7 +80,7 @@
 					<td>${fn:substring(ls.ydt,0,19) }</td>
 					<td>${ls.sbm }</td>
 					<td>
-						<a href="javascript:saveDevice('1','${ls.dsn }','${ls.aid }','${ls.vid }','${ls.state }','${ls.cj }','${ls.xh }','${fn:substring(ls.ydt,0,19) }','${ls.sbm }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:saveDevice('1','${ls.dsn }','${ls.vid }','${ls.state }','${ls.cj }','${ls.xh }','${fn:substring(ls.ydt,0,10) }','${ls.sbm }')">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteDevice('${ls.dsn }','${status.count }')">删除</a>&nbsp;&nbsp;
 					</td>
 				</tr>
@@ -114,26 +103,17 @@
     <div id="popSaveDeviceDiv" style="display:none;"> 
 		<form id="form2" name="form2" action="<c:url value='/device-saveDevice.action'/>" method="post">
 	    <div class="lab_ipt_item">
-	    	<span class="lab120">设备编号：</span>
+	    	<span class="lab120">设备号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="devnox" name="devno" value="0" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-	            <span class="asterisk">*</span>
+	        	<input type="text" id="devnox" name="devno" value="" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	            <span class="asterisk"></span>
 	        </div>
 	    </div>
-	    <!--
-	    <div class="lab_ipt_item">
-	    	<span class="lab120">代理商：</span>
-	        <div class="ipt-box">
-	        	<input type="text" id="proxyx" name="proxy" class="ipt_text_w150 inputDefault"  maxlength="15"/>
-	            <span class="asterisk">*</span>
-	        </div>
-	    </div>
-	    -->
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">设备类型：</span>
 	        <div class="ipt-box">
-	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="typ" listValue="fat" value="type"></s:select>
-	            <span class="asterisk">*</span>
+	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="vid" listValue="dname" value="type"></s:select>
+	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item" id="is_show_devstate">
