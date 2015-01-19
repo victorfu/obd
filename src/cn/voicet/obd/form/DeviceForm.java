@@ -11,7 +11,7 @@ public class DeviceForm {
 	private String devno;	//设备号
 	private String proxy;	//代理商
 	private int type;		//设备类型
-	private String state;	//设备状态
+	private String state="10";	//设备状态
 	private String changj;	//厂家
 	private String devxh;	//设备型号
 	private String valdt;	//有效期

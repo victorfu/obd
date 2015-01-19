@@ -111,9 +111,10 @@
 	    	<span class="lab120">账号：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="uaccx" name="uacc" class="ipt_text_w150 inputDefault"  maxlength="15"/>
-	            <span class="asterisk">*</span>
+	            <span class=""></span>
 	        </div>
 	    </div>
+	    <div id="accErrMsg" style="text-indent:80px; color:#f00"></div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">初始密码：</span>
 	        <div class="ipt-box">
@@ -124,9 +125,9 @@
 	    	<span class="lab120">用户姓名：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="unamex" name="uname" class="ipt_text_w150 inputDefault" maxlength="15"/>
-	            <span class="asterisk">*</span>
 	        </div>
 	    </div>
+	    <div id="nameErrMsg" style="text-indent:80px; color:#f00"></div>
 		<div class="lab_ipt_item">
 			<span class="lab120"></span>
 			<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="addAccountBtn()"/></div>
@@ -135,55 +136,6 @@
 		</form>
 	</div>
     <!--POP ADDDEV END-->
-    
-    
-	<!--POP LAYER START-->
-	<div id="popImportDataDiv" style="display:none;"> 
-		<form id="form3" name="form3" 
-			action="${pageContext.request.contextPath }/device-importDevice.action" 
-			method="post" 
-			enctype="multipart/form-data"
-			onsubmit="return validateuploadInforFile(this)">
-	    <div class="lab_ipt_item">
-	    	<span class="lab120">选择文件：</span>
-	        <div class="ipt-box">
-	        	<input type="file" id="uploadExcel" name="uploadExcel"/>
-	        </div>
-	    </div>
-		<div class="lab_ipt_item" id="importBtnDiv">
-			<span class="lab120"></span>
-			<div class="ipt-box"><input type="submit" class="btn4" value="确定"/></div>
-			<div class="ipt-box" style="margin-left:20px;"><input type="button" class="btn4" value="取消" onclick="layer.closeAll()"/></div>
-			<br/>
-			<span class="asterisk"></span>
-		</div>	
-		</form>
-	</div>
-	<!--POP LAYER END-->
-    
-    <!-- 分配客户资料给话务员 -->
-    <form id="form2" action="<c:url value='/customer-setAgtAlloc.action'/>" method="post">
-		<input type="hidden" id="cidx" name="cid"/>
-	</form>
-	
-    <%-- 删除客户资料 --%>
-    <form id="form3" action="<c:url value='/customer-deleteCustomerInfo.action'/>" method="post">
-		<input type="hidden" id="del_cidx" name="cid"/>
-	</form>
-	
-	<form id="form4" name="form4" action="<c:url value='customer-viewDetail.action'/>" method="post">
-		<input type="hidden" id="vcid" name="cid"/>
-		<input type="hidden" id="vq_pino" name="q_pino"/>
-		<input type="hidden" id="vq_caryear" name="q_caryear"/>
-		<input type="hidden" id="vq_chuxcs" name="q_chuxcs"/>
-		<input type="hidden" id="vq_chephm" name="q_chephm"/>
-		<input type="hidden" id="vq_uname" name="q_uname"/>
-		<input type="hidden" id="vq_mobile" name="q_mobile"/>
-		<input type="hidden" id="vq_agtacc" name="q_agtacc"/>
-		<input type="hidden" id="vq_state" name="q_state"/>
-		<input type="hidden" name="viewall" value="${viewall }"/>
-	</form>
-    
 </div>
 <script type="text/javascript">
 //split page task

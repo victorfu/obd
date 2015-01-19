@@ -1,6 +1,30 @@
+$(function(){
+	$("#chepaix").bind("blur",checkChepai);
+});
+
+function checkChepai()
+{
+	var chep = $("#chepaix").val();
+	if(!chep)
+	{
+		$(".asterisk")[0].innerHTML="车牌号不能为空！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[0].innerHTML="";
+		return true;
+	}
+}
+
 //add car
 function saveCar(roleid,s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip,warn)
 {
+	$(".asterisk").each(function(){
+		this.innerHTML="";
+	});
+	$(".asterisk")[0].innerHTML="*";
+	//
 	//init
 	$("#istipchk")[0].checked=false;
 	$("#iswarnchk")[0].checked=false;
@@ -88,6 +112,7 @@ function saveCar(roleid,s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,co
 
 function saveCarBtn()
 {
+	if(!checkChepai())	return false;
 	document.form2.submit();
 }
 

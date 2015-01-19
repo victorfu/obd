@@ -10,4 +10,5 @@ public interface UserDao{
 	Map<String, Object> userLogin(UserForm userForm);
 	boolean updateUserPassword(DotSession ds, UserForm userForm);
 	String registerUser(UserForm userForm);
+	String ansyUserName(UserForm userForm);
 }

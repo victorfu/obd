@@ -118,44 +118,44 @@
 <form id="form2" name="form2" action="<c:url value='/device-saveType.action'/>" method="post">
 	<input type="hidden" id="typenox" name="typeno" value="0"/>
 	<div class="lab_ipt_item">
-  		<span class="lab120">设备类型名称：</span>
+  		<span class="lab120">类型名称：</span>
       	<div class="ipt-box">
-      		<input type="text" id="tpnamex" name="tpname" class="ipt_text_w150 inputDefault"  maxlength="15"/>
-          	<span class="asterisk">*</span>
+      		<input type="text" id="tpnamex" name="tpname" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">厂家：</span>
       	<div class="ipt-box">
-      		<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault" maxlength="15"/>
-          	<span class="asterisk">*</span>
+      		<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault" maxlength="20"/>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">地址：</span>
       	<div class="ipt-box">
-      		<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-          	<span class="asterisk"></span>
+      		<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">电话：</span>
       	<div class="ipt-box">
-      		<input type="text" id="telnumx" name="telnum" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="telnumx" name="telnum" class="ipt_text_w150 inputDefault"  maxlength="15"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">手机：</span>
       	<div class="ipt-box">
-      		<input type="text" id="mobilex" name="mobile" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="mobilex" name="mobile" class="ipt_text_w150 inputDefault"  maxlength="15"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
   		<span class="lab120">QQ：</span>
       	<div class="ipt-box">
-      		<input type="text" id="qqx" name="qq" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+      		<input type="text" id="qqx" name="qq" class="ipt_text_w150 inputDefault"  maxlength="15"/>
           	<span class="asterisk"></span>
       	</div>
   	</div>
@@ -169,8 +169,8 @@
   	<div class="lab_ipt_item">
   		<span class="lab120">厂家网址：</span>
       	<div class="ipt-box">
-      		<input type="text" id="cjurlx" name="cjurl" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class="asterisk"></span>
+      		<input type="text" id="cjurlx" name="cjurl" class="ipt_text_w150 inputDefault"  maxlength="30"/>
+          	<span class=""></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">

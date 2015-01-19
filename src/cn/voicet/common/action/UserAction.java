@@ -41,12 +41,10 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		Map<String, Object> map = userDao.userLogin(userForm);
 		log.info("user login map: "+map);
 		//
-		ds.agentid = Integer.valueOf((String) map.get("anentid"));
+		ds.agentid = Integer.valueOf((String) map.get("agentid"));
 		ds.userid = Integer.valueOf((String) map.get("uid"));
 		ds.roleID=(String) map.get("lev");
 		ds.username=(String) map.get("name");
-		//ds.carnum=Integer.valueOf((String) map.get("cid"));
-		//ds.devnum=Integer.valueOf((String) map.get("dsn"));
 		//
 		ds.password = userForm.getPassword();
 		ds.account=userForm.getAccount();
@@ -151,6 +149,15 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		{
 			return "userRegPage";
 		}
+	}
+	
+	public String ansyUserName() throws IOException
+	{
+		log.info("account:"+userForm.getAccount());
+		String b = userDao.ansyUserName(userForm);
+		log.info("b:"+b);
+		response.getWriter().write(b);
+		return null;
 	}
 	
 }

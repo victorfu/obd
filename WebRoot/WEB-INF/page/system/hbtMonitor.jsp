@@ -187,6 +187,10 @@
 							}
 						}
 					}
+					else
+					{
+						colsole.log("result is null");
+					}
 				},
 				error : function(errorMsg) {
 					//alert("不好意思，大爷，图表请求数据失败啦!");

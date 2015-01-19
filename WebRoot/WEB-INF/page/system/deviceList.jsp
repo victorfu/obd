@@ -41,7 +41,7 @@
 			</li>	       
 	        <li></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li><input type="button" onclick="saveDevice('0','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
+	        <li><input type="button" onclick="saveDevice('0','','','10','','','${sessionScope.vts.cursdt }','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li>
 	        	<span class="down">点击<a href="${pageContext.request.contextPath }/excelTemplate/device_importTemplate.xls">下载</a>模板文件</span>
 	        </li>
@@ -105,7 +105,7 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">设备号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="devnox" name="devno" value="" class="ipt_text_w150 inputDefault"  maxlength="10"/>
+	        	<input type="text" id="devnox" name="devno" value="" class="ipt_text_w150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
@@ -113,42 +113,42 @@
 	    	<span class="lab120">设备类型：</span>
 	        <div class="ipt-box">
 	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="vid" listValue="dname" value="type"></s:select>
-	            <span class="asterisk"></span>
+	            <span class=""></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item" id="is_show_devstate">
 	    	<span class="lab120">设备状态：</span>
 	        <div class="ipt-box">
 	        	<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:160px; height:26px;" listValue="str" value="state"></s:select>
-	            <span class="asterisk"></span>
+	            <span class=""></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">厂家：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-	            <span class="asterisk"></span>
+	        	<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class=""></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">型号：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="devxhx" name="devxh" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-	            <span class="asterisk"></span>
+	            <span class=""></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">有效期：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="valdtx" name="valdt" onclick="WdatePicker({skin:'whyGreen'})" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-	            <span class="asterisk"></span>
+	        	<input type="text" id="valdtx" name="valdt" onclick="WdatePicker({skin:'whyGreen'})" class="Wdate ipt_text_w150 inputDefault"  maxlength="20"/>
+	            <span class=""></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">识别码：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="identix" name="identi" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-	            <span class="asterisk"></span>
+	            <span class=""></span>
 	        </div>
 	    </div>
 		<div class="lab_ipt_item">

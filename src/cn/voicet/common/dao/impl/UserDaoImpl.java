@@ -89,4 +89,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			}
 		});
 	}
+
+	public String ansyUserName(final UserForm userForm) {
+		String sql = "select count(*) from tb_user where acc='"+userForm.getAccount()+"'";
+		log.info("sql:"+sql);
+		int c = this.getJdbcTemplate().queryForInt(sql);
+		if(c==0)
+		{
+			return "0";
+		}
+		else
+		{
+			return "1";	
+		}
+	}
 }

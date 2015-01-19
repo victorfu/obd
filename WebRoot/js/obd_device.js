@@ -1,3 +1,24 @@
+$(function(){
+	$("#devnox").bind("blur",checkDevno);
+});
+
+function checkDevno()
+{
+	var devno = $("#devnox").val();
+	if(!devno)
+	{
+		$(".asterisk")[0].innerHTML="设备号不能为空";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[0].innerHTML="";
+		return true;
+	}
+}
+//devnox
+
+
 //show select file dialog
 function showSelFile()
 {
@@ -58,6 +79,12 @@ function validateExcelUpLoadFile(form)
 function saveDevice(s,devno,type,state,changj,devxh,valdt,identi)
 {
 	//init
+	$(".asterisk").each(function(){
+		this.innerHTML="";
+	});
+	$(".asterisk")[0].innerHTML="*";
+	
+	//
 	$("#is_show_devstate")[0].style.display="none";
 	//
 	var tit;
@@ -93,6 +120,7 @@ function saveDevice(s,devno,type,state,changj,devxh,valdt,identi)
 
 function saveDeviceBtn()
 {
+	if(!checkDevno()) return false;
 	document.form2.submit();
 }
 

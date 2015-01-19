@@ -115,6 +115,11 @@
 		<action name="ajaxlogin" class="userAction" method="ajaxlogin">
 			<result type="json"></result>
 		</action>
+		
+		<action name="ansyUserName" class="userAction" method="ansyUserName">
+			<result type="json"></result>
+		</action>
+		
 		<!-- 删除单条设备 -->
 		<action name="deleteDev" class="deviceAction" method="deleteDev">
 			<result type="json"></result>

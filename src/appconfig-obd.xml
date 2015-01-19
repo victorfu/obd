@@ -49,6 +49,12 @@
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="代理商管理" action="proxy-query.action" />
 		</grp>
+		<grp name="实时监测">
+			<fun name="车辆数据监测" action="car-querymonitorcar.action" />
+		</grp>
+		<grp name="数据统计">
+			<fun name="行程统计" action="car-triptotal.action" />
+		</grp>
 	</role>
 	<role roleid="3" describle="代理商">
 		<grp name="数据查询">
@@ -66,6 +72,12 @@
 			<fun name="账号管理" action="account-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 	    </grp>
+		<grp name="实时监测">
+			<fun name="车辆数据监测" action="car-querymonitorcar.action" />
+		</grp>
+		<grp name="数据统计">
+			<fun name="行程统计" action="car-triptotal.action" />
+		</grp>
 	</role>
 	<role roleid="4" describle="用户">
 		<grp name="数据查询">
@@ -83,6 +95,12 @@
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="资料维护" action="account-info.action" />
 	    </grp>
+		<grp name="实时监测">
+			<fun name="车辆数据监测" action="car-querymonitorcar.action" />
+		</grp>
+		<grp name="数据统计">
+			<fun name="行程统计" action="car-triptotal.action" />
+		</grp>
 	</role>
 	
 	<list name="dev_state" describle="设备状态">
@@ -110,55 +128,4 @@
 		<item id="11" name="车辆震动"/>
 	</list>
 	
-	
-	
-	<list name="callstate" describle="呼叫状态">
-		<item id="0" name="未呼叫" />
-		<item id="1" name="呼叫成功" />
-		<item id="2" name="呼叫失败" />
-	</list>
-	<list name="workmode" describle="工作模式">
-		<item id="0" name="0:TTS合成语音播放" />
-		<item id="1" name="1:转入业务组" />
-	</list>
-	
-	<list name="taskkind" describle="队列业务类型">
-		<item id="0" name="0:标准" />
-		<item id="1" name="1:回访1" />
-		<item id="2" name="2:回访2" />
-		<item id="3" name="3:回访3" />
-	</list>
-	<list name="taskstate" describle="任务类型">
-		<item id="0" name="0:新建" />
-		<item id="1" name="1:激活" />
-		<item id="9" name="9:停止" />
-		<item id="10" name="10:呼叫完成" />
-	</list>
-	<list name="sex" describle="性别">
-		<item id="1" name="男" />
-		<item id="0" name="女" />
-	</list>
-	<list name="succfail" describle="外呼结果">
-		<item id="1" name="成功" />
-		<item id="0" name="失败" />
-	</list>
-	<list name="customerstate" describle="客户资料状态">
-		<item id="0" name="跟踪" />
-		<item id="1" name="成功" />
-		<item id="2" name="失败" />
-	</list>
-	<list name="customerstate2" describle="客户资料状态">
-		<item id="-1" name="不限" />
-		<item id="0" name="跟踪" />
-		<item id="1" name="成功" />
-		<item id="2" name="失败" />
-	</list>
-	<list name="baodantotal" describle="保费保单汇总">
-		<item id="0" name="0:总体汇总" />
-		<item id="1" name="1:按话务员汇总" />
-		<item id="2" name="2:指定话务员按月汇总" />
-	</list>
-	<list name="ctsip" describle="录音服务器地址列表">
-		<item id="100" name = "http://192.168.1.200"/>
-	</list>
 </dot2014>

@@ -42,12 +42,11 @@
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">车辆编号</th>
+                     <th width="6%">车牌号码</th>
                      <th width="8%">设备号</th>
                      <th width="4%">品牌</th>
                      <th width="4%">型号</th>
                      <th width="10%">购车日期</th>
-                     <th width="6%">车牌号</th>
                      <th width="8%">发动机</th>
                      <th width="4%">颜色</th>
                      <th width="4%">总里程</th>
@@ -58,12 +57,11 @@
              <tbody id="movies">
                	<c:forEach items="${carList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.cid }</td>
+					<td>${ls.cph }</td>
 					<td id="row_devno${ls.cid }">${ls.dsn }</td>
 					<td>${ls.pp }</td>
 					<td>${ls.xh }</td>
 					<td>${fn:substring(ls.gcdt,0,11) }</td>
-					<td>${ls.cph }</td>
 					<td>${ls.fdjh }</td>
 					<td>${ls.ys }</td>
 					<td>${ls.zlc }</td>

@@ -32,7 +32,7 @@
 			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
-	        	<input type="button" onclick="saveCar('${sessionScope.vts.roleID }','0','0','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
+	        	<input type="button" onclick="saveCar('${sessionScope.vts.roleID }','0','0','','','','${sessionScope.vts.cursdt }','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
 	        </li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -151,22 +151,22 @@
   	<div class="lab_ipt_item">
   		<span class="lab120">品牌：</span>
       	<div class="ipt-box">
-      		<input type="text" id="pinpaix" name="pinpai" class="ipt_text_w150 inputDefault" maxlength="15"/>
+      		<input type="text" id="pinpaix" name="pinpai" class="ipt_text_w150 inputDefault" maxlength="20"/>
           	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">型号：</span>
       	<div class="ipt-box">
-      		<input type="text" id="xinghaox" name="xinghao" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-          	<span class="asterisk"></span>
+      		<input type="text" id="xinghaox" name="xinghao" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">购车时间：</span>
       	<div class="ipt-box">
-      		<input type="text" id="buydtx" name="buydt" onclick="WdatePicker({skin:'whyGreen'})" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-          	<span class="asterisk"></span>
+      		<input type="text" id="buydtx" name="buydt" onclick="WdatePicker({skin:'whyGreen'})" class="Wdate ipt_text_w150 inputDefault"  maxlength="20"/>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -180,21 +180,21 @@
   		<span class="lab120">车架：</span>
       	<div class="ipt-box">
       		<input type="text" id="chejiax" name="chejia" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class="asterisk"></span>
+          	<span class=""></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
   		<span class="lab120">发动机编号：</span>
       	<div class="ipt-box">
       		<input type="text" id="fadongx" name="fadong" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class="asterisk"></span>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">颜色：</span>
       	<div class="ipt-box">
       		<input type="text" id="colorx" name="color" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class="asterisk"></span>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -202,7 +202,7 @@
       	<div class="ipt-box">
       		<input type="checkbox" id="istipchk" onclick="checkTip(this)" style="margin-top:6px;"/>
 	        <input type="hidden" id="tipx" name="tip" value="0"/>
-          	<span class="asterisk"></span>
+          	<span class=""></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -210,7 +210,7 @@
       	<div class="ipt-box">
       		<input type="checkbox" id="iswarnchk" onclick="checkWarn(this)" style="margin-top:6px;"/>
 	        <input type="hidden" id="warnx" name="warn" value="0"/>
-          	<span class="asterisk"></span>
+          	<span class=""></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
