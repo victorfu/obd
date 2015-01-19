@@ -1,4 +1,17 @@
 
+//是否启用
+function checkEnable(obj)
+{
+	if(obj.checked)
+	{
+		$("#ienablex").val(1);
+	}
+	else
+	{
+		$("#ienablex").val(0);	
+	}
+}
+
 //add device
 function saveProxy(s,aid,pname,ienable,addr,telnum,mobile,qq,url,paid,company,mode,ptype,sdt,edt,img,money,email)
 {
@@ -17,6 +30,15 @@ function saveProxy(s,aid,pname,ienable,addr,telnum,mobile,qq,url,paid,company,mo
 	$("#aidx").val(aid);
 	$("#pnamex").val(pname);
 	$("#ienablex").val(ienable);
+	if(ienable==1)
+	{
+		$("#ienablechk")[0].checked=true;
+	}
+	else
+	{
+		$("#ienablechk")[0].checked=false;
+	}
+	
 	$("#addrx").val(addr);
 	$("#telnumx").val(telnum);
 	$("#mobilex").val(mobile);

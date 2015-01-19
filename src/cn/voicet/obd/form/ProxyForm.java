@@ -132,7 +132,14 @@ public class ProxyForm {
 		return money;
 	}
 	public void setMoney(String money) {
-		this.money = money;
+		if(money.length()==0)
+		{
+			this.money = "0";
+		}
+		else
+		{
+			this.money = money;
+		}
 	}
 	public String getEmail() {
 		return email;

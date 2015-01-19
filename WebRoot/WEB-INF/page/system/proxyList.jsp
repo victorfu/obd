@@ -62,7 +62,7 @@
 					<td>${fn:substring(ls.crdt,0,19) }</td>
 					<td>
 						<a href="<c:url value='proxy-finddev.action?aid=${ls.aid }'/>">分配设备</a>&nbsp;&nbsp;
-						<a href="javascript:saveProxy('1','${ls.aid }','${ls.aname }','${ls.ienable }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.url }','${ls.paid }','${ls.company }','${ls.mode }','${ls.typ }','${ls.stdt }','${ls.etdt }','${ls.pic }','${ls.mony }','${ls.mail }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:saveProxy('1','${ls.aid }','${ls.aname }','${ls.ienable }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.url }','${ls.paid }','${ls.company }','${ls.mode }','${ls.typ }','${fn:substring(ls.stdt,0,19) }','${fn:substring(ls.etdt,0,19) }','${ls.pic }','${ls.mony }','${ls.mail }')">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteProxy('${ls.aid }','${status.count }')">删除</a>
 					</td>
 				</tr>
@@ -95,15 +95,15 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">启用标识：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="ienablex" name="ienable" class="ipt_text_w150 inputDefault"  maxlength="15"/>
-	            <span class="asterisk">*</span>
+	            <input type="checkbox" id="ienablechk" onclick="checkEnable(this)" style="margin-top:6px;"/>
+	        	<input type="hidden" id="ienablex" name="ienable"/>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">地址：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault" maxlength="15"/>
-	            <span class="asterisk">*</span>
+	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
@@ -151,28 +151,28 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">模式：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="modex" name="mode" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<s:select id="modex" name="mode" list="#{1:'模式一',2:'模式二'}" listKey="key" listValue="value" cssStyle="width:160px; height:26px;"></s:select>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">类型：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="ptypex" name="ptype" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<s:select id="ptypex" name="ptype" list="#{1:'类型一',2:'类型二'}" listKey="key" listValue="value" cssStyle="width:160px; height:26px;"></s:select>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">开始时间：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="sdtx" name="sdt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="sdtx" name="sdt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">结束时间：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="edtx" name="edt" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="edtx" name="edt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt150 inputDefault"  maxlength="20"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
