@@ -120,35 +120,18 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		return "userRegPage";
 	}
 	
-	public String reg()
+	public String reg() throws IOException
 	{
-		request.setAttribute("errorMsg", "");
 		log.info("account:"+userForm.getAccount()+", password:"+userForm.getPassword()+", devno:"+userForm.getDevno());
 		String res = userDao.registerUser(userForm);
 		log.info("res:"+res);
-		if(res.equals("0"))
-		{
-			return "regSuccessPage";
-		}
-		else if(res.equals("-1"))
-		{
-			request.setAttribute("errorMsg", "账号已存在！");
-			return "userRegPage";
-		}
-		else if(res.equals("-2"))
-		{
-			request.setAttribute("errorMsg", "设备状态不可用！");
-			return "userRegPage";
-		}
-		else if(res.equals("-3"))
-		{
-			request.setAttribute("errorMsg", "设备不存在！");
-			return "userRegPage";
-		}
-		else
-		{
-			return "userRegPage";
-		}
+		response.getWriter().write(res);
+		return null;
+	}
+	
+	public String regSucc()
+	{
+		return "regSuccessPage";
 	}
 	
 	public String ansyUserName() throws IOException

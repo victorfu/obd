@@ -35,6 +35,7 @@ public class ProxyAction extends BaseAction implements ModelDriven<ProxyForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", qpname:"+proxyForm.getQpname());
 		List<Map<String, Object>> list = proxyDao.queryProxyList(ds, proxyForm);
 		request.setAttribute("proxyList", list);
 		//

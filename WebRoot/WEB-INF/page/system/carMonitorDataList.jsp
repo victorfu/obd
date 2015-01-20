@@ -26,7 +26,7 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">车辆数据监测</h3>
-   	<form name="form1" action="<c:url value='hbt-carquery.action'/>" method="post">
+   	<form name="form1" action="<c:url value='car-querymonitorcar.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
 			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>

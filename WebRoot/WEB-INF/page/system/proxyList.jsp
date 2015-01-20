@@ -30,8 +30,9 @@
    	<form name="form1" action="<c:url value='/proxy-query.action'/>" method="post">
 	<div class="queryDiv">
 		<ul class="queryWrap_ul">
+	        <li><label>姓名：</label><input type="text" name="qpname" class="ipt100 inputDefault" value="${qpname }" maxlength="20"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li><input type="button" onclick="saveProxy('0','0','','','','','','','','','','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
+	        <li><input type="button" onclick="saveProxy('0','0','','','','','','','','','','','','${sessionScope.vts.cursdttm }','${sessionScope.vts.curedttm }','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li></li>
 		</ul>
 	</div>
@@ -41,7 +42,7 @@
 			<thead class="tab_head">
                  <tr>
                      <th width="4%">姓名</th>
-                     <th width="8%">启用</th>
+                     <th width="2%">启用</th>
                      <th width="8%">地址</th>
                      <th width="6%">电话</th>
                      <th width="4%">模式</th>
@@ -54,7 +55,12 @@
 				<c:forEach items="${proxyList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.aname }</td>
-					<td>${ls.ienable }</td>
+					<td>
+						<c:choose>
+							<c:when test="${ls.ienable eq 1 }">√</c:when>
+							<c:otherwise>&nbsp;</c:otherwise>							
+						</c:choose>
+					</td>
 					<td>${ls.addr }</td>
 					<td>${ls.tel }</td>
 					<td>${ls.mode }</td>
@@ -89,7 +95,7 @@
 	    	<span class="lab120">代理商姓名：</span>
 	        <div class="ipt-box">
 	        	<input type="text" id="pnamex" name="pname" value="0" class="ipt_text_w150 inputDefault"  maxlength="10"/>
-	            <span class="asterisk">*</span>
+	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">

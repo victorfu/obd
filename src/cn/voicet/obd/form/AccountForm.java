@@ -25,6 +25,8 @@ public class AccountForm {
 	private int isbind;	//1:分配, 0:取消分配 
 	private int parentid;	
 	
+	private String qacc;	//查询账号
+	
 	public int getUid() {
 		return uid;
 	}
@@ -146,5 +148,17 @@ public class AccountForm {
 	public void setParentid(int parentid) {
 		this.parentid = parentid;
 	}
-	
+	public String getQacc() {
+		return qacc;
+	}
+	public void setQacc(String qacc) {
+		if(qacc.length()==0)
+		{
+			this.qacc = null;
+		}
+		else
+		{
+			this.qacc = qacc;
+		}
+	}
 }

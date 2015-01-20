@@ -4,19 +4,19 @@
 #container{width:1024px; margin:0 auto;}
 /* header */
 #header{height:85px; padding:5px 0 0 0px; background:url(../images/banner.jpg) no-repeat;}
-.tit1{height:25px; line-height:25px; text-indent:80px; font-size:20px; font-weight:bold; color:#0E72C7; text-align:left;}
-.tit2{height:40px; line-height:40px; padding-top:-5px; text-indent:80px; font-size:34px; font-weight:bold; color:#0E72C7; text-align:left;}
-.tit3{height:20px; padding-right:10px; text-align:right; color:#9CCFFF;}
+.tit1{height:20px;width:200px; padding-right:5px; text-align:right; color:#E2E2E2;float:right;font-size: 12px;font-weight: bold;margin-top: 35px;}
+.tit2{height: 85px; width:351px;background: url(../images/qsygcgl.png) no-repeat;float: left;}
+.tit3{height:20px;width:200px; padding-right:5px; text-align:right; color:#E2E2E2;float:right;font-size: 12px;font-weight: bold;}
 /* nav */
 #nav{height:30px; line-height:29px; text-indent:20px; color:#FFF; background:url(../images/nav-bg0.png) repeat-x;}
-.nav_left{width:740px; float:left; text-align:left;}
+.nav_left{width:800px; float:left; text-align:left;}
 .nav_left_wel{float:left;}
 .nav_left_wel span{margin-right:40px;}
 .nav_left_path{float:left;}
-.nav_right{width:260px; float:left; color:#FFF;}
-.nav_right span{margin-left:30px;}
-.menu_righta:link, .menu_righta:visited{text-decoration: none;color: #fff;}
-.menu_righta:hover, .menu_righta:active{text-decoration:underline;border: none;}
+.nav_right{float:right; color:#FFF;}
+.nav_right span{margin-left:15px;}
+.menu_righta:link, .menu_righta:visited{text-decoration: none;color: #fff;margin-right:8px;}
+.menu_righta:hover, .menu_righta:active{text-decoration:underline;border: none;background:none}
 /* main */
 #main{width:1024px; height:672px; overflow:hidden;}
 .main_left{float:left; width:155px; height:672px; background:#B1D8F9; text-align:left;}
@@ -30,7 +30,7 @@
 .login_main{width:566px; height:251px; background:#91C4EF; margin:0 auto;}
 .login_main_up{height:75px; background:url(../images/login-up.jpg) repeat-x;}
 .login_product{font-size:20px; color:#447DB4; text-align:center; text-indent:380px; padding-top:10px;}
-.login_company{font-size:32px; color:#447DB4; text-align:left; font-weight:bold;text-indent:80px; line-height:40px;}
+.login_company{font-size:32px; color: #D6D6D6; text-align:left; font-weight:bold;text-indent: 40px; line-height: 60px;}
 .login_main_down{height:186px; background:url(../images/login-p.jpg) repeat-x;}
 .login_content{float:right; width:240px; padding-left:80px;}
 .login_label{font:14px Microsoft YaHei; text-align:right; color:#111;}

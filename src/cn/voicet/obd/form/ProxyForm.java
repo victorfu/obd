@@ -25,6 +25,7 @@ public class ProxyForm {
 	private String money;
 	private String email;
 	
+	private String qpname;	//查询姓名
 
 	public int getAid() {
 		return aid;
@@ -147,4 +148,18 @@ public class ProxyForm {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getQpname() {
+		return qpname;
+	}
+	public void setQpname(String qpname) {
+		if(qpname.length()==0)
+		{
+			this.qpname = null;
+		}
+		else
+		{
+			this.qpname = qpname;
+		}
+	}
+	
 }

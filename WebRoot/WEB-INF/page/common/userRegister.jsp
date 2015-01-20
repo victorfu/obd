@@ -6,8 +6,8 @@
 <head>
 	<title>OBD-车载诊断系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link type="text/css" href="<c:url value='css/common.css'/>" rel="stylesheet" />
-	<link type="text/css" href="<c:url value='css/layout.css'/>" rel="stylesheet" />
+	<link type="text/css" href="<c:url value='css/common.css?v=1'/>" rel="stylesheet" />
+	<link type="text/css" href="<c:url value='css/layout.css?v=1'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
@@ -15,9 +15,11 @@
 <a id="popHuifang" target="mainFrame"></a>
 	<!-- header -->
   	<div id="header">
-  		<div class="tit1"><s:property value="#application.vta.product"/></div>
-  		<div class="tit2"><s:property value="#application.vta.customer"/></div>
-  		<div class="tit3"><s:property value="#application.vta.provider"/></div>
+  		<div class="tit2"></div>
+	  	<div style="width: 200px;height: 85px; float: right;">
+	  		<div class="tit1"><s:property value="#application.vta.product"/></div>
+	  		<div class="tit3"><s:property value="#application.vta.provider"/></div>
+		</div>
     </div>
     <!-- nav -->
   	<div id="nav">
@@ -88,36 +90,153 @@
     	<tr>
     		<td class="th">账号：</td>		
     		<td><input type="text" name="account" id="f_name" value="${account }" maxlength="20" class="TEXT" style="width:150px;"/>
-				<span id="name_msg">邮箱或手机号</span>
+				<span id="name_msg">2～20个字符，支持英文、数字和“_”格式"</span>
 			</td>
     	</tr>
     	<tr>
     		<td class="th">登录密码：</td>
     		<td><input type="password" name="password" id="f_pwd" value="${password }" class="TEXT" style="width:150px;"/>
-				<span id="password_msg">至少6位,必须是字母或特殊符合和数字结合</span>
+				<span id="password_msg">至少6位,必须是字母或特殊符号和数字结合</span>
 			</td>    		
     	</tr>
     	<tr>
     		<td class="th">密码确认：</td>		
-    		<td><input type="password" name="pwd2" id="f_pwd2" class="TEXT" style="width:150px;"/></td>
+    		<td><input type="password" id="f_pwd2" class="TEXT" style="width:150px;"/></td>
     	</tr>
 		<tr id="tr_email">
     		<td class="th">设备：</td>
     		<td>
-				<input type="text" name="devno" id="f_email" value="${devno }" class="TEXT" style="width:150px;"/>
+				<input type="text" name="devno" id="f_devno" value="${devno }" class="TEXT" style="width:150px;"/>
 				<span id="email_tip"></span>
 			</td>    			
-    	</tr>
-    	<tr>
-    		<td class="th"></td>		
-			<td style="color:#f00">${errorMsg }</td>
     	</tr>
     	<tr class="buttons">
     		<td class="th"></td>		
 			<td style="padding:20px 0;">
-    		<input type="submit" value="注册新用户 " class="BUTTON SUBMIT"/> <span id="error_msg" class="error_msg" style="display:none"></span>
+    		<input type="button" onclick="userReg()" value="注册新用户 " class="BUTTON SUBMIT"/></span>
 			<br/>
+<script type="text/javascript">
+
+	$(function(){
+		$("#f_name").bind("blur",checkName);
+		$("#f_pwd").bind("blur",checkPassword);
+		$("#f_pwd2").bind("blur",checkPassword2);
+		$("#f_devno").bind("blur",checkDevno);
+	});
+
+	function checkName()
+	{
+		var name = $("#f_name").val().trim();
+		if(!name)
+		{
+			$("#error_msg")[0].innerHTML="账号必须填写！";
+			return false;
+		}
+		else
+		{
+			$("#error_msg")[0].innerHTML="";
+			return true;
+		}
+	}
+
+	function checkPassword()
+	{
+		var pwd = $('#f_pwd').val();
+		if(pwd.length<6)
+		{
+			$("#error_msg")[0].innerHTML="密码长度小于6位！";
+			return false;
+		}
+		else if(!pwd.match(/[0-9]/)||!(pwd.match(/[a-zA-Z]/)||/\W/.test(pwd)))
+		{
+			$("#error_msg")[0].innerHTML="密码必须是字母或特殊符号和数字结合！";
+			return false;
+		}
+		else
+		{
+			$("#error_msg")[0].innerHTML="";
+			return true;
+		}
+	}
+
+	function checkPassword2()
+	{
+		if($('#f_pwd').val().length == 0 || $('#f_pwd').val() != $('#f_pwd2').val())
+		{
+			$("#error_msg")[0].innerHTML="两次密码必须填写，且要一致！";
+			return false;
+		}
+		else
+		{
+			$("#error_msg")[0].innerHTML="";
+			return true;
+		}
+	}
+
+	function checkDevno()
+	{
+		var devno = $("#f_devno").val().trim();
+		if(!devno)
+		{
+			$("#error_msg")[0].innerHTML="设备必须填写！";
+			return false;
+		}
+		else
+		{
+			$("#error_msg")[0].innerHTML="";
+			return true;
+		}
+	}
+	
+	function userReg()
+	{
+		if(!checkName()) return false;
+		if(!checkPassword()) return false;
+		if(!checkPassword2()) return false;
+		if(!checkDevno()) return false;
+		//
+		var name = $("#f_name").val().trim();
+		var pwd = $('#f_pwd').val();
+		var devno = $("#f_devno").val().trim();
+		$.ajax({
+	        type: "POST",
+	        url: "user-reg.action",
+	        data: {account:name, password:pwd, devno:devno},
+	        success: function(result){
+				if(result=="0")
+				{
+					alert("注册成功,立即登录!");
+					location.href="index.action";
+				}
+				else if(result=="-1")
+				{
+					$("#error_msg")[0].innerHTML="账号已存在！";
+				}
+				else if(result=="-2")
+				{
+					$("#error_msg")[0].innerHTML="设备状态不可用！";
+				}
+				else if(result=="-3")
+				{
+					$("#error_msg")[0].innerHTML="设备不存在！";
+				}
+				else
+				{
+					alert("请求失败 ");
+				}
+		    },
+	        error: function () {
+	            //alert(RES.REQUESTWRONG);
+	        }
+	    });
+	}
+</script>
 			</td>
+    	</tr>
+    	
+    	<tr>
+    		<td class="th"></td>		
+			<td style="color:#f00"><div id="error_msg"></div></td>
     	</tr>
 	</tbody></table>
 </form>
@@ -126,109 +245,12 @@
 	<h3>为什么要注册？</h3>
 	<ol>
 		<li>1.&nbsp;获取汽车最新状态</li>
-		<li>2.&nbsp;</li>
+		<li>2.&nbsp;查看车辆实时轨迹</li>
 	</ol>
 </div>
 <div class="clear"></div>
 </div>
-<script type="text/javascript">
-<!--
-var pwd="";
-var pwd2="";
-$('#form_user').bind('form-pre-serialize', function(event,form,options,veto){
-	pwd=$('#f_pwd').val();
-	pwd2=$('#f_pwd2').val();
-	$('#f_pwd').val(CryptoJS.SHA1($('#f_pwd').val()));
-	$('#f_pwd2').val(CryptoJS.SHA1($('#f_pwd2').val()));
-});
-$('#form_user').ajaxForm({
-    beforeSubmit: function(a,f,o) {
-		if($('#f_email').val().length == 0){
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-			$('#f_email').focus();
-			$('#error_msg').html("邮箱地址必须填写");
-			$('#error_msg').show("fast");
-			return false;
-		}
-		/*
-		else{
-			var acc = $('#f_email').val().toLowerCase();			
-			if(acc.indexOf('@qq.com')>0 || acc.indexOf('@foxmail.com')>0){
-				$('#error_msg').html("暂时不支持使用QQ和Foxmail邮箱进行注册");
-				$('#error_msg').show("fast");
-    			$('#f_pwd').val(pwd);
-    			$('#f_pwd2').val(pwd2);
-				return false;
-			}
-		}*/
-		if($('#f_name').val().length == 0){
-			$('#f_name').focus();
-			$('#error_msg').html("姓名必须填写");
-			$('#error_msg').show("fast");
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-			return false;
-        }
-
-        if(pwd.length < 6){
-            $('#f_pwd').val(pwd);
-            $('#f_pwd2').val(pwd2);
-            $('#f_pwd').focus();
-            $('#error_msg').html("密码长度小于6位");
-            $('#error_msg').show("fast");
-            return false;
-        }
-
-        if(!pwd.match(/[0-9]/)||!(pwd.match(/[a-zA-Z]/)||/\W/.test(pwd))){
-            $('#f_pwd').val(pwd);
-            $('#f_pwd2').val(pwd2);
-            $('#f_pwd').focus();
-            $('#error_msg').html("密码必须是字母或特殊符号和数字结合");
-            $('#error_msg').show("fast");
-            return false;
-        }
-
-		if($('#f_pwd').val().length == 0 || $('#f_pwd').val() != $('#f_pwd2').val()){
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-			$('#f_pwd').focus();
-			$('#error_msg').html("两次密码必须填写，且要匹配");
-			$('#error_msg').show("fast");
-			return false;
-		}
-		var notify = $("input[name=gender]:checked").val();
-		if(!notify){
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-			$('#tr_gender').addClass('hl');
-            $('#error_msg').html("请选择性别");
-            $('#error_msg').show("fast");
-			return false;
-		}
-		if($('#f_vcode').val().length == 0){
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-			$('#f_vcode').focus();
-			$('#error_msg').html("验证码必须填写");
-			$('#error_msg').show("fast");
-			return false;
-		}
-    },
-    success: function(html) {
-    	if(html.length > 0){
-			$('#f_pwd').val(pwd);
-			$('#f_pwd2').val(pwd2);
-    		$('#error_msg').hide();
-    		$('#error_msg').html(html);
-    		$('#error_msg').show("fast");
-    	}else{
-    		location.href="http://www.oschina.net/home/regok?email=" + $('#f_email').val();
-    	}
-    }
-});
-//-->
-</script><div class="clear"></div></div>
+<div class="clear"></div></div>
 
 </div>
   	<!-- footer -->

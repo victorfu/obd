@@ -28,52 +28,48 @@
 <div id="contentWrap">
 	<h3 class="h3_title">驾驶习惯查询</h3>
    	<form name="form1" action="<c:url value='hbt-query.action'/>" method="post">
-	<div class="queryDiv_h80">
+	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
 			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
 	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
 	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-	        <li></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="4%">编号</th>
                      <th width="8%">车牌号码</th>
                      <th width="12%">日期时间</th>
-                     <th width="6%">告警类型</th>
-                     <th width="6%">定位类型</th>
-                     <th width="12%">经度</th>
-                     <th width="12%">纬度</th>
+                     <th width="6%">点火次数</th>
+                     <th width="6%">行驶时间</th>
+                     <th width="6%">怠速时间</th>
+                     <th width="6%">热车时间</th>
+                     <th width="6%">平均车速</th>
+                     <th width="6%">最高车速</th>
+                     <th width="6%">最高转速</th>
+                     <th width="6%">急加速</th>
+                     <th width="6%">急减速</th>
+                     <th width="6%">急转弯</th>
                  </tr>
              </thead>
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${hbtList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.lid }</td>
 					<td>${ls.cid }</td>
-					<td>${ls.dt }</td>
-					<td>
-						<c:if test="${ls.dm eq 7 }">超速</c:if>
-						<c:if test="${ls.dm eq 8 }">低电压</c:if>
-						<c:if test="${ls.dm eq 9 }">车辆碰撞</c:if>
-						<c:if test="${ls.dm eq 11 }">车辆震动</c:if>
-					</td>
-					<td>
-						<c:choose>
-							<c:when test="${ls.lx eq 1 }">GPS</c:when>
-							<c:when test="${ls.lx eq 2 }">LBS</c:when>
-							<c:otherwise>其它</c:otherwise>
-						</c:choose>
-					</td>
-					<td>${ls.jd }</td>
-					<td>${ls.wd }</td>
+					<td>${ls.recvdate }</td>
+					<td>${ls.totallgnition }</td>
+					<td>${ls.accumulativetime }</td>
+					<td>${ls.accumulativeidletime }</td>
+					<td>${ls.averageheating }</td>
+					<td>${ls.averagespeed }</td>
+					<td>${ls.maxspeed }</td>
+					<td>${ls.highestspeed }</td>
+					<td>${ls.acceleration }</td>
+					<td>${ls.tdeceleration }</td>
+					<td>${ls.tswerve }</td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -72,7 +72,7 @@
 							<th class="login_label">验证码&nbsp;</th>
 							<td align="left">
 								<input type="text" id="vercode" name="vercode" placeholder="输入验证码" class="ipt70 inputDefault" maxlength="4"/>
-								<img src="${pageContext.request.contextPath }/verCode" id="verImg" class="cursor_p" height="20" width="60"/>
+								<img src="${pageContext.request.contextPath }/verCode" id="verImg" title="点击图片更换验证码" class="cursor_p" height="20" width="60"/>
 							</td>
 						</tr>
 						<tr height="28px">

@@ -31,6 +31,7 @@
    	<input type="hidden" id="pageflag" name="pageflag" value=""/>
 	<div class="queryDiv">
 		<ul class="queryWrap_ul">
+	        <li><label>账号：</label><input type="text" name="qacc" class="ipt100 inputDefault" value="${qacc }" maxlength="20"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li><input type="button" onclick="addAccount()" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li></li>

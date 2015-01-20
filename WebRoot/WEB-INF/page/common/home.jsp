@@ -17,18 +17,21 @@
 <a id="popHuifang" target="mainFrame"></a>
 	<!-- header -->
   	<div id="header">
-  		<div class="tit1"><s:property value="#application.vta.product"/></div>
-  		<div class="tit2"><s:property value="#application.vta.customer"/></div>
-  		<div class="tit3"><s:property value="#application.vta.provider"/></div>
-    </div>
+	  	<div class="tit2"></div>
+	  	<div style="width: 200px;height: 85px; float: right;">
+	  		<div class="tit1"><s:property value="#application.vta.product"/></div>
+	  		<div class="tit3"><s:property value="#application.vta.provider"/></div>
+		</div>
+	</div>
     <!-- nav -->
-    <!--  
   	<div id="nav">
     	<div class="nav_left">
     		<div class="nav_left_wel">
+    		<!--
         	<span><a href="main.jsp" target="mainFrame" title="首页" style="color:#fff;">首页</a></span>
-    		<span>欢迎：&nbsp;<s:property value="#session.vts.roleName"/></span>
-    		<span><s:property value="#session.vts.username"/></span>
+        	-->
+    		<span>欢迎：&nbsp;<s:property value="#session.vts.username"/></span>
+    		<span></span>
     		</div>
     		<div id="navigate" class="nav_left_path">
     		</div>
@@ -38,7 +41,6 @@
             <span><a class="menu_righta" href="javascript:logout()">[&nbsp;注销&nbsp;]</a></span>
         </div>
     </div>
-    -->
     <!-- main -->
   	<div id="main">
     	<div class="main_left">

@@ -28,19 +28,16 @@
 <div id="contentWrap">
 	<h3 class="h3_title">专业数据2</h3>
    	<form name="form1" action="<c:url value='group-query.action?flag=2'/>" method="post">
-	<div class="queryDiv_h80">
+	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
 			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
 	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
 	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-	        <li></li>
-	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
+			<li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>

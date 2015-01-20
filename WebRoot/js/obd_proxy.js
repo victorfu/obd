@@ -1,3 +1,22 @@
+$(function(){
+	$("#pnamex").bind("blur",checkPname);
+});
+//代理商姓名
+function checkPname()
+{
+	var pn = $("#pnamex").val().trim();
+	if(!pn)
+	{
+		$(".asterisk")[0].innerHTML="代理商姓名不能为空！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[0].innerHTML="";
+		return true;
+	}
+}
+
 
 //是否启用
 function checkEnable(obj)
@@ -16,6 +35,9 @@ function checkEnable(obj)
 function saveProxy(s,aid,pname,ienable,addr,telnum,mobile,qq,url,paid,company,mode,ptype,sdt,edt,img,money,email)
 {
 	//init
+	$(".asterisk").each(function(){
+		this.innerHTML="";
+	});
 	//
 	var tit;
 	if(s==0)
@@ -67,6 +89,7 @@ function saveProxy(s,aid,pname,ienable,addr,telnum,mobile,qq,url,paid,company,mo
 
 function saveProxyBtn()
 {
+	if(!checkPname()) return false;
 	document.form2.submit();
 }
 

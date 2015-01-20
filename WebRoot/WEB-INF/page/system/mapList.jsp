@@ -43,17 +43,16 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">车辆行程查询<input type="button" value="返回" onclick="history.go(-1)"/></h3>
-	<input id="follow" type="checkbox"/><span style="font-size:12px;">画面跟随</span>
-	<input id="play" type="button" value="播放" onclick="play();" disabled="disabled" />
-	<input id="pause" type="button" value="暂停" onclick="pause();" disabled="disabled" />
-	<input id="reset" type="button" value="重置" onclick="reset()" disabled="disabled" />
-		
 	<div class="content_List450" id="mapview">
 		<input type="hidden" id="cidx" value="${cid }"/>
 		<input type="hidden" id="sdtx" value="${sdttm }"/>
 		<input type="hidden" id="edtx" value="${edttm }"/>
 		<div id="allmap"></div>
 	</div>
+	<input id="follow" type="checkbox"/><span style="font-size:12px;">画面跟随</span>
+	<input id="play" type="button" value="播放" onclick="play();" disabled="disabled" />
+	<input id="pause" type="button" value="暂停" onclick="pause();" disabled="disabled" />
+	<input id="reset" type="button" value="重置" onclick="reset()" disabled="disabled" />
 	<div id="mapdata"></div>
 </div>
 <script type="text/javascript">

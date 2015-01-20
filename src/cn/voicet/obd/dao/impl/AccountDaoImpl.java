@@ -26,12 +26,13 @@ import cn.voicet.obd.form.AccountForm;
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	public static final Logger log = Logger.getLogger(AccountDaoImpl.class);
 
-	public List<Map<String, Object>> queryAccountList(final DotSession ds, AccountForm accountForm) {
-		log.info("sp:web_user_Query(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_Query(?)}", new CallableStatementCallback() {
+	public List<Map<String, Object>> queryAccountList(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_Query(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_Query(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
+				cs.setString("acc", accountForm.getQacc());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

@@ -4,7 +4,7 @@ $(function(){
 
 function checkDevno()
 {
-	var devno = $("#devnox").val();
+	var devno = $("#devnox").val().trim();
 	if(!devno)
 	{
 		$(".asterisk")[0].innerHTML="设备号不能为空";

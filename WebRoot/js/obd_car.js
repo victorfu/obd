@@ -4,7 +4,7 @@ $(function(){
 
 function checkChepai()
 {
-	var chep = $("#chepaix").val();
+	var chep = $("#chepaix").val().trim();
 	if(!chep)
 	{
 		$(".asterisk")[0].innerHTML="车牌号不能为空！";

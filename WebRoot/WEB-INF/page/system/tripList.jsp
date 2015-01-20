@@ -31,18 +31,16 @@
 <div id="contentWrap">
 	<h3 class="h3_title">车辆行程查询</h3>
    	<form action="<c:url value='trip-query.action'/>" method="post">
-	<div class="queryDiv_h80">
+	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
 	   		<li><label>车牌号码：</label><input type="text" name="chepai" value="${chepai }" class="ipt100 inputDefault"/></li>
 			<li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
 	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
-		</ul>
-		<ul class="queryWrap_ul">
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
     </form>
-	<div class="content_List528">
+	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>

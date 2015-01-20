@@ -119,6 +119,10 @@
 		<action name="ansyUserName" class="userAction" method="ansyUserName">
 			<result type="json"></result>
 		</action>
+		<action name="user-reg" class="userAction" method="reg">
+			<result type="json"></result>
+		</action>
+		
 		
 		<!-- 删除单条设备 -->
 		<action name="deleteDev" class="deviceAction" method="deleteDev">

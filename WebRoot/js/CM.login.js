@@ -57,3 +57,12 @@ var responseLogin = function(data, textStatus, jqXHR)
 	}
 	verImg.src = "verCode?"+Math.random();
 }
+
+$(function(){
+	$("#verImg").bind("click",changeVerCode);
+});
+//
+function changeVerCode()
+{
+	verImg.src = "verCode?"+Math.random();
+}

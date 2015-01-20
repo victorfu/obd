@@ -13,7 +13,9 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">车辆实时数据监测</h3>
+	<h3 class="h3_title">车辆实时数据监测
+	<span><input type="button" value="返回" onclick="history.go(-1)" class="btn4"/></span>
+	</h3>
 	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
    	<div id="carMonitor" style="width:100%; height:100%"></div>
    	<input type="hidden" id="qchepaix" value="${qchepai }"/>

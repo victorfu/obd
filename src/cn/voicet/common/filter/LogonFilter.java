@@ -28,6 +28,7 @@ public class LogonFilter implements Filter{
 		list.add("/404.jsp");
 		list.add("/user-register.action");
 		list.add("/user-reg.action");
+		list.add("/user-regSucc.action");
 		//
 	}
 

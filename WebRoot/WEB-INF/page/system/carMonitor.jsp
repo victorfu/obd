@@ -19,19 +19,22 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">车辆实时定位监测</h3>
+	<h3 class="h3_title">车辆实时定位监测
+		<span><input type="button" value="返回" onclick="history.go(-1)" class="btn4"/></span>
+	</h3>
 	<div id="allmap"></div>
 </div>
 <script src="http://api.map.baidu.com/api?v=2.0&ak=8TWE7qd96upvIp2ifKktjcwf"></script>
 <script type="text/javascript">
 	//百度地图API功能
 	var map = new BMap.Map("allmap");    // 创建Map实例
-	var point = new BMap.Point(118.92787900, 32.05748900);
-	map.centerAndZoom(point, 11);  // 初始化地图,设置中心点坐标和地图级别
+	var point = new BMap.Point(118.822774,32.029016);
+	map.centerAndZoom(point, 14);  // 初始化地图,设置中心点坐标和地图级别
 	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
 	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-	var marker = new BMap.Marker(point);
+	//添加标注，如起点
+	var marker = new BMap.Marker(new BMap.Point(118.822774,32.029016));
 	map.addOverlay(marker);
 	marker.addEventListener("click",getAttr);
 	function getAttr()
@@ -39,14 +42,29 @@
 		var p = marker.getPosition();
 		alert("当前车辆位置：");
 	}
-
+	
+	var pointA = new BMap.Point(118.822774,32.029016);  // 创建点坐标A--大渡口区
+	var pointB = new BMap.Point(118.826079,32.067212);  // 创建点坐标B--江北区
+	var pointC = new BMap.Point(118.80452,32.063417);  // 创建点坐标B--江北区
+	var pointD = new BMap.Point(118.772612,32.079695);  // 创建点坐标B--江北区
+	//
+	var points = [];
+	points.push(pointA);
+	points.push(pointB);
+	points.push(pointC);
+	points.push(pointD);
+	
+	var polyline = new BMap.Polyline(points, {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+	map.addOverlay(polyline);
 	// 编写自定义函数,创建标注
 	function addMarker(point){
 	  var marker = new BMap.Marker(point);
 	  map.addOverlay(marker);
+
 	}
 </script>
 <script type="text/javascript">
+	/*
 	var interval;
 	$(function(){
 		var time= 6000;
@@ -66,6 +84,7 @@
 	    };
 	    run();
 	});		
+	*/
 </script>
 </body>
 </html>

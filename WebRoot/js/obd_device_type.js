@@ -9,7 +9,7 @@ $(function(){
 //类型名称
 function checkDevTypeName()
 {
-	var tpname = $("#tpnamex").val();
+	var tpname = $("#tpnamex").val().trim();
 	if(!tpname)
 	{
 		$(".asterisk")[0].innerHTML="类型名称不能为空！";

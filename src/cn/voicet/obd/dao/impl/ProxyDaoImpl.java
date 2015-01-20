@@ -17,7 +17,6 @@ import cn.voicet.common.dao.impl.BaseDaoImpl;
 import cn.voicet.common.util.DotSession;
 import cn.voicet.common.util.VTJime;
 import cn.voicet.obd.dao.ProxyDao;
-import cn.voicet.obd.form.DeviceForm;
 import cn.voicet.obd.form.ProxyForm;
 
 @Repository(ProxyDao.SERVICE_NAME)
@@ -26,11 +25,12 @@ public class ProxyDaoImpl extends BaseDaoImpl implements ProxyDao {
 	public static final Logger log = Logger.getLogger(ProxyDaoImpl.class);
 
 	public List<Map<String, Object>> queryProxyList(final DotSession ds, final ProxyForm proxyForm) {
-		log.info("sp:web_Agent_Query(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_Agent_Query(?)}", new CallableStatementCallback() {
+		log.info("sp:web_Agent_Query(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_Agent_Query(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
+				cs.setString("aname", proxyForm.getQpname());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

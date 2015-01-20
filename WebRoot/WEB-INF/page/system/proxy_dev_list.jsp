@@ -26,7 +26,9 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">分配设备<input type="button" onclick="history.go(-1)" value="返回"/></h3>
+	<h3 class="h3_title">分配设备
+		<span><input type="button" value="返回" onclick="history.go(-1)" class="btn4"/></span>
+	</h3>
 	<div class="content_List615">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">

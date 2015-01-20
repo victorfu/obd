@@ -33,14 +33,14 @@
 			<li><label>设备号：</label><input type="text" name="qdevno" class="ipt100 inputDefault" value="${qdevno }" maxlength="20"/></li>
 	       	<li><label>有效期：</label><input type="text" id="sdttm" name="qsdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
 	        <li><label>-&nbsp;&nbsp;</label><input type="text" id="edttm" name="qedttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
-		</ul>
-		<ul class="queryWrap_ul" style="margin-top:-4px;">
-			<li>
+	        <li>
 				<label>状态</label>
 				<s:select id="qstatex" name="qstate" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:80px; height:22px;" headerKey="-1" headerValue="全部" listValue="str" value="qstate"></s:select>
 			</li>	       
 	        <li></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
+		</ul>
+		<ul class="queryWrap_ul" style="margin-top:-4px;">
 	        <li><input type="button" onclick="saveDevice('0','','','10','','','${sessionScope.vts.cursdt }','')" class="btn4" value="添&nbsp;&nbsp;加"/></li>
 	        <li>
 	        	<span class="down">点击<a href="${pageContext.request.contextPath }/excelTemplate/device_importTemplate.xls">下载</a>模板文件</span>

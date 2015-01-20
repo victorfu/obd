@@ -1,10 +1,8 @@
 package cn.voicet.obd.action;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;

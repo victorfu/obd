@@ -54,7 +54,7 @@ function checkUacc()
 //用户姓名
 function checkUname()
 {
-	var n = $("#unamex").val();
+	var n = $("#unamex").val().trim();
 	if(!n)
 	{
 		$("#nameErrMsg")[0].innerHTML="用户姓名不能为空";

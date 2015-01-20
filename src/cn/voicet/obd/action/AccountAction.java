@@ -36,6 +36,7 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", qacc:"+accountForm.getQacc());
 		List<Map<String, Object>> list = accountDao.queryAccountList(ds, accountForm);
 		request.setAttribute("accList", list);
 		return "accountPage";

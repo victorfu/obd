@@ -1,5 +1,4 @@
 package cn.voicet.obd.action;
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +74,6 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	 */
 	public String monitor()
 	{
-		//clear rt data
-		DotSession ds = DotSession.getVTSession(request);
 		return "carMonitorPage";
 	}
 	
@@ -87,6 +84,7 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	public String querymonitorcar()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", qchepai:"+carForm.getQchepai());
 		List<Map<String, Object>> list = carDao.queryCarList(ds, carForm);
 		request.setAttribute("carList", list);
 		return "carMonitorDataPage";
