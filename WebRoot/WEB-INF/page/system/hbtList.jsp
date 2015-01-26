@@ -30,9 +30,9 @@
    	<form name="form1" action="<c:url value='hbt-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
-			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
-	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
+			<li><label>车牌号：</label><input type="text" name="qchepai" class="ipt100 inputDefault" value="${qchepai }" maxlength="20"/></li>
+	        <li><label>开始日期：</label><input type="text" id="sdttm" name="qsdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edttm" name="qedttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
@@ -58,8 +58,8 @@
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${hbtList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.cid }</td>
-					<td>${ls.recvdate }</td>
+					<td>${ls.cph }</td>
+					<td>${fn:substring(ls.recvdate,0,19) }</td>
 					<td>${ls.totallgnition }</td>
 					<td>${ls.accumulativetime }</td>
 					<td>${ls.accumulativeidletime }</td>

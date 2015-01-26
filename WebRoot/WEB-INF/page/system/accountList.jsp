@@ -58,7 +58,7 @@
 					<td>
 						<c:if test="${ls.lev eq 1 }">系统管理员</c:if>
 						<c:if test="${ls.lev eq 2 }">管理员</c:if>
-						<c:if test="${ls.lev eq 3 }">代理商</c:if>
+						<c:if test="${ls.lev eq 3 }">企业管理员</c:if>
 						<c:if test="${ls.lev eq 4 }">用户</c:if>
 					</td>
 					<td>${ls.pwd }</td>
@@ -66,7 +66,9 @@
 					<td>${ls.carcount }</td>
 					<td>${ls.mail }</td>
 					<td>
-						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }&parentid=${ls.puid }'/>">查看车辆</a>&nbsp;&nbsp;
+						<c:if test="${sessionScope.vts.userid ne ls.uid }">
+						<a href="<c:url value='account-viewCar.action?uid=${ls.uid }&parentid=${sessionScope.vts.userid }'/>">查看车辆</a>&nbsp;&nbsp;
+						</c:if>
 						<a href="<c:url value='account-info.action?uid=${ls.uid }&aid=${ls.aid }&ulevel=${ls.lev }'/>">修改</a>&nbsp;&nbsp;
 						<a href="javascript:deleteAccount('${ls.uid }','${status.count }')">删除</a>
 					</td>

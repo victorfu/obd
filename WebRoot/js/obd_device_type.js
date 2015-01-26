@@ -10,9 +10,10 @@ $(function(){
 function checkDevTypeName()
 {
 	var tpname = $("#tpnamex").val().trim();
+	tpname = removeHTMLTag(tpname);
 	if(!tpname)
 	{
-		$(".asterisk")[0].innerHTML="类型名称不能为空！";
+		$(".asterisk")[0].innerHTML="类型名称格式不正确！";
 		return false;
 	}
 	else

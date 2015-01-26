@@ -30,7 +30,7 @@ public class HbtDaoImpl extends BaseDaoImpl implements HbtDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", hbtForm.getChepai());
+				cs.setString("cph", hbtForm.getQchepai());
 				cs.setString("sdt", ds.cursdttm);
 				cs.setString("edt", ds.curedttm);
 				cs.execute();

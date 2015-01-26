@@ -51,7 +51,7 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 		{
 			accountForm.setUlevel(4);
 		}
-		log.info("uid:"+ds.userid+", ulevel:"+accountForm.getUlevel()+", aid:"+ds.agentid+", shareacc:"+accountForm.getUacc()+", uname:"+accountForm.getUname());
+		log.info("uid:"+ds.userid+", ulevel:"+accountForm.getUlevel()+", shareacc:"+accountForm.getUacc()+", uname:"+accountForm.getUname());
 		accountDao.addAccount(ds, accountForm);
 		return query();
 	}

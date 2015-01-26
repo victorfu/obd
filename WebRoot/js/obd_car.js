@@ -5,9 +5,10 @@ $(function(){
 function checkChepai()
 {
 	var chep = $("#chepaix").val().trim();
+	chep = removeHTMLTag(chep);
 	if(!chep)
 	{
-		$(".asterisk")[0].innerHTML="车牌号不能为空！";
+		$(".asterisk")[0].innerHTML="车牌号格式不正确！";
 		return false;
 	}
 	else

@@ -48,6 +48,7 @@ function checkUacc()
 			}
 		}
 	});
+	return true;
 }
 
 
@@ -88,6 +89,8 @@ function addAccount()
 
 function addAccountBtn()
 {
+	if(!checkUacc()) return false;
+	if(!checkUname()) return false;
 	document.form2.submit();
 }
 

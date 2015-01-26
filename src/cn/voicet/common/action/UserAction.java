@@ -41,7 +41,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		Map<String, Object> map = userDao.userLogin(userForm);
 		log.info("user login map: "+map);
 		//
-		ds.agentid = Integer.valueOf((String) map.get("agentid"));
 		ds.userid = Integer.valueOf((String) map.get("uid"));
 		ds.roleID=(String) map.get("lev");
 		ds.username=(String) map.get("name");

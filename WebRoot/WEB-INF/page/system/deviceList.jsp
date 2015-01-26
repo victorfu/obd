@@ -27,6 +27,7 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">设备管理</h3>
+	<input id="tpl_size" type="hidden" value="${fn:length(typeList) }"/>
    	<form name="form1" action="<c:url value='/device-query.action'/>" method="post">
 	<div class="queryDiv_h80">
 	   	<ul class="queryWrap_ul">
@@ -105,7 +106,7 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">设备号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="devnox" name="devno" value="" class="ipt_text_w150 inputDefault"  maxlength="20"/>
+	        	<input type="text" id="devnox" name="devno" value="" class="ipt_text_w150 inputDefault"  maxlength="13"/>
 	            <span class="asterisk"></span>
 	        </div>
 	    </div>
@@ -113,7 +114,7 @@
 	    	<span class="lab120">设备类型：</span>
 	        <div class="ipt-box">
 	        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="vid" listValue="dname" value="type"></s:select>
-	            <span class=""></span>
+	            <span class="asterisk"></span>
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item" id="is_show_devstate">
@@ -256,6 +257,7 @@ $(function(){
 <!-- layer 弹出插件 end -->
 <!-- ajax file upload -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js?v=5'/>"></script>
-<script type="text/javascript" src="<c:url value='js/obd_device.js?v=2'/>"></script>
+<script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_device.js?v=3'/>"></script>
 </body>
 </html>

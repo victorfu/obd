@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>OBD-车载诊断系统</title>
+	<title>企事业公车管理系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" href="<c:url value='css/common.css'/>" rel="stylesheet" />
 	<link type="text/css" href="<c:url value='css/layout.css'/>" rel="stylesheet" />

@@ -12,7 +12,6 @@
 <div id="dbCon">
 	<h3 class="h3_title" style="margin-top:20px;">修改资料</h3>
 	<input type="hidden" id="uidx" name="uid" value="${uid }"/>
-	<input type="hidden" id="aidx" name="aid" value="${aid }"/>
 	<input type="hidden" id="ulevelx" name="ulevel" value="${ulevel }"/>
 	<div class="sys_init_info">
         <div class="lab_ipt_item">

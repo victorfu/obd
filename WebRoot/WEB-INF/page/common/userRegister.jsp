@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>OBD-车载诊断系统</title>
+	<title>企事业公车管理系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" href="<c:url value='css/common.css?v=1'/>" rel="stylesheet" />
 	<link type="text/css" href="<c:url value='css/layout.css?v=1'/>" rel="stylesheet" />
@@ -127,9 +127,20 @@
 	function checkName()
 	{
 		var name = $("#f_name").val().trim();
+		var reg = /^[a-zA-Z][a-zA-Z0-9_]*$/;
 		if(!name)
 		{
 			$("#error_msg")[0].innerHTML="账号必须填写！";
+			return false;
+		}
+		else if(!name.match(reg))
+		{
+			$("#error_msg")[0].innerHTML="账号为英文字母开头，只含有英文字母、数字和下划线！";
+			return false;
+		}
+		else if(name.length<2 || name.length>20)
+		{
+			$("#error_msg")[0].innerHTML="账号长度为2-20个字符！";
 			return false;
 		}
 		else

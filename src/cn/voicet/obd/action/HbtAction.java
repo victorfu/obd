@@ -1,6 +1,7 @@
 package cn.voicet.obd.action;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -34,7 +35,14 @@ public class HbtAction extends BaseAction implements ModelDriven<HbtForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		hbtDao.queryHbtList(ds, hbtForm);
+		if(null!=hbtForm.getQsdttm() || null!=hbtForm.getQedttm())
+		{
+			ds.cursdttm = hbtForm.getQsdttm();
+			ds.curedttm = hbtForm.getQedttm();
+		}
+		log.info("uid:"+ds.userid+", qchepai:"+hbtForm.getQchepai()+", sdttm:"+ds.cursdttm+", edttm:"+ds.curedttm);
+		List<Map<String, Object>> list = hbtDao.queryHbtList(ds, hbtForm);
+		request.setAttribute("hbtList", list);
 		return "hbtPage";
 	}
 	

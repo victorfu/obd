@@ -142,7 +142,7 @@
       			<c:otherwise>
       				<input type="hidden" id="lab_devnox_r" name="devno"/>
 		      		<label id="lab_devx"></label>
-		      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" value="devno"></s:select>
+		      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" headerKey="" headerValue="--选择设备--" value="devno"></s:select>
 		          	<span class=""></span>	
 	      			</c:otherwise>	
       		</c:choose>
@@ -228,6 +228,7 @@
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='layer/extend/layer.ext.js'/>"></script>
 <!-- layer 弹出插件 end -->
+<script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
 <script type="text/javascript" src="<c:url value='js/obd_car.js?v=3'/>"></script>
 </body>
 </html>

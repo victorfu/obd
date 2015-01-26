@@ -49,14 +49,13 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 			ds.cursdttm = deviceForm.getQsdttm();
 			ds.curedttm = deviceForm.getQedttm();
 		}
-		log.info("agentid:"+ds.agentid+", qdevno:"+deviceForm.getQdevno()+", sdttm:"+ds.cursdttm+", edt:"+ds.curedttm+", qstate:"+deviceForm.getQstate());
+		log.info("qdevno:"+deviceForm.getQdevno()+", sdttm:"+ds.cursdttm+", edt:"+ds.curedttm+", qstate:"+deviceForm.getQstate());
 		List<Map<String, Object>> list = deviceDao.queryDeviceList(ds, deviceForm);
 		request.setAttribute("devList", list);
 		//
 		List<Map<String, Object>> typeList = deviceDao.queryDeviceTypeList(deviceForm);
 		request.setAttribute("typeList", typeList);
 		//
-		
 		return "devicePage";
 	}
 	
@@ -66,9 +65,10 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String importDevice()
 	{
+		DotSession ds = DotSession.getVTSession(request);
 		log.info("import data start");
-		log.info("type:"+deviceForm.getType());
-		deviceDao.batchImportData(deviceForm,uploadExcel);
+		log.info("uid:"+ds.userid+", type:"+deviceForm.getType());
+		deviceDao.batchImportData(ds, deviceForm,uploadExcel);
 		log.info("import data complete");
 		return null;
 	}
@@ -109,8 +109,9 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String saveDevice()
 	{
-		log.info("devno:"+deviceForm.getDevno()+",changj:"+deviceForm.getChangj()+", type:"+deviceForm.getType()+", state:"+deviceForm.getState()+", devxy:"+deviceForm.getDevxh()+", valdt:"+deviceForm.getValdt()+", identi:"+deviceForm.getIdenti());
-		deviceDao.saveDevice(deviceForm);
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", devno:"+deviceForm.getDevno()+",changj:"+deviceForm.getChangj()+", type:"+deviceForm.getType()+", state:"+deviceForm.getState()+", devxy:"+deviceForm.getDevxh()+", valdt:"+deviceForm.getValdt()+", identi:"+deviceForm.getIdenti());
+		deviceDao.saveDevice(deviceForm, ds);
 		log.info("save device["+deviceForm.getDevno()+"] complete");
 		return query();
 	}

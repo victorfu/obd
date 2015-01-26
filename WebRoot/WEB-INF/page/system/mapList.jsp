@@ -42,7 +42,9 @@
 </head>
 <body>
 <div id="contentWrap">
-	<h3 class="h3_title">车辆行程查询<input type="button" value="返回" onclick="history.go(-1)"/></h3>
+	<h3 class="h3_title">车辆行程查询
+	<span><input type="button" value="返回" onclick="history.go(-1)" class="btn4"/></span>
+	</h3>
 	<div class="content_List450" id="mapview">
 		<input type="hidden" id="cidx" value="${cid }"/>
 		<input type="hidden" id="sdtx" value="${sdttm }"/>

@@ -42,7 +42,7 @@
 			<thead class="tab_head2">
                  <tr>
                      <th width="6%">车牌号码</th>
-                     <th width="6%">接收时间</th>
+                     <th width="8%">接收时间</th>
                      <th width="4%">电瓶<br/>电压</th>
                      <th width="4%">发动机<br/>转速</th>
                      <th width="4%">行驶<br/>车速</th>
@@ -63,7 +63,7 @@
 				<c:forEach items="${rtList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.cph }</td>
-					<td>${fn:substring(ls.rdt,11,19) }</td>
+					<td>${fn:substring(ls.rdt,0,10) }</td>
 					<td>${ls.vt }</td>
 					<td>${ls.ep }</td>
 					<td>${ls.rs }</td>

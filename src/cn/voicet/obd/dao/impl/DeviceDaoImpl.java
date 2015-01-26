@@ -61,8 +61,8 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		});
 	}
 
-	public void batchImportData(final DeviceForm deviceForm, final File uploadExcel) {
-		log.info("sp:web_dev_update(?,?,?,?,?,?,?)");
+	public void batchImportData(final DotSession ds, final DeviceForm deviceForm, final File uploadExcel) {
+		log.info("sp:web_dev_update(?,?,?,?,?,?,?,?)");
 
 		//excel max column num
 		final int MAX_COL_CHECK = 200;
@@ -75,7 +75,7 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 				PreparedStatement ps = null;
 				// close session auto commit;
 				con.setAutoCommit(false);
-				ps = con.prepareStatement("{call web_dev_update(?,?,?,?,?,?,?)}");
+				ps = con.prepareStatement("{call web_dev_update(?,?,?,?,?,?,?,?)}");
 				boolean bCheckOK;
 				String cellValues[] = new String[MAX_COL_CHECK];
 				try 
@@ -121,11 +121,11 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 								{
 									if(null==cellValues[j] || ""==cellValues[j])
 									{
-										ps.setString(1, null);
+										ps.setString(2, null);
 									}
 									else
 									{
-										ps.setString(1, cellValues[j]);
+										ps.setString(2, cellValues[j]);
 									}
 								}
 								//设备状态
@@ -133,11 +133,11 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 								{
 									if(null==cellValues[j] || ""==cellValues[j])
 									{
-										ps.setString(3, null);
+										ps.setString(4, null);
 									}
 									else
 									{
-										ps.setString(3, cellValues[j]);
+										ps.setString(4, cellValues[j]);
 									}
 								}
 								//有效期
@@ -145,19 +145,20 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 								{
 									if(null==cellValues[j] || ""==cellValues[j])
 									{
-										ps.setString(6, null);
+										ps.setString(7, null);
 									}
 									else
 									{
-										ps.setString(6, cellValues[j]);
+										ps.setString(7, cellValues[j]);
 									}	
 								}
 							}
 							//
-							ps.setInt(2, deviceForm.getType());
-							ps.setString(4, null);
+							ps.setInt(1, ds.userid);
+							ps.setInt(3, deviceForm.getType());
 							ps.setString(5, null);
-							ps.setString(7, null);
+							ps.setString(6, null);
+							ps.setString(8, null);
 							//
 							ps.addBatch();
 							//
@@ -207,11 +208,12 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		return true;
 	}
 
-	public void saveDevice(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_update(?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_dev_update(?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+	public void saveDevice(final DeviceForm deviceForm, final DotSession ds) {
+		log.info("sp:web_dev_update(?,?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_dev_update(?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
 				cs.setString("devno", deviceForm.getDevno());
 				cs.setInt("devtype", deviceForm.getType());
 				cs.setString("istate", deviceForm.getState());

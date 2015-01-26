@@ -54,7 +54,13 @@
              <tbody class="tab_tbody" id="movies">
 				<c:forEach items="${proxyList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.aname }</td>
+					<td title="${ls.aname }">
+						<c:set var="anamelen" value="${fn:length(ls.aname) }"></c:set>
+						<c:choose>
+							<c:when test="${anamelen gt 4 }">${fn:substring(ls.aname,0,3) }..</c:when>
+							<c:otherwise>${ls.aname }</c:otherwise>
+						</c:choose>
+					</td>
 					<td>
 						<c:choose>
 							<c:when test="${ls.ienable eq 1 }">√</c:when>

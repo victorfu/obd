@@ -36,7 +36,6 @@ public class DotSession {
 	public String roleID;
 	public int userid;
 	public int userlev;		//用户级别
-	public int agentid;	//代理商编号
 	public int devnum;
 	public int carnum;
 	
@@ -589,12 +588,6 @@ public class DotSession {
 	}
 	public void setUserlev(int userlev) {
 		this.userlev = userlev;
-	}
-	public int getAgentid() {
-		return agentid;
-	}
-	public void setAgentid(int agentid) {
-		this.agentid = agentid;
 	}
 	public int getUserid() {
 		return userid;

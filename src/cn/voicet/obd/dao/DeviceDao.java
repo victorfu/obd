@@ -10,8 +10,8 @@ import cn.voicet.obd.form.DeviceForm;
 public interface DeviceDao {
 	public static final String SERVICE_NAME = "cn.voicet.obd.dao.impl.DeviceDaoImpl";
 	List<Map<String, Object>> queryDeviceList(DotSession ds, DeviceForm deviceForm);
-	void batchImportData(DeviceForm deviceForm, File uploadExcel);
-	void saveDevice(DeviceForm deviceForm);
+	void batchImportData(DotSession ds, DeviceForm deviceForm, File uploadExcel);
+	void saveDevice(DeviceForm deviceForm, DotSession ds);
 	void deleteDevice(DeviceForm deviceForm);
 	
 	//设备类型

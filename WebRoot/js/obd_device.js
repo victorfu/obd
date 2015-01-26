@@ -5,9 +5,16 @@ $(function(){
 function checkDevno()
 {
 	var devno = $("#devnox").val().trim();
-	if(!devno)
+	devno = removeHTMLTag(devno);
+	var reg = /^[a-zA-Z0-9]+$/;
+	if(!devno || devno.length!=13)
 	{
-		$(".asterisk")[0].innerHTML="设备号不能为空";
+		$(".asterisk")[0].innerHTML="设备格式不正确";
+		return false;
+	}
+	else if(!reg.test(devno))
+	{
+		$(".asterisk")[0].innerHTML="设备格式不正确";
 		return false;
 	}
 	else
@@ -118,8 +125,24 @@ function saveDevice(s,devno,type,state,changj,devxh,valdt,identi)
 	});
 }
 
+function checkTypeListSize()
+{
+	var tpl_size =  $("#tpl_size").val();
+	if(tpl_size==0)
+	{
+		$(".asterisk")[1].innerHTML="请添加设备类型";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[1].innerHTML="";
+		return true;
+	}
+}
+
 function saveDeviceBtn()
 {
+	if(!checkTypeListSize()) return false;
 	if(!checkDevno()) return false;
 	document.form2.submit();
 }

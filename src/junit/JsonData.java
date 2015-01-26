@@ -11,5 +11,11 @@ public class JsonData{
 		System.out.println(s.length());
 		String[] sa = s.split(",");
 		System.out.println(Arrays.asList(sa).size());
+		System.loadLibrary("");
+	}
+	
+	private native String show();
+	static{
+		
 	}
 }

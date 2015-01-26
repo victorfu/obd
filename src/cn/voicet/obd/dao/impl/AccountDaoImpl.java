@@ -120,13 +120,12 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	}
 
 	public void addAccount(final DotSession ds, final AccountForm accountForm) {
-		log.info("sp:web_user_create_account(?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_user_create_account(?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
 				cs.setInt("lev", accountForm.getUlevel());
-				cs.setInt("aid", ds.agentid);
 				cs.setString("subaccount", accountForm.getUacc());
 				cs.setString("uname", accountForm.getUname());
 				cs.execute();
@@ -168,13 +167,12 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	}
 
 	public void saveAccountInfo(final DotSession ds, final AccountForm accountForm) {
-		log.info("sp:web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_update(?,?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", accountForm.getUid());
 				cs.setInt("lev", accountForm.getUlevel());
-				cs.setInt("aid", accountForm.getAid());
 				cs.setString("account", accountForm.getUacc());
 				cs.setString("uname", accountForm.getUname());
 				cs.setString("ct", accountForm.getIdcardtype());

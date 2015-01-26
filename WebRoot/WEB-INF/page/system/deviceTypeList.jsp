@@ -30,7 +30,9 @@
 			<li><label>类型名称：</label><input type="text" id="qtpnamex" name="qtpname" class="ipt100 inputDefault"  value="${qtpname }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
+	        	<c:if test="${sessionScope.vts.roleID eq 1 }">
 	        	<input type="button" onclick="saveType('0','0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
+	        	</c:if>
 	        </li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -41,17 +43,19 @@
 	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
-                 <tr>
-                     <th width="8%">类型名称</th>
-                     <th width="8%">厂家</th>
-                     <th width="6%">地址</th>
-                     <th width="6%">电话</th>
-                     <th width="8%">手机</th>
-                     <th width="8%">QQ</th>
-                     <th width="8%">邮箱</th>
-                     <th width="8%">官网</th>
-                     <th width="8%">操作</th>
-                 </tr>
+				<tr>
+                    <th width="8%">类型名称</th>
+                    <th width="8%">厂家</th>
+                    <th width="6%">地址</th>
+                    <th width="6%">电话</th>
+                    <th width="8%">手机</th>
+                    <th width="8%">QQ</th>
+                    <th width="8%">邮箱</th>
+                    <th width="8%">官网</th>
+					<c:if test="${sessionScope.vts.roleID eq 1 }">
+						<th width="8%">操作</th>
+                    </c:if>
+				</tr>
              </thead>
              <tbody id="movies">
                	<c:forEach items="${typeList }" var="ls" varStatus="status">
@@ -64,10 +68,12 @@
 					<td>${ls.qq }</td>
 					<td>${ls.mail }</td>
 					<td>${ls.url }</td>
-					<td>
-						<a href="javascript:saveType('1','${ls.vid }','${ls.dname }','${ls.fat }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.mail }','${ls.url }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteType('${ls.vid }','${status.count }')">删除</a>&nbsp;&nbsp;
-					</td>
+					<c:if test="${sessionScope.vts.roleID eq 1 }">
+						<td>
+							<a href="javascript:saveType('1','${ls.vid }','${ls.dname }','${ls.fat }','${ls.addr }','${ls.tel }','${ls.mobile }','${ls.qq }','${ls.mail }','${ls.url }')">修改</a>&nbsp;&nbsp;
+							<a href="javascript:deleteType('${ls.vid }','${status.count }')">删除</a>&nbsp;&nbsp;
+						</td>
+					</c:if>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -188,6 +194,7 @@
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='layer/extend/layer.ext.js'/>"></script>
 <!-- layer 弹出插件 end -->
+<script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
 <script type="text/javascript" src="<c:url value='js/obd_device_type.js?v=1'/>"></script>
 </body>
 </html>

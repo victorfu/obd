@@ -4,6 +4,8 @@ public class HbtForm {
 	
 	private String curid;
 	private String qchepai;
+	private String qsdttm;
+	private String qedttm;
 	
 	private String chepai;	//车牌
 	private int type=0;		//告警类型	0:所有告警,7:超速,8:低电压,9:车辆碰撞,11:车辆震动
@@ -44,12 +46,31 @@ public class HbtForm {
 		return qchepai;
 	}
 	public void setQchepai(String qchepai) {
-		this.qchepai = qchepai;
+		if(qchepai.length()==0)
+		{
+			this.qchepai = null;
+		}
+		else
+		{
+			this.qchepai = qchepai;
+		}
 	}
 	public String getCurid() {
 		return curid;
 	}
 	public void setCurid(String curid) {
 		this.curid = curid;
+	}
+	public String getQsdttm() {
+		return qsdttm;
+	}
+	public void setQsdttm(String qsdttm) {
+		this.qsdttm = qsdttm;
+	}
+	public String getQedttm() {
+		return qedttm;
+	}
+	public void setQedttm(String qedttm) {
+		this.qedttm = qedttm;
 	}
 }

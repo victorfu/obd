@@ -52,10 +52,10 @@
 				<c:forEach items="${groupList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
 					<td>${ls.id }</td>
-					<td></td>
+					<td>${ls.cph }</td>
 					<td>${ls.recvdate }</td>
 					<td>${ls.b1s1 }</td>
-					<td>${ls.b2s2 }</td>
+					<td>${ls.b1s2 }</td>
 				</tr>
 				</c:forEach>
 			</tbody>
