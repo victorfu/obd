@@ -48,12 +48,11 @@ public class ProxyDaoImpl extends BaseDaoImpl implements ProxyDao {
 	}
 
 	public List<Map<String, Object>> queryDeviceList(final DotSession ds, final ProxyForm proxyForm) {
-		log.info("sp:web_dev_agent_Query(?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_agent_Query(?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_dev_User_Query(?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_dev_User_Query(?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setInt("aid", proxyForm.getAid());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -70,21 +69,21 @@ public class ProxyDaoImpl extends BaseDaoImpl implements ProxyDao {
 		});
 	}
 
-	public void selectDevice(final ProxyForm proxyForm) {
+	public void selectDevice(final DotSession ds, final ProxyForm proxyForm) {
 		String sp = "";
 		if(proxyForm.getIscheck()==1)
 		{
-			sp = "web_dev_agent_share";
+			sp = "web_dev_User_share";
 		}
 		else
 		{
-			sp = "web_dev_agent_share_remove";
+			sp = "web_dev_User_share_remove";
 		}
 		log.info("sp:"+sp+"(?,?)");
 		this.getJdbcTemplate().execute("{call "+sp+"(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setInt("aid", proxyForm.getAid());
+				cs.setInt("uid", ds.userid);
 				cs.setString("devno", proxyForm.getDevno());
 				cs.execute();
 				return null;

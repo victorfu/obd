@@ -57,7 +57,9 @@ public class ProxyAction extends BaseAction implements ModelDriven<ProxyForm>{
 	
 	public String selectDev()
 	{
-		proxyDao.selectDevice(proxyForm);
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid);
+		proxyDao.selectDevice(ds, proxyForm);
 		return null;
 	}
 	

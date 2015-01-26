@@ -10,7 +10,7 @@ public interface ProxyDao {
 	public static final String SERVICE_NAME = "cn.voicet.obd.dao.impl.ProxyDaoImpl";
 	List<Map<String, Object>> queryProxyList(DotSession ds, ProxyForm proxyForm);
 	List<Map<String, Object>> queryDeviceList(DotSession ds, ProxyForm proxyForm);
-	void selectDevice(ProxyForm proxyForm);
+	void selectDevice(DotSession ds, ProxyForm proxyForm);
 	void saveProxy(ProxyForm proxyForm);
 	void deleteProxy(ProxyForm proxyForm);
 }
