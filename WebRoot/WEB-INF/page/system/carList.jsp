@@ -26,7 +26,9 @@
 <body>
 <div id="contentWrap">
 	<h3 class="h3_title">车辆管理</h3>
+	<input type="hidden" id="page_car_g"/>
    	<form name="form1" action="<c:url value='car-query.action'/>" method="post">
+   	<input type="hidden" id="pageflag_query" name="pageflag" value=""/>
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
 			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
@@ -78,7 +80,15 @@
 							</c:otherwise>
 						</c:choose>
 						<a href="javascript:saveCar('${sessionScope.vts.roleID }','1','${ls.cid }','${ls.dsn }','${ls.pp }','${ls.xh }','${fn:substring(ls.gcdt,0,10) }','${ls.cph }','${ls.cjh }','${ls.fdjh }','${ls.ys }','${ls.tx }','${ls.gj }')">修改</a>&nbsp;&nbsp;
-						<a href="javascript:deleteCar('${ls.cid }','${status.count }')">删除</a>&nbsp;&nbsp;
+						
+						<c:choose>
+							<c:when test="${ls.del eq 1 }">
+								<a href="javascript:deleteCar('${ls.cid }','${status.count }')">删除</a>&nbsp;&nbsp;
+							</c:when>
+							<c:otherwise>
+								<label style="color:#808080;">删除&nbsp;&nbsp;</label>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				</c:forEach>
@@ -99,17 +109,30 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		//curCarPage
+		var nowPage = parent.document.getElementById("curCarPage").value;
+		console.log("nowPage:"+nowPage);
+		var pflag = "${pageflag }";
+		console.log("pflag:"+pflag);
+		if(!pflag)
+		{
+			console.log("nowPage:"+nowPage);
+			nowPage = 1;
+		}
 		$("div.holder").jPages({
 			containerID : "movies",
 	        first : "首页",
 	        previous : "上一页",
 	        next : "下一页",
 	        last : "尾页",
-	        startPage : 1,
+	        startPage : nowPage,
 	        perPage : 25,
 	        keyBrowse:true,
 	        delay : 0,
 	        callback : function( pages, items ){
+				document.getElementById("page_car_g").value = pages.current;
+				document.getElementById("pageflag_update").value = pages.current;
+				parent.document.getElementById("curCarPage").value = pages.current;
 		        $("#legend1").html("&nbsp;&nbsp;当前第"+pages.current+"页 ,&nbsp;&nbsp;总共"+pages.count+"页,&nbsp;&nbsp;");
 		        $("#legend2").html("当前显示第"+items.range.start+" - "+items.range.end+"条记录,&nbsp;&nbsp;总共"+items.count+"条记录&nbsp;&nbsp;");
 		    }
@@ -129,6 +152,7 @@
 <div id="popSaveCarDiv" style="display:none;"> 
 <form id="form2" name="form2" action="<c:url value='car-saveCar.action'/>" method="post">
 	<input type="hidden" id="cidx" name="cid" value="0"/>
+	<input type="hidden" id="pageflag_update" name="pageflag" value="${pageflag }"/>
 	<div class="lab_ipt_item">
   		<span class="lab120">设备号：</span>
       	<div class="ipt-box">
@@ -137,6 +161,7 @@
       			<c:when test="${sessionScope.vts.roleID eq 4 }">
 					<label id="lab_devx"></label>
 					<input type="text" id="devnox" name="devno" class="ipt_text_w150 inputDefault" maxlength="15"/>
+					<span class=""></span>
       			</c:when>
 				<%-- 管理员， 代理商 --%>
       			<c:otherwise>
@@ -163,7 +188,7 @@
       	</div>
   	</div>
   	<div class="lab_ipt_item">
-  		<span class="lab120">购车时间：</span>
+  		<span class="lab120">购车日期：</span>
       	<div class="ipt-box">
       		<input type="text" id="buydtx" name="buydt" onclick="WdatePicker({skin:'whyGreen'})" class="Wdate ipt_text_w150 inputDefault"  maxlength="20"/>
           	<span class=""></span>
@@ -215,20 +240,19 @@
   	</div>
 	<div class="lab_ipt_item">
 		<span class="lab120"></span>
-		<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveCarBtn()"/></div>
+		<div class="ipt-box"><input type="button" class="btn4" value="确定" onclick="saveCarBtn('${sessionScope.vts.roleID }')"/></div>
 		<div class="ipt-box" style="margin-left:20px;"><input type="button" class="btn4" value="取消" onclick="layer.closeAll()"/></div>
 	</div>	
 </form>
 </div>
 <!--POP ADDDEV END-->
 
-    
-
 <!-- layer 弹出插件 start -->
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='layer/extend/layer.ext.js'/>"></script>
 <!-- layer 弹出插件 end -->
+<script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js'/>"></script>
 <script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
-<script type="text/javascript" src="<c:url value='js/obd_car.js?v=3'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_car.js?v=5'/>"></script>
 </body>
 </html>

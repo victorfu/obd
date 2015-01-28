@@ -11,9 +11,11 @@ public interface AccountDao {
 	List<Map<String, Object>> queryAccountList(DotSession ds, AccountForm accountForm);
 	List<Map<String, Object>> queryCarList(DotSession ds,
 			AccountForm accountForm);
-	void bindCar(AccountForm accountForm);
+	void selectCar(AccountForm accountForm);
 	void addAccount(DotSession ds, AccountForm accountForm);
 	void deleteAccount(DotSession ds, AccountForm accountForm);
 	Map<String, Object> getAccountInfo(AccountForm accountForm);
 	void saveAccountInfo(DotSession ds, AccountForm accountForm);
+	List<Map<String, Object>> queryAbleUseDevList(DotSession ds, AccountForm accountForm);
+	void selectDevice(DotSession ds, AccountForm accountForm);
 }

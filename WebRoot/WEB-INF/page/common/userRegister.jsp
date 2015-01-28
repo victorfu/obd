@@ -103,15 +103,22 @@
     		<td class="th">密码确认：</td>		
     		<td><input type="password" id="f_pwd2" class="TEXT" style="width:150px;"/></td>
     	</tr>
-		<tr id="tr_email">
+		<tr>
     		<td class="th">设备：</td>
     		<td>
-				<input type="text" name="devno" id="f_devno" value="${devno }" class="TEXT" style="width:150px;"/>
+				<input type="text" name="devno" id="f_devno" value="${devno }" class="TEXT" style="width:150px;" maxlength="13"/>
 				<span id="email_tip"></span>
 			</td>    			
     	</tr>
+    	<tr>
+    		<td class="th">车牌号：</td>
+    		<td>
+				<input type="text" name="chepai" id="f_chepai" value="${chepai }" class="TEXT" style="width:150px;" maxlength="10"/>
+				<span id=""></span>
+			</td>    			
+    	</tr>
     	<tr class="buttons">
-    		<td class="th"></td>		
+    		<td class="th"></td>
 			<td style="padding:20px 0;">
     		<input type="button" onclick="userReg()" value="注册新用户 " class="BUTTON SUBMIT"/></span>
 			<br/>
@@ -122,6 +129,7 @@
 		$("#f_pwd").bind("blur",checkPassword);
 		$("#f_pwd2").bind("blur",checkPassword2);
 		$("#f_devno").bind("blur",checkDevno);
+		$("#f_chepai").bind("blur",checkChepai);
 	});
 
 	function checkName()
@@ -160,7 +168,7 @@
 		}
 		else if(!pwd.match(/[0-9]/)||!(pwd.match(/[a-zA-Z]/)||/\W/.test(pwd)))
 		{
-			$("#error_msg")[0].innerHTML="密码必须是字母或特殊符号和数字结合！";
+			$("#error_msg")[0].innerHTML="密码为字母和数字组合！";
 			return false;
 		}
 		else
@@ -198,6 +206,27 @@
 			return true;
 		}
 	}
+
+	function checkChepai()
+	{
+		var cp = $("#f_chepai").val().trim();
+		cp = removeHTMLTag(cp);
+		if(!cp)
+		{
+			$("#error_msg")[0].innerHTML="车牌号必须填写！";
+			return false;
+		}
+		else if(cp.length<6)
+		{
+			$("#error_msg")[0].innerHTML="车牌号格式不正确！";
+			return false;
+		}
+		else
+		{
+			$("#error_msg")[0].innerHTML="";
+			return true;
+		}
+	}
 	
 	function userReg()
 	{
@@ -205,19 +234,20 @@
 		if(!checkPassword()) return false;
 		if(!checkPassword2()) return false;
 		if(!checkDevno()) return false;
+		if(!checkChepai()) return false;
 		//
 		var name = $("#f_name").val().trim();
 		var pwd = $('#f_pwd').val();
 		var devno = $("#f_devno").val().trim();
+		var cp = $("#f_chepai").val().trim();
 		$.ajax({
 	        type: "POST",
 	        url: "user-reg.action",
-	        data: {account:name, password:pwd, devno:devno},
+	        data: {account:name, password:pwd, devno:devno, chepai:cp},
 	        success: function(result){
 				if(result=="0")
 				{
 					alert("注册成功,立即登录!");
-					location.href="index.action";
 				}
 				else if(result=="-1")
 				{
@@ -285,5 +315,6 @@
 <!-- layer 弹出插件 end -->
 <!-- ajax file upload -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
 </body>
 </html>

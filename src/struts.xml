@@ -46,14 +46,8 @@
 			<result name="accountPage">/WEB-INF/page/system/accountList.jsp</result>
 			<result name="accountCarPage">/WEB-INF/page/system/accounCartList.jsp</result>
 			<result name="accountInfoPage">/WEB-INF/page/system/accountInfo.jsp</result>
+			<result name="enable_use_devPage">/WEB-INF/page/system/account_enableuse_dev_list.jsp</result>
 		</action>
-		
-		<!-- 代理商管理 -->
-		<action name="proxy-*" class="proxyAction" method="{1}">
-			<result name="proxyPage">/WEB-INF/page/system/proxyList.jsp</result>
-			<result name="devPage">/WEB-INF/page/system/proxy_dev_list.jsp</result>
-		</action>
-		
 		
 		<!-- 车辆行程查询 -->
 		<action name="trip-*" class="tripAction" method="{1}">
@@ -85,10 +79,6 @@
 			<result name="groupPage3">/WEB-INF/page/system/group3List.jsp</result>
 			<result name="groupPage4">/WEB-INF/page/system/group4List.jsp</result>
 		</action>
-		
-		
-		
-		
 		
 		<!-- 数据库维护 -->
 		<action name="dbconfig" class="databaseConfigAction" method="home">
@@ -132,14 +122,14 @@
 		<action name="deleteDevType" class="deviceAction" method="deleteType">
 			<result type="json"></result>
 		</action>
-		<!--  -->
-		<action name="proxy_selectDev" class="proxyAction" method="selectDev">
+		
+		<action name="account_selectDev" class="accountAction" method="selectDev">
 			<result type="json"></result>
 		</action>
-		<!-- 删除代理商 -->
-		<action name="deleteProxy" class="proxyAction" method="deleteProxy">
+		<action name="account_selectCar" class="accountAction" method="selectCar">
 			<result type="json"></result>
 		</action>
+		
 		<!-- 获取地图数据 -->
 		<action name="getmapdata" class="tripAction" method="getmapdata">
 			<result type="json"></result>
@@ -171,8 +161,10 @@
 			<result type="json"></result>
 		</action>
 		
-		
-		
+		<!-- 普通用户保存车辆，检测设备是否存在 -->
+		<action name="checkEnableDev" class="carAction" method="checkEnableDev">
+			<result type="json"></result>
+		</action>
 		
 		<!-- 清空数据库日志 -->
 		<action name="dbconfig-empty" class="databaseConfigAction" method="empty">

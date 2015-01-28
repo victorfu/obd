@@ -99,7 +99,35 @@ public class AccountAction extends BaseAction implements ModelDriven<AccountForm
 	public String fenpei()
 	{
 		log.info("uid:"+accountForm.getUid()+", cid:"+accountForm.getCid()+", isbind:"+accountForm.getIsbind());
-		accountDao.bindCar(accountForm);
+		//accountDao.bindCar(accountForm);
 		return viewCar();
+	}
+	
+	/**
+	 * 
+	 */
+	public String enableUseDev()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("loginuid:"+ds.userid+", uid:"+accountForm.getUid());
+		List<Map<String, Object>> list = accountDao.queryAbleUseDevList(ds, accountForm);
+		request.setAttribute("devList", list);
+		return "enable_use_devPage";
+	}
+	
+	public String selectDev()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("ischeck:"+accountForm.getIscheck()+", uid:"+accountForm.getUid()+", devno:"+accountForm.getDevno());
+		accountDao.selectDevice(ds, accountForm);
+		return null;
+	}
+	
+	public String selectCar()
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+accountForm.getUid()+", cid:"+accountForm.getCid()+", parentid:"+accountForm.getParentid()+", ischeck:"+accountForm.getIscheck());
+		accountDao.selectCar(accountForm);
+		return null;
 	}
 }

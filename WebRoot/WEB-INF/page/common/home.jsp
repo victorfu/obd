@@ -65,20 +65,14 @@
         <a href="#">设为首页</a>&nbsp;|&nbsp;
         <a href="#">收藏本站</a>&nbsp;|&nbsp;
         <a href="#">联系我们</a>&nbsp;|&nbsp;
-        <a href="help.jsp" target="_blank">帮助中心</a>&nbsp;|&nbsp;
+        <a href="#">帮助中心</a>&nbsp;|&nbsp;
         <a href="#">常见问题</a>
         <!-- 记录js分页当前页码 start -->
-        <input type="hidden" id="curTaskPage" value="1"/>
-        <input type="hidden" id="curTelnumPage" value="1"/>
-        <input type="hidden" id="curAcdPage" value="1"/>
-        <input type="hidden" id="curAgentPage" value="1"/>
-        <input type="hidden" id="curSubtelPage" value="1"/>
-        <input type="hidden" id="curBlackPage" value="1"/>
+        <input type="hidden" id="curDevicePage" value="1"/>
+        <input type="hidden" id="curDeviceTypePage" value="1"/>
+        <input type="hidden" id="curCarPage" value="1"/>
+        <input type="hidden" id="curAccountPage" value="1"/>
         
-        <%-- 客户资料导入及分配页面当前页 --%>
-        <input type="hidden" id="curCusImportPage" value="1"/>
-        <%-- 客户资料管理页面当前页 --%>
-        <input type="hidden" id="curCusManagePage" value="1"/>
         <!-- 记录js分页当前页码 end -->
         </p>
         <span>2014 VoiceT&nbsp;&nbsp;V141210&nbsp;&nbsp;[建议使用IE8以上版本或360兼容模式浏览器,&nbsp;显示器分辨率1280*1024]</span>

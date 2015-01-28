@@ -30,6 +30,9 @@ public class DeviceForm {
 	
 	private String sdttm;	//开始日期时间
 	private String edttm;	//结束日期时间
+	//记录当前页标记
+	private String pageflag;
+	private String devtypepageflag;
 	
 	public String getDevno() {
 		return devno;
@@ -196,5 +199,17 @@ public class DeviceForm {
 		{
 			this.qtpname = qtpname;
 		}
+	}
+	public String getPageflag() {
+		return pageflag;
+	}
+	public void setPageflag(String pageflag) {
+		this.pageflag = pageflag;
+	}
+	public String getDevtypepageflag() {
+		return devtypepageflag;
+	}
+	public void setDevtypepageflag(String devtypepageflag) {
+		this.devtypepageflag = devtypepageflag;
 	}
 }

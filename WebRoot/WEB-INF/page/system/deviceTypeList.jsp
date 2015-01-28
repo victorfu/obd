@@ -25,20 +25,21 @@
 <div id="contentWrap">
 	<h3 class="h3_title">设备类型管理</h3>
    	<form name="form1" action="<c:url value='device-type.action'/>" method="post">
-	<div class="queryDiv">
-	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>类型名称：</label><input type="text" id="qtpnamex" name="qtpname" class="ipt100 inputDefault"  value="${qtpname }"/></li>
-	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
-	        <li>
-	        	<c:if test="${sessionScope.vts.roleID eq 1 }">
-	        	<input type="button" onclick="saveType('0','0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
-	        	</c:if>
-	        </li>
-		</ul>
-		<ul class="queryWrap_ul_w100 right">
-	        <li></li>
-		</ul>
-	</div>
+		<input type="hidden" name="devtypepageflag" value=""/>
+		<div class="queryDiv">
+		   	<ul class="queryWrap_ul_w600 left">
+				<li><label>类型名称：</label><input type="text" id="qtpnamex" name="qtpname" class="ipt100 inputDefault"  value="${qtpname }"/></li>
+		        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
+		        <li>
+		        	<c:if test="${sessionScope.vts.roleID eq 1 }">
+		        	<input type="button" onclick="saveType('0','0','','','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
+		        	</c:if>
+		        </li>
+			</ul>
+			<ul class="queryWrap_ul_w100 right">
+		        <li></li>
+			</ul>
+		</div>
     </form>
 	<div class="content_List568">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
@@ -92,6 +93,15 @@
 	
 </div>
 <script type="text/javascript">
+	var nowPage = parent.document.getElementById("curDeviceTypePage").value;
+	console.log("nowPage:"+nowPage);
+	var pflag = "${devtypepageflag }";
+	console.log("pflag:"+pflag);
+	if(!pflag)
+	{
+		console.log("nowPage:"+nowPage);
+		nowPage = 1;
+	}
 	$(function(){
 		$("div.holder").jPages({
 			containerID : "movies",
@@ -99,11 +109,13 @@
 	        previous : "上一页",
 	        next : "下一页",
 	        last : "尾页",
-	        startPage : 1,
+	        startPage : nowPage,
 	        perPage : 25,
 	        keyBrowse:true,
 	        delay : 0,
 	        callback : function( pages, items ){
+				document.getElementById("devtype_pageflag_update").value = pages.current;
+				parent.document.getElementById("curDeviceTypePage").value = pages.current;
 		        $("#legend1").html("&nbsp;&nbsp;当前第"+pages.current+"页 ,&nbsp;&nbsp;总共"+pages.count+"页,&nbsp;&nbsp;");
 		        $("#legend2").html("当前显示第"+items.range.start+" - "+items.range.end+"条记录,&nbsp;&nbsp;总共"+items.count+"条记录&nbsp;&nbsp;");
 		    }
@@ -123,6 +135,7 @@
 <div id="popSaveTypeDiv" style="display:none;"> 
 <form id="form2" name="form2" action="<c:url value='/device-saveType.action'/>" method="post">
 	<input type="hidden" id="typenox" name="typeno" value="0"/>
+	<input type="hidden" id="devtype_pageflag_update" name="devtypepageflag" value="${devtypepageflag }"/>
 	<div class="lab_ipt_item">
   		<span class="lab120">类型名称：</span>
       	<div class="ipt-box">
@@ -187,8 +200,6 @@
 </form>
 </div>
 <!--POP ADDDEV END-->
-
-    
 
 <!-- layer 弹出插件 start -->
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>

@@ -89,7 +89,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 	public String updatePwd() throws IOException
 	{
 		DotSession ds=DotSession.getVTSession(request);
-		log.info("oldpwd:"+userForm.getOldpwd()+", newpwd:"+userForm.getNewpwd());
+		log.info("uid"+ds.userid+", oldpwd:"+userForm.getOldpwd()+", newpwd:"+userForm.getNewpwd());
 		
 		boolean bool = userDao.updateUserPassword(ds, userForm);
 		log.info("bool:"+bool);
@@ -121,7 +121,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 	
 	public String reg() throws IOException
 	{
-		log.info("account:"+userForm.getAccount()+", password:"+userForm.getPassword()+", devno:"+userForm.getDevno());
+		log.info("account:"+userForm.getAccount()+", password:"+userForm.getPassword()+", devno:"+userForm.getDevno()+", chepai:"+userForm.getChepai());
 		String res = userDao.registerUser(userForm);
 		log.info("res:"+res);
 		response.getWriter().write(res);

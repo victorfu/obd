@@ -1,12 +1,14 @@
 $(function(){
 	$("#chepaix").bind("blur",checkChepai);
+	$("#devnox").bind("blur",checkDevno);
 });
 
 function checkChepai()
 {
 	var chep = $("#chepaix").val().trim();
+	var reg = /^[\u4E00-\u9FA5][\da-zA-Z]{6}$/;
 	chep = removeHTMLTag(chep);
-	if(!chep)
+	if(!chep || !reg.test(chep))
 	{
 		$(".asterisk")[0].innerHTML="车牌号格式不正确！";
 		return false;
@@ -17,6 +19,36 @@ function checkChepai()
 		return true;
 	}
 }
+
+function checkDevno()
+{
+	var d = $("#devnox").val();
+	var b = true;
+	if(d)
+	{
+		$.ajax({
+			cache: false,
+			async: false,
+			type: "POST",
+			dataType: "json",
+			data: {devno:d},
+			url: "checkEnableDev.action",
+			success: function(flag) {
+				if(!flag) {
+					b = false;	
+					alert("设备不存在！");
+				}
+			}
+		});
+	}
+	else
+	{
+		b = true;
+	}
+	console.log("b:"+b);
+	return b;
+}
+
 
 //add car
 function saveCar(roleid,s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip,warn)
@@ -111,10 +143,32 @@ function saveCar(roleid,s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,co
 	});
 }
 
-function saveCarBtn()
+function saveCarBtn(roleid)
 {
+	if(roleid==4)
+	{
+		if(!checkDevno()) return false;
+	}
 	if(!checkChepai())	return false;
-	document.form2.submit();
+	//
+	$("#form2").ajaxSubmit({ 
+		success:function(data){ //提交成功的回调函数
+			if(data=="0")
+			{
+				//alert("保存成功");
+				document.form1.submit();
+			}
+			else if(data=="-1")
+			{
+				alert("车牌号已经存在");
+			}
+			else
+			{
+				alert("请求失败");
+			}
+        }
+	});
+    return false;
 }
 
 //delete device
@@ -172,6 +226,8 @@ function checkWarn(obj)
 function unbindDev(cid,devno)
 {
 	$("#row_devno"+cid)[0].innerHTML="";
+	var pg = $("#page_car_g").val();
+	$("#pageflag_query").val(pg);
 	//
 	$.ajax({
 		cache:false,

@@ -27,6 +27,11 @@ public class AccountForm {
 	
 	private String qacc;	//查询账号
 	
+	private int ischeck;
+
+	//记录当前页标记
+	private String pageflag;
+	
 	public int getUid() {
 		return uid;
 	}
@@ -160,5 +165,17 @@ public class AccountForm {
 		{
 			this.qacc = qacc;
 		}
+	}
+	public int getIscheck() {
+		return ischeck;
+	}
+	public void setIscheck(int ischeck) {
+		this.ischeck = ischeck;
+	}
+	public String getPageflag() {
+		return pageflag;
+	}
+	public void setPageflag(String pageflag) {
+		this.pageflag = pageflag;
 	}
 }

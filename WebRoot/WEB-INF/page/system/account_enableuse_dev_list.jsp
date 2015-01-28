@@ -8,8 +8,9 @@
 <head>
  	<title></title>
 	<link type="text/css" href="<c:url value='css/common.css?v=2'/>" rel="stylesheet" />
-	<link type="text/css" href="<c:url value='css/layout.css?v=1'/>" rel="stylesheet" />
- 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link type="text/css" href="<c:url value='css/layout.css?v=2'/>" rel="stylesheet" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  	<meta http-equiv="cache-control" content="no-cache"/>
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
@@ -24,48 +25,46 @@
 	<form name="form1" action="<c:url value='account-query.action'/>" method="post">
 		<input type="hidden" name="pageflag" value="${pageflag }"/>
 	</form>
-	<h3 class="h3_title">用户车辆分配
+	<h3 class="h3_title">分配设备
 		<span><input type="button" value="返回" onclick="document.form1.submit();" class="btn4"/></span>
 	</h3>
 	<div class="content_List615">
 		<table cellpadding="0" cellspacing="0" class="tab_border">
 			<thead class="tab_head">
                  <tr>
-                     <th width="6%">车牌号码</th>
-                     <th width="8%">设备号</th>
-                     <th width="4%">品牌</th>
-                     <th width="4%">型号</th>
-                     <th width="10%">购车日期</th>
-                     <th width="8%">发动机</th>
-                     <th width="4%">颜色</th>
-                     <th width="4%">总里程</th>
-                     <th width="6%">行驶次数</th>
-                     <th width="12%">操作</th>
+                     <th width="6%">设备号</th>
+                     <th width="8%">状态</th>
+                     <th width="6%">厂家</th>
+                     <th width="6%">型号</th>
+                     <th width="12%">有效期</th>
+                     <th width="12%">创建日期</th>
+                     <th width="12%">分配</th>
                  </tr>
              </thead>
-             <tbody id="movies">
-               	<c:forEach items="${carList }" var="ls" varStatus="status">
+             <tbody class="tab_tbody" id="movies">
+				<c:forEach items="${devList }" var="ls" varStatus="status">
 				<tr id="rowIndex_${status.count }" align="center">
-					<td>${ls.cph }</td>
-					<td id="row_devno${ls.cid }">${ls.dsn }</td>
-					<td>${ls.pp }</td>
+					<td>${ls.dsn }</td>
+					<td>
+						<c:if test="${ls.state eq 0 }">停用</c:if>
+						<c:if test="${ls.state eq 10 }">未绑定</c:if>
+						<c:if test="${ls.state eq 100 }">已绑定</c:if>
+					</td>
+					<td>${ls.cj }</td>
 					<td>${ls.xh }</td>
-					<td>${fn:substring(ls.gcdt,0,11) }</td>
-					<td>${ls.fdjh }</td>
-					<td>${ls.ys }</td>
-					<td>${ls.zlc }</td>
-					<td>${ls.xscs }</td>
+					<td>${fn:substring(ls.ydt,0,19) }</td>
+					<td>${fn:substring(ls.cdt,0,19) }</td>
 					<td>
 						<c:choose>
 							<c:when test="${ls.flag eq 1}">
-								<input type="checkbox" checked="checked" onclick="fenpeiCar(this,'${uid }','${ls.cid }','${parentid }')"/>分配	
+								<input type="checkbox" checked="checked" onclick="gouXuan(this,'${uid }','${ls.dsn }')"/>勾选	
 							</c:when>
 							<c:otherwise>
-								<input type="checkbox" onclick="fenpeiCar(this,'${uid }','${ls.cid }','${parentid }')"/>分配
+						<input type="checkbox" onclick="gouXuan(this,'${uid }','${ls.dsn }')"/>勾选	
 							</c:otherwise>
 						</c:choose>
 						<script>
-							function fenpeiCar(obj,uid,cid,pid)
+							function gouXuan(obj,uid,dsn)
 							{
 								var o;
 								if(obj.checked==true)
@@ -76,8 +75,8 @@
 								{
 									o=0;
 								}
-								var datajson = {"uid":uid, "cid":cid, "parentid":pid, "ischeck":o};
-								var url = 'account_selectCar.action';
+								var datajson = {"uid":uid,"devno":dsn,"ischeck":o};
+								var url = 'account_selectDev.action';
 								$.ajax({
 							        type: "POST",
 							        url: url,
@@ -87,16 +86,6 @@
 							    });
 							}
 						</script>
-						<!--
-						<c:choose>
-							<c:when test="${ls.flag eq 1 }">
-								<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&isbind=1&parentid=${parentid }">分配</a>	
-							</c:when>
-							<c:otherwise>
-								<a href="account-fenpei.action?uid=${uid }&cid=${ls.cid }&isbind=0&parentid=${parentid }">取消</a>
-							</c:otherwise>
-						</c:choose>
-						-->
 					</td>
 				</tr>
 				</c:forEach>
@@ -113,7 +102,6 @@
  		<button id="tiaozhuan" class="btn btn-primary">跳转</button>
 	</div>
     <!-- jPage end -->
-	
 </div>
 <script type="text/javascript">
 	$(function(){

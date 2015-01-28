@@ -3,6 +3,7 @@ package cn.voicet.obd.dao.impl;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,43 +47,6 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 			}
 		});
 	}
-	
-	public void saveCar(final DotSession ds, final CarForm carForm) {
-		//
-		log.info("sp:web_car_update(?,?,?,?,?,?,?,?,?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_car_update(?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
-			public Object doInCallableStatement(CallableStatement cs)
-					throws SQLException, DataAccessException {
-				cs.setInt("uid", ds.userid);
-				cs.setInt("cid", carForm.getCid());
-				cs.setString("dsn", carForm.getDevno());
-				cs.setString("pp", carForm.getPinpai());
-				cs.setString("xh", carForm.getXinghao());
-				cs.setString("gcdt", carForm.getBuydt());
-				cs.setString("cph", carForm.getChepai());
-				cs.setString("cjh", carForm.getChejia());
-				cs.setString("fdjh", carForm.getFadong());
-				cs.setString("ys", carForm.getColor());
-				cs.setInt("tx", carForm.getTip());
-				cs.setInt("gj", carForm.getWarn());
-				cs.execute();
-				return null;
-			}
-		});
-	}
-	
-	public void deleteCar(final DotSession ds, final CarForm carForm) {
-		log.info("sp:web_car_Del(?,?)");
-		this.getJdbcTemplate().execute("{call web_car_Del(?,?)}", new CallableStatementCallback() {
-			public Object doInCallableStatement(CallableStatement cs)
-					throws SQLException, DataAccessException {
-				cs.setInt("uid", ds.userid);
-				cs.setInt("cid", carForm.getCid());
-				cs.execute();
-				return null;
-			}
-		});
-	}
 
 	public List<Map<String, Object>> queryUsableDeviceList(final DotSession ds) {
 		log.info("sp:web_car_Dev_Available(?)");
@@ -102,6 +66,59 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 					}
 				}
 				return list;
+			}
+		});
+	}
+
+	public boolean checkEnableDev(final CarForm carForm) {
+		String sql = "select count(*) from TB_DevInfo where dsn='"+carForm.getDevno()+"'";
+		log.info("sql:"+sql);
+		int c = this.getJdbcTemplate().queryForInt(sql);
+		if(c==0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public String saveCar(final DotSession ds, final CarForm carForm) {
+		//
+		log.info("sp:web_car_update(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		return (String)this.getJdbcTemplate().execute("{call web_car_update(?,?,?,?,?,?,?,?,?,?,?,?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
+				cs.setInt("cid", carForm.getCid());
+				cs.setString("dsn", carForm.getDevno());
+				cs.setString("pp", carForm.getPinpai());
+				cs.setString("xh", carForm.getXinghao());
+				cs.setString("gcdt", carForm.getBuydt());
+				cs.setString("cph", carForm.getChepai());
+				cs.setString("cjh", carForm.getChejia());
+				cs.setString("fdjh", carForm.getFadong());
+				cs.setString("ys", carForm.getColor());
+				cs.setInt("tx", carForm.getTip());
+				cs.setInt("gj", carForm.getWarn());
+				//
+				cs.registerOutParameter("retv", Types.VARCHAR);
+				cs.execute();
+				return cs.getString("retv");
+			}
+		});
+	}
+	
+	public void deleteCar(final DotSession ds, final CarForm carForm) {
+		log.info("sp:web_car_Del(?,?)");
+		this.getJdbcTemplate().execute("{call web_car_Del(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
+				cs.setInt("cid", carForm.getCid());
+				cs.execute();
+				return null;
 			}
 		});
 	}

@@ -1,4 +1,5 @@
 package cn.voicet.obd.action;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -42,21 +43,42 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 		List<Map<String, Object>> devlist = carDao.queryUsableDeviceList(ds);
 		request.setAttribute("devList", devlist);
 		//
+		log.info("pageflag:"+carForm.getPageflag());
 		return "carPage";
 	}
 	
-	public String saveCar()
+	public String checkEnableDev() throws IOException
+	{
+		boolean isdevenable = carDao.checkEnableDev(carForm);
+		log.info("isdevenable:"+isdevenable);
+		response.getWriter().print(isdevenable);
+		return null;
+	}
+	
+	public String saveCar() throws IOException
 	{
 		log.info("cid:"+carForm.getCid()+", devno:"+carForm.getDevno()+", pinpai:"+carForm.getPinpai()+", xinghao:"+carForm.getXinghao()+", buydt:"+carForm.getBuydt()+", chepai:"+carForm.getChepai()+", chejia:"+carForm.getChejia()+", fadong:"+carForm.getFadong()+", color:"+carForm.getColor()+", tip:"+carForm.getTip()+", warn:"+carForm.getWarn());
 		DotSession ds = DotSession.getVTSession(request);
-		carDao.saveCar(ds, carForm);
-		return query();
+		String flag = carDao.saveCar(ds, carForm);
+		log.info("flag:"+flag);
+		if(flag.equals("0"))
+		{
+			log.info("save car ["+carForm.getCid()+"] complete!");
+		}
+		else
+		{
+			log.info("save car ["+carForm.getCid()+"] failure!!");
+		}
+		response.getWriter().print(flag);
+		return null;
 	}
 	
 	public String deleteCar()
 	{
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", cid: "+ carForm.getCid());
 		carDao.deleteCar(ds, carForm);
+		log.info("delete ["+ carForm.getCid()+"] complete");
 		return null;
 	}
 	

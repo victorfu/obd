@@ -121,8 +121,9 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 	 */
 	public String deleteDev()
 	{
-		log.info("devno:"+deviceForm.getDevno());
-		deviceDao.deleteDevice(deviceForm);
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", devno:"+deviceForm.getDevno());
+		deviceDao.deleteDevice(ds, deviceForm);
 		log.info("delete device["+deviceForm.getDevno()+"] complete");
 		return null;
 	}

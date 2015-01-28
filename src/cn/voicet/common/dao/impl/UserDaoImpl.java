@@ -54,7 +54,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return (Boolean)this.getJdbcTemplate().execute("{call web_user_chg_pwd(?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("uid", "1");
+				cs.setInt("uid", ds.userid);
 				cs.setString("pwd", userForm.getOldpwd());
 				cs.setString("newpwd", userForm.getNewpwd());
 				cs.registerOutParameter("retv", Types.VARCHAR);
@@ -77,11 +77,11 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return (String)this.getJdbcTemplate().execute("{call web_user_register(?,?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
-				cs.setString("parentid", "1");
 				cs.setString("puid", "0");
 				cs.setString("account", userForm.getAccount());
 				cs.setString("pwd", userForm.getPassword());
 				cs.setString("devno", userForm.getDevno());
+				cs.setString("cph", userForm.getChepai());
 				cs.registerOutParameter("retv", Types.VARCHAR);
 				cs.execute();
 				return cs.getString("retv");

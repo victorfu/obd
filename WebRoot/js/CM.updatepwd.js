@@ -48,6 +48,16 @@ function checkNewpwd()
 		$(".asterisk")[1].innerHTML="新密码不能为空";
 		return false;
 	}
+	else if(newpwd.length<6)
+	{
+		$(".asterisk")[1].innerHTML="密码长度小于6位";
+		return false;
+	}
+	else if(!newpwd.match(/[0-9]/)||!(newpwd.match(/[a-zA-Z]/)||/\W/.test(newpwd)))
+	{
+		$(".asterisk")[1].innerHTML="密码为字母和数字组合！";
+		return false;
+	}
 	else
 	{
 		$(".asterisk")[1].innerHTML="";
@@ -87,11 +97,11 @@ function validatePwdinput(form)
 			layer.closeAll(); 
 			if(data=="true")
 			{
-				layer.msg("密码修改成功",2,1);
+				layer.alert("密码修改成功",111);
 			}
 			else
 			{
-				layer.msg("密码修改失败",2,5);
+				layer.alert("密码修改失败",111);
 			}
         }  
 	}); 

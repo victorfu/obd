@@ -192,13 +192,14 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		//
 		switch (curCol) {
 			case 0:
+				//设备号必填
+				
 				break;
 			case 1:
 				break;
 			case 2:
 				break;
 			case 3:
-				//设备号必填
 				
 				break;
 				
@@ -227,11 +228,12 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		});
 	}
 	
-	public void deleteDevice(final DeviceForm deviceForm) {
-		log.info("sp:web_dev_del(?)");
-		this.getJdbcTemplate().execute("{call web_dev_del(?)}", new CallableStatementCallback() {
+	public void deleteDevice(final DotSession ds, final DeviceForm deviceForm) {
+		log.info("sp:web_dev_del(?,?)");
+		this.getJdbcTemplate().execute("{call web_dev_del(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
+				cs.setInt("uid", ds.userid);
 				cs.setString("dsn", deviceForm.getDevno());
 				cs.execute();
 				return null;

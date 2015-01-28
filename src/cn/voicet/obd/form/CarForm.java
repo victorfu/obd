@@ -18,6 +18,10 @@ public class CarForm {
 	private String color;	//颜色
 	private int tip;		//提醒
 	private int warn;		//警告
+	
+	//记录当前页标记
+	private String pageflag;
+	
 	public int getCid() {
 		return cid;
 	}
@@ -28,7 +32,14 @@ public class CarForm {
 		return devno;
 	}
 	public void setDevno(String devno) {
-		this.devno = devno;
+		if(devno.length()==0)
+		{
+			this.devno = null;	
+		}
+		else
+		{
+			this.devno = devno;
+		}
 	}
 	public String getPinpai() {
 		return pinpai;
@@ -119,5 +130,10 @@ public class CarForm {
 	public void setEdttm(String edttm) {
 		this.edttm = edttm;
 	}
-	
+	public String getPageflag() {
+		return pageflag;
+	}
+	public void setPageflag(String pageflag) {
+		this.pageflag = pageflag;
+	}
 }

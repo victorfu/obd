@@ -15,6 +15,7 @@ public class UserForm {
 	private String vercode;
 	
 	private String devno;	//设备号
+	private String chepai;
 	
 	public String getAccount() {
 		return account;
@@ -81,5 +82,11 @@ public class UserForm {
 	}
 	public void setDevno(String devno) {
 		this.devno = devno;
+	}
+	public String getChepai() {
+		return chepai;
+	}
+	public void setChepai(String chepai) {
+		this.chepai = chepai;
 	}
 }

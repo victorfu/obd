@@ -49,76 +49,6 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		});
 	}
 
-	public List<Map<String, Object>> queryCarList(final DotSession ds, final AccountForm accountForm) {
-		log.info("sp:web_user_car_query_Available(?,?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?,?)}", new CallableStatementCallback() {
-			public Object doInCallableStatement(CallableStatement cs)
-					throws SQLException, DataAccessException {
-				cs.setInt("uid", accountForm.getUid());
-				cs.setInt("puid", accountForm.getParentid());
-				cs.execute();
-				ResultSet rs = cs.getResultSet();
-				Map<String, Object> map = null;
-				List<Object> list = new ArrayList<Object>();
-				//取多结果集
-				int rid = 0;
-				while(cs.getUpdateCount()!=-1);
-				while((rs=cs.getResultSet())!=null)  
-                {  
-                    while(rs.next())  
-                    {  
-                        if(rid==0)  
-                        {  
-                        	map = new HashMap<String, Object>();
-	   						VTJime.putMapDataByColName(map, rs);
-	   		        		list.add(map); 
-                        }  
-                        else if(rid==1)  
-                        {  
-                        	map = new HashMap<String, Object>();
-   						 	VTJime.putMapDataByColName(map, rs);
-   						 	map.put("flag", "1");
-   						 	list.add(map); 
-                        }
-                    }  
-                    cs.getMoreResults();  
-                    rid++;  
-                }
-				return list;
-			}
-		});
-	}
-
-	public void bindCar(final AccountForm accountForm) {
-		this.getJdbcTemplate().execute(new ConnectionCallback() {
-			public Object doInConnection(Connection con) throws SQLException,
-					DataAccessException {
-				CallableStatement cs = null;
-				//分配
-				if(accountForm.getIsbind()==1)
-				{
-					cs = con.prepareCall("{call web_user_car_share(?,?)}");
-				}
-				else if(accountForm.getIsbind()==0)
-				{
-					cs = con.prepareCall("{call web_user_car_share_remove(?,?)}");
-				}
-				//取消分配
-				else
-				{
-					System.out.println("isbind error");
-				}
-				cs.setInt("uid", accountForm.getUid());
-				cs.setInt("cid", accountForm.getCid());
-				cs.execute();
-				return null;
-			}
-		});
-		
-		
-		
-	}
-
 	public void addAccount(final DotSession ds, final AccountForm accountForm) {
 		log.info("sp:web_user_create_account(?,?,?,?)");
 		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?)}", new CallableStatementCallback() {
@@ -188,5 +118,140 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 				return null;
 			}
 		});
+	}
+
+	public List<Map<String, Object>> queryAbleUseDevList(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:Web_Dev_Available(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call Web_Dev_Available(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("loginuid", ds.userid);
+				cs.setInt("uid", accountForm.getUid());
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				List<Object> list = new ArrayList<Object>();
+				//取多结果集
+				int rid = 0;
+				while(cs.getUpdateCount()!=-1);
+				while((rs=cs.getResultSet())!=null)  
+                {  
+                    while(rs.next())  
+                    {  
+                        if(rid==0)  
+                        {  
+                        	map = new HashMap<String, Object>();
+	   						VTJime.putMapDataByColName(map, rs);
+	   						map.put("flag", 1);
+	   		        		list.add(map); 
+                        }  
+                        else if(rid==1)  
+                        {  
+                        	map = new HashMap<String, Object>();
+   						 	VTJime.putMapDataByColName(map, rs);
+   						 	map.put("flag", 0);
+   						 	list.add(map); 
+                        }
+                    }  
+                    cs.getMoreResults();  
+                    rid++;  
+                }
+				return list;
+			}
+		});
+	}
+	
+
+	public List<Map<String, Object>> queryCarList(final DotSession ds, final AccountForm accountForm) {
+		log.info("sp:web_user_car_query_Available(?,?)");
+		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_user_car_query_Available(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", accountForm.getUid());
+				cs.setInt("puid", accountForm.getParentid());
+				cs.execute();
+				ResultSet rs = cs.getResultSet();
+				Map<String, Object> map = null;
+				List<Object> list = new ArrayList<Object>();
+				//取多结果集
+				int rid = 0;
+				while(cs.getUpdateCount()!=-1);
+				while((rs=cs.getResultSet())!=null)  
+                {  
+                    while(rs.next())  
+                    {  
+                        if(rid==0)  
+                        {  
+                        	map = new HashMap<String, Object>();
+	   						VTJime.putMapDataByColName(map, rs);
+   						 	map.put("flag", "1");
+	   		        		list.add(map); 
+                        }  
+                        else if(rid==1)  
+                        {  
+                        	map = new HashMap<String, Object>();
+   						 	VTJime.putMapDataByColName(map, rs);
+   						 	map.put("flag", "0");
+   						 	list.add(map); 
+                        }
+                    }  
+                    cs.getMoreResults();  
+                    rid++;  
+                }
+				return list;
+			}
+		});
+	}
+	
+	public void selectDevice(final DotSession ds, final AccountForm accountForm) {
+		String sp = "";
+		if(accountForm.getIscheck()==1)
+		{
+			sp = "web_dev_share";
+		}
+		else
+		{
+			sp = "web_dev_share_Remove";
+		}
+		log.info("sp:"+sp+"(?,?)");
+		this.getJdbcTemplate().execute("{call "+sp+"(?,?)}", new CallableStatementCallback() {
+			public Object doInCallableStatement(CallableStatement cs)
+					throws SQLException, DataAccessException {
+				cs.setInt("uid", accountForm.getUid());
+				cs.setString("devno", accountForm.getDevno());
+				cs.execute();
+				return null;
+			}
+		});
+	}
+
+	public void selectCar(final AccountForm accountForm) {
+		this.getJdbcTemplate().execute(new ConnectionCallback() {
+			public Object doInConnection(Connection con) throws SQLException,
+					DataAccessException {
+				CallableStatement cs = null;
+				//分配
+				if(accountForm.getIscheck()==1)
+				{
+					log.info("sp:web_user_car_share(?,?)");
+					cs = con.prepareCall("{call web_user_car_share(?,?)}");
+				}
+				else if(accountForm.getIscheck()==0)
+				{
+					log.info("sp:web_user_car_share_remove(?,?)");
+					cs = con.prepareCall("{call web_user_car_share_remove(?,?)}");
+				}
+				//取消分配
+				else
+				{
+					System.out.println("ischeck error");
+				}
+				cs.setInt("uid", accountForm.getUid());
+				cs.setInt("cid", accountForm.getCid());
+				cs.execute();
+				return null;
+			}
+		});
+		
 	}
 }

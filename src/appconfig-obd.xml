@@ -21,7 +21,6 @@
 			<fun name="设备管理" action="device-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
-			<fun name="代理商管理" action="proxy-query.action" />
 		</grp>
 		<grp name="实时监测">
 			<fun name="车辆数据监测" action="car-querymonitorcar.action" />
@@ -47,7 +46,6 @@
 			<fun name="设备管理" action="device-query.action" />
 			<fun name="车辆管理" action="car-query.action" />
 			<fun name="账号管理" action="account-query.action" />
-			<fun name="代理商管理" action="proxy-query.action" />
 		</grp>
 		<grp name="实时监测">
 			<fun name="车辆数据监测" action="car-querymonitorcar.action" />

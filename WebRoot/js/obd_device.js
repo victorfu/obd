@@ -99,11 +99,18 @@ function saveDevice(s,devno,type,state,changj,devxh,valdt,identi)
 	{
 		tit="添加设备";
 		$("#is_show_devstate")[0].style.display="none";
+		$("#devnox").show();
+		$("#view_devno").hide();
+		$(".asterisk")[0].innerHTML="*";
 	}
 	else
 	{
 		tit="修改设备信息";
 		$("#is_show_devstate")[0].style.display="block";
+		$("#devnox").hide();
+		$("#view_devno").show();
+		$("#view_devno")[0].innerHTML=devno;
+		$(".asterisk")[0].innerHTML="";
 	}
 	//
 	$("#devnox").val(devno);

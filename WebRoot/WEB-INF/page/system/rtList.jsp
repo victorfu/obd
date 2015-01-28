@@ -97,24 +97,17 @@
 <script type="text/javascript">
 //split page task
 $(function(){
-	var nowPage = parent.document.getElementById("curCusManagePage").value;
-	var pflag = "${pageflag }";
-	if(!pflag)
-	{
-		nowPage = 1;
-	}
 	$("div.holder").jPages({
 		containerID : "movies",
         first : "首页",
         previous : "上一页",
         next : "下一页",
         last : "尾页",
-        startPage : nowPage,
+        startPage : 1,
         perPage : 24,
         keyBrowse:true,
         delay : 0,
         callback : function( pages, items ){
-			parent.document.getElementById("curCusManagePage").value = pages.current;
 	        $("#legend1").html("&nbsp;&nbsp;当前第"+pages.current+"页 ,&nbsp;&nbsp;总共"+pages.count+"页,&nbsp;&nbsp;");
 	        $("#legend2").html("当前显示第"+items.range.start+" - "+items.range.end+"条记录,&nbsp;&nbsp;总共"+items.count+"条记录&nbsp;&nbsp;");
 	    }

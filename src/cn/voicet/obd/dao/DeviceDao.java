@@ -12,7 +12,7 @@ public interface DeviceDao {
 	List<Map<String, Object>> queryDeviceList(DotSession ds, DeviceForm deviceForm);
 	void batchImportData(DotSession ds, DeviceForm deviceForm, File uploadExcel);
 	void saveDevice(DeviceForm deviceForm, DotSession ds);
-	void deleteDevice(DeviceForm deviceForm);
+	void deleteDevice(DotSession ds, DeviceForm deviceForm);
 	
 	//设备类型
 	List<Map<String, Object>> queryDeviceTypeList(DeviceForm deviceForm);
