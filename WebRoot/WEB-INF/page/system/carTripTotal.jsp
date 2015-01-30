@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
     <!-- 日期控件结束 -->
 	<style type="text/css">
-	#allmap {width:100%; height:600px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#allmap {width:100%; height:600px;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
 </head>
 <body>
