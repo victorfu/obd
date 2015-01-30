@@ -191,10 +191,12 @@
 							{
 								console.log("stop draw echarts!");
 							}
-							console.log(rec.length);
-							if(rec.length>50)
+							console.log("rt rec length:"+rec.length);
+							if(rec.length>200)
 							{
+								console.log("rt rec length gt 200");
 								clearRtCkData();
+								console.log("clear rt cookie data complete");
 							}
 						}
 						else
@@ -215,17 +217,17 @@
 
 	function clearRtCkData()
 	{
-		Cookie.clearCookie("hbt_rec");	
-		Cookie.clearCookie("hbt_tot");
-		Cookie.clearCookie("hbt_acct");
-		Cookie.clearCookie("hbt_acci");
-		Cookie.clearCookie("hbt_aveh");
-		Cookie.clearCookie("hbt_aves");
-		Cookie.clearCookie("hbt_maxs");
-		Cookie.clearCookie("hbt_hig");
-		Cookie.clearCookie("hbt_acce");
-		Cookie.clearCookie("hbt_tde");
-		Cookie.clearCookie("hbt_tsw");
+		Cookie.clearCookie("rt_rec");	
+		Cookie.clearCookie("rt_tot");
+		Cookie.clearCookie("rt_acct");
+		Cookie.clearCookie("rt_acci");
+		Cookie.clearCookie("rt_aveh");
+		Cookie.clearCookie("rt_aves");
+		Cookie.clearCookie("rt_maxs");
+		Cookie.clearCookie("rt_hig");
+		Cookie.clearCookie("rt_acce");
+		Cookie.clearCookie("rt_tde");
+		Cookie.clearCookie("rt_tsw");
 	}	
 </script>
 </body>

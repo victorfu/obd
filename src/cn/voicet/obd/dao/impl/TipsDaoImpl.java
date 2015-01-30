@@ -30,10 +30,10 @@ public class TipsDaoImpl extends BaseDaoImpl implements TipsDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", tipsForm.getChepai());
+				cs.setString("cph", ds.getCurChepai());
 				cs.setInt("typs", tipsForm.getType());
-				cs.setString("sdt", ds.cursdttm);
-				cs.setString("edt", ds.curedttm);
+				cs.setString("sdt", ds.cursdt);
+				cs.setString("edt", ds.curedt);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

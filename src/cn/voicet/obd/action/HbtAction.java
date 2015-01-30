@@ -35,12 +35,16 @@ public class HbtAction extends BaseAction implements ModelDriven<HbtForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=hbtForm.getQsdttm() || null!=hbtForm.getQedttm())
+		if(null!=hbtForm.getSdt() || null!=hbtForm.getEdt())
 		{
-			ds.cursdttm = hbtForm.getQsdttm();
-			ds.curedttm = hbtForm.getQedttm();
+			ds.cursdt = hbtForm.getSdt();
+			ds.curedt = hbtForm.getEdt();
 		}
-		log.info("uid:"+ds.userid+", qchepai:"+hbtForm.getQchepai()+", sdttm:"+ds.cursdttm+", edttm:"+ds.curedttm);
+		if(null!=hbtForm.getQchepai())
+		{
+			ds.setCurChepai(hbtForm.getQchepai());
+		}
+		log.info("uid:"+ds.userid+", curChepai:"+ds.getCurChepai()+", sdt:"+ds.cursdt+", edt:"+ds.curedt);
 		List<Map<String, Object>> list = hbtDao.queryHbtList(ds, hbtForm);
 		request.setAttribute("hbtList", list);
 		return "hbtPage";

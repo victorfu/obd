@@ -36,12 +36,16 @@ public class TipsAction extends BaseAction implements ModelDriven<TipsForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=tipsForm.getSdttm() || null!=tipsForm.getEdttm())
+		if(null!=tipsForm.getSdt() || null!=tipsForm.getEdt())
 		{
-			ds.cursdttm = tipsForm.getSdttm();
-			ds.curedttm = tipsForm.getEdttm();
+			ds.cursdt = tipsForm.getSdt();
+			ds.curedt = tipsForm.getEdt();
 		}
-		log.info("chepai:"+tipsForm.getChepai()+", type:"+tipsForm.getType()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		if(null!=tipsForm.getQchepai())
+		{
+			ds.setCurChepai(tipsForm.getQchepai());
+		}
+		log.info("curChepai:"+ds.getCurChepai()+", type:"+tipsForm.getType()+", cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
 		List<Map<String, Object>> list = tipsDao.queryTipsList(ds, tipsForm);
 		request.setAttribute("tipList", list);
 		return "tipsPage";

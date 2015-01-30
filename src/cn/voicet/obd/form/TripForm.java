@@ -3,38 +3,31 @@ package cn.voicet.obd.form;
 public class TripForm {
 
 	private String cid;
-	private String sdttm;
-	private String edttm;
-	private String chepai;
+	private String sdt;
+	private String edt;
+	private String qchepai;
 	public String getCid() {
 		return cid;
 	}
 	public void setCid(String cid) {
 		this.cid = cid;
 	}
-	public String getSdttm() {
-		return sdttm;
+	public String getSdt() {
+		return sdt;
 	}
-	public void setSdttm(String sdttm) {
-		this.sdttm = sdttm;
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
 	}
-	public String getEdttm() {
-		return edttm;
+	public String getEdt() {
+		return edt;
 	}
-	public void setEdttm(String edttm) {
-		this.edttm = edttm;
+	public void setEdt(String edt) {
+		this.edt = edt;
 	}
-	public String getChepai() {
-		return chepai;
+	public String getQchepai() {
+		return qchepai;
 	}
-	public void setChepai(String chepai) {
-		if(chepai.length()==0)
-		{
-			this.chepai = null;
-		}
-		else
-		{
-			this.chepai = chepai;			
-		}
+	public void setQchepai(String qchepai) {
+		this.qchepai = qchepai;
 	}
 }

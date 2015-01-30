@@ -17,13 +17,14 @@
         <div class="lab_ipt_item">
 	    	<span class="lab120">账号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="uaccx" name="uacc" value="${accMap.acc }" maxlength="15" class="ipt_text_w150 inputDefault" />
+	        	<label>${accMap.acc }</label>
+	        	<input type="hidden" id="uaccx" name="uacc" value="${accMap.acc }" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">姓名：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="unamex" name="uname" value="${accMap.name }"  maxlength="5" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="unamex" name="uname" value="${accMap.name }"  maxlength="15" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
@@ -35,51 +36,47 @@
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">证件号：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="idcardx" name="idcard" value="${accMap.cn }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="idcardx" name="idcard" value="${accMap.cn }" maxlength="20" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">QQ：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="qqx" name="qq" value="${accMap.qq }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="qqx" name="qq" value="${accMap.qq }" maxlength="15" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">邮箱：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="emailx" name="email" value="${accMap.mail }" maxlength="100" class="ipt_text_w150 inputDefault" />
-	        </div>
-	    </div>
-	    <div class="lab_ipt_item">
-	    	<span class="lab120">照片：</span>
-	        <div class="ipt-box">
-	        	<input type="text" id="photox" name="photo" value="${accMap.pic }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="emailx" name="email" value="${accMap.mail }" maxlength="32" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">地址：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="addrx" name="addr" value="${accMap.addr }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="addrx" name="addr" value="${accMap.addr }" maxlength="150" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">电话：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="telnumx" name="telnum" value="${accMap.tel }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="telnumx" name="telnum" value="${accMap.tel }" maxlength="20" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">手机：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="mobilex" name="mobile" value="${accMap.mobile }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="mobilex" name="mobile" value="${accMap.mobile }" maxlength="15" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">备注：</span>
 	        <div class="ipt-box">
-	        	<input type="text" id="noteinfox" name="noteinfo" value="${accMap.noteinfo }" maxlength="100" class="ipt_text_w150 inputDefault" />
+	        	<input type="text" id="noteinfox" name="noteinfo" value="${accMap.noteinfo }" maxlength="200" class="ipt_text_w150 inputDefault" />
 	        </div>
 	    </div>
+		<div id="accErrMsg" style="text-indent:80px; color:#f00"></div>
+		<div id="nameErrMsg" style="text-indent:80px; color:#f00"></div>
 	    <div class="lab_ipt_item">
 	    	<span class="lab120">&nbsp;</span>
 	        <div class="ipt-box">
@@ -90,7 +87,7 @@
 	    </div>
     </div>
 </div>
-<script type="text/javascript" src="<c:url value='js/obd_account.js?v=1'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_account.js?v=2'/>"></script>
 <!-- layer 弹出插件 start -->
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <!-- layer 弹出插件 end -->

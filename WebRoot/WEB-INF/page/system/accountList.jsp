@@ -74,7 +74,7 @@
 								<a href="javascript:viewCar('${ls.uid }','${sessionScope.vts.userid }')">查看车辆</a>&nbsp;&nbsp;
 							</c:if>
 						</c:if>
-						<a href="<c:url value='account-info.action?uid=${ls.uid }&aid=${ls.aid }&ulevel=${ls.lev }'/>">修改</a>&nbsp;&nbsp;
+						<a href="<c:url value='account-info.action?uid=${ls.uid }&ulevel=${ls.lev }'/>">修改</a>&nbsp;&nbsp;
 						<c:if test="${sessionScope.vts.userid ne ls.uid }">
 							<a href="javascript:deleteAccount('${ls.uid }','${status.count }')">删除</a>
 						</c:if>
@@ -180,12 +180,12 @@
 //split page task
 $(function(){
 	var nowPage = parent.document.getElementById("curAccountPage").value;
-	console.log("nowPage:"+nowPage);
+	//console.log("nowPage:"+nowPage);
 	var pflag = "${pageflag }";
-	console.log("pflag:"+pflag);
+	//console.log("pflag:"+pflag);
 	if(!pflag)
 	{
-		console.log("nowPage:"+nowPage);
+		//console.log("nowPage:"+nowPage);
 		nowPage = 1;
 	}
 	$("div.holder").jPages({

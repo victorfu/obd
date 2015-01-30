@@ -33,9 +33,9 @@
    	<form action="<c:url value='trip-query.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
-	   		<li><label>车牌号码：</label><input type="text" name="chepai" value="${chepai }" class="ipt100 inputDefault"/></li>
-			<li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
+	   		<li><label>车牌号码：</label><input type="text" name="qchepai" value="${sessionScope.vts.curChepai }" class="ipt100 inputDefault"/></li>
+			<li><label>开始日期：</label><input type="text" id="sdt" name="sdt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.cursdt }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edt" name="edt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.curedt }" maxlength="20" style="height:18px"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>
@@ -63,7 +63,7 @@
 					<td>${ls.v1 }</td>
 					<td>${ls.hct }</td>
 					<td>
-						<a href="<c:url value='trip-viewmap.action?cid=${ls.cid }&sdttm=${fn:substring(ls.sdt,0,19) }&edttm=${fn:substring(ls.edt,0,19) }'/>">查看</a>
+						<a href="<c:url value='trip-viewmap.action?cid=${ls.cid }&sdt=${fn:substring(ls.sdt,0,10) }&edt=${fn:substring(ls.edt,0,10) }'/>">查看</a>
 					</td>
 				</tr>
 				</c:forEach>

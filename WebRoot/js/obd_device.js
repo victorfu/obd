@@ -4,7 +4,7 @@ $(function(){
 
 function checkDevno()
 {
-	var devno = $("#devnox").val().trim();
+	var devno = $("#devnox").val();
 	devno = removeHTMLTag(devno);
 	var reg = /^[a-zA-Z0-9]+$/;
 	if(!devno || devno.length!=13)
@@ -34,7 +34,7 @@ function showSelFile()
         title: '导入数据',
         offset: [($(window).height() - 290)/2+'px', ''],
         border : [5, 0.5, '#666'],
-        area: ['400px','150px'],
+        area: ['420px','160px'],
         shadeClose: false,
 		bgcolor: '#EEF1F8',
 		page:{dom:'#popImportDataDiv'}

@@ -6,8 +6,8 @@ public class RtForm {
 	
 	private String chepai;	//车牌
 	private int type=0;		//告警类型	0:所有告警,7:超速,8:低电压,9:车辆碰撞,11:车辆震动
-	private String sdttm;
-	private String edttm;
+	private String sdt;
+	private String edt;
 	public String getChepai() {
 		return chepai;
 	}
@@ -27,17 +27,17 @@ public class RtForm {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getSdttm() {
-		return sdttm;
+	public String getSdt() {
+		return sdt;
 	}
-	public void setSdttm(String sdttm) {
-		this.sdttm = sdttm;
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
 	}
-	public String getEdttm() {
-		return edttm;
+	public String getEdt() {
+		return edt;
 	}
-	public void setEdttm(String edttm) {
-		this.edttm = edttm;
+	public void setEdt(String edt) {
+		this.edt = edt;
 	}
 	public String getCurid() {
 		return curid;

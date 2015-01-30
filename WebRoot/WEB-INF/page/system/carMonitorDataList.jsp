@@ -29,7 +29,7 @@
    	<form name="form1" action="<c:url value='car-querymonitorcar.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
+			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${sessionScope.vts.curChepai }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -44,7 +44,6 @@
                      <th width="6%">车牌号</th>
                      <th width="4%">品牌</th>
                      <th width="4%">型号</th>
-                     <th width="6%">购车日期</th>
                      <th width="8%">发动机编号</th>
                      <th width="4%">颜色</th>
                      <th width="16%">操作</th>
@@ -56,13 +55,12 @@
 					<td>${ls.cph }</td>
 					<td>${ls.pp }</td>
 					<td>${ls.xh }</td>
-					<td>${fn:substring(ls.gcdt,0,11) }</td>
 					<td>${ls.fdjh }</td>
 					<td>${ls.ys }</td>
 					<td>
-						<a href="<c:url value='car-monitor.action?qchepai=${ls.cph }'/>">实时定位</a>&nbsp;&nbsp;
-						<a href="<c:url value='hbt-monitor.action?qchepai=${ls.cph }'/>">驾驶习惯</a>&nbsp;&nbsp;
-						<a href="<c:url value='rt-monitor.action?qchepai=${ls.cph }'/>">实时数据</a>&nbsp;&nbsp;
+						<a href="<c:url value='car-monitor.action?qchepai=${ls.cph }'/>">实时定位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="<c:url value='hbt-monitor.action?qchepai=${ls.cph }'/>">驾驶习惯</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="<c:url value='rt-monitor.action?qchepai=${ls.cph }'/>">实时数据</a>
 					</td>
 				</tr>
 				</c:forEach>

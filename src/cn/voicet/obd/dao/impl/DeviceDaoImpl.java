@@ -42,8 +42,8 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 					throws SQLException, DataAccessException {
 				cs.setString("devno", deviceForm.getQdevno());
 				cs.setInt("uid", ds.userid);
-				cs.setString("sdt", ds.cursdttm);
-				cs.setString("edt", ds.curedttm);
+				cs.setString("sdt", ds.cursdt);
+				cs.setString("edt", ds.curedt);
 				cs.setString("state", deviceForm.getQstate());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();

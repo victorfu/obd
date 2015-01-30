@@ -37,11 +37,13 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	{
 		
 		DotSession ds = DotSession.getVTSession(request);
+		if(null!=carForm.getQchepai())
+		{
+			ds.setCurChepai(carForm.getQchepai());
+		}
+		log.info("curChepai:"+ds.getCurChepai());
 		List<Map<String, Object>> list = carDao.queryCarList(ds, carForm);
 		request.setAttribute("carList", list);
-		//
-		List<Map<String, Object>> devlist = carDao.queryUsableDeviceList(ds);
-		request.setAttribute("devList", devlist);
 		//
 		log.info("pageflag:"+carForm.getPageflag());
 		return "carPage";
@@ -55,15 +57,34 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 		return null;
 	}
 	
+	/**
+	 * 修改车辆前，获取可用的设备号
+	 * @return
+	 * @throws IOException 
+	 */
+	public String getEnableDevno() throws IOException
+	{
+		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid:"+ds.userid+", cid:"+carForm.getCid());
+		StringBuffer devnoStr = carDao.getEnableDevno(ds, carForm);
+		log.info("devnoStr:"+devnoStr);
+		response.getWriter().print(devnoStr);
+		return null;
+	}
+	
 	public String saveCar() throws IOException
 	{
-		log.info("cid:"+carForm.getCid()+", devno:"+carForm.getDevno()+", pinpai:"+carForm.getPinpai()+", xinghao:"+carForm.getXinghao()+", buydt:"+carForm.getBuydt()+", chepai:"+carForm.getChepai()+", chejia:"+carForm.getChejia()+", fadong:"+carForm.getFadong()+", color:"+carForm.getColor()+", tip:"+carForm.getTip()+", warn:"+carForm.getWarn());
 		DotSession ds = DotSession.getVTSession(request);
+		log.info("uid"+ds.userid+", cid:"+carForm.getCid()+", devno:"+carForm.getDevno()+", pinpai:"+carForm.getPinpai()+", xinghao:"+carForm.getXinghao()+", buydt:"+carForm.getBuydt()+", chepai:"+carForm.getChepai()+", chejia:"+carForm.getChejia()+", fadong:"+carForm.getFadong()+", color:"+carForm.getColor()+", tip:"+carForm.getTip()+", warn:"+carForm.getWarn());
 		String flag = carDao.saveCar(ds, carForm);
 		log.info("flag:"+flag);
 		if(flag.equals("0"))
 		{
 			log.info("save car ["+carForm.getCid()+"] complete!");
+		}
+		else if(flag.equals("-2"))
+		{
+			log.info("save car ["+carForm.getCid()+"] failure, cause devno isn't exist!!");
 		}
 		else
 		{
@@ -106,7 +127,11 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	public String querymonitorcar()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		log.info("uid:"+ds.userid+", qchepai:"+carForm.getQchepai());
+		if(null!=carForm.getQchepai())
+		{
+			ds.setCurChepai(carForm.getQchepai());
+		}
+		log.info("uid:"+ds.userid+", curChepai:"+ds.getCurChepai());
 		List<Map<String, Object>> list = carDao.queryCarList(ds, carForm);
 		request.setAttribute("carList", list);
 		return "carMonitorDataPage";
@@ -119,12 +144,16 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	public String triptotal()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=carForm.getSdttm() || null!=carForm.getEdttm())
+		if(null!=carForm.getSdt() || null!=carForm.getEdt())
 		{
-			ds.cursdttm = carForm.getSdttm();
-			ds.curedttm = carForm.getEdttm();
+			ds.cursdt = carForm.getSdt();
+			ds.curedt = carForm.getEdt();
 		}
-		log.info("userid:"+ds.userid+", qchepai:"+carForm.getQchepai()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		if(null!=carForm.getQchepai())
+		{
+			ds.setCurChepai(carForm.getQchepai());
+		}
+		log.info("userid:"+ds.userid+", curChepai:"+ds.getCurChepai()+", cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
 		String tripData = carDao.queryTripTotal(ds, carForm);
 		log.info("tripData:"+tripData);
 		request.setAttribute("tripData", "11, 20, 13, 40, 15, 60,17,80,19,10,17,42,23,64,15");

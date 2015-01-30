@@ -36,12 +36,16 @@ public class WarnAction extends BaseAction implements ModelDriven<WarnForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=warnForm.getSdttm() || null!=warnForm.getEdttm())
+		if(null!=warnForm.getSdt() || null!=warnForm.getEdt())
 		{
-			ds.cursdttm = warnForm.getSdttm();
-			ds.curedttm = warnForm.getEdttm();
+			ds.cursdt = warnForm.getSdt();
+			ds.curedt = warnForm.getEdt();
 		}
-		log.info("chepai:"+warnForm.getChepai()+", type:"+warnForm.getType()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		if(null!=warnForm.getQchepai())
+		{
+			ds.setCurChepai(warnForm.getQchepai());
+		}
+		log.info("curChepai:"+ds.getCurChepai()+", type:"+warnForm.getType()+", cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
 		List<Map<String, Object>> list = warnDao.queryWarnList(ds, warnForm);
 		request.setAttribute("warnList", list);
 		return "warnPage";

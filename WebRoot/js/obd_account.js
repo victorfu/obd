@@ -55,7 +55,7 @@ function checkUacc()
 //用户姓名
 function checkUname()
 {
-	var n = $("#unamex").val().trim();
+	var n = $("#unamex").val();
 	if(!n)
 	{
 		$("#nameErrMsg")[0].innerHTML="用户姓名不能为空";
@@ -128,24 +128,23 @@ function saveAccount()
 	var uid = $("#uidx").val();
 	var aid = $("#aidx").val();
 	var ulevel = $("#ulevelx").val();
-	
 	var uacc = $("#uaccx").val();
 	var uname = $("#unamex").val();
 	var idcard = $("#idcardx").val();
 	var idcardtype = $("#idcardtypex").val();
 	var qq = $("#qqx").val();
 	var email = $("#emailx").val();
-	var photo = $("#photox").val();
 	var addr = $("#addrx").val();
 	var telnum = $("#telnumx").val();
 	var mobile = $("#mobilex").val();
 	var noteinfo = $("#noteinfox").val();
 	//
+	
 	$.ajax({
 		cache:false,
 		async:false,
 		type:"post",
-		data:{uid:uid, aid:aid, ulevel:ulevel, uacc:uacc, uname:uname, idcard:idcard, idcardtype:idcardtype, qq:qq, email:email, photo:photo, addr:addr, telnum:telnum, mobile:mobile, noteinfo:noteinfo},
+		data:{uid:uid, aid:aid, ulevel:ulevel, uacc:uacc, uname:uname, idcard:idcard, idcardtype:idcardtype, qq:qq, email:email, photo:'', addr:addr, telnum:telnum, mobile:mobile, noteinfo:noteinfo},
 		url:"saveAccount.action",
 		success: function(data) {
 			alert("保存成功");

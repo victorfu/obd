@@ -32,9 +32,9 @@ public class GroupDaoImpl extends BaseDaoImpl implements GroupDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", groupForm.getChepai());
-				cs.setString("sdt", ds.cursdttm);
-				cs.setString("edt", ds.curedttm);
+				cs.setString("cph", ds.getCurChepai());
+				cs.setString("sdt", ds.cursdt);
+				cs.setString("edt", ds.curedt);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;

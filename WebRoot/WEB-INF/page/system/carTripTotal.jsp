@@ -13,6 +13,10 @@
  	<meta http-equiv="cache-control" content="no-cache"/>
  	<meta http-equiv="expires" content="0"/>
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
+	<!-- 日期控件开始 -->
+    <link type="text/css" href="<c:url value='datePicker/skin/WdatePicker.css'/>" rel="stylesheet" />
+	<script type="text/javascript" src="<c:url value='datePicker/WdatePicker.js'/>"></script>
+    <!-- 日期控件结束 -->
 	<style type="text/css">
 	#allmap {width:100%; height:600px;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
@@ -23,9 +27,9 @@
    	<form name="form1" action="<c:url value='car-triptotal.action'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
-			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
-	        <li><label>开始时间：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
-	        <li><label>结束时间：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
+			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${sessionScope.vts.curChepai }"/></li>
+	        <li><label>开始时间：</label><input type="text" id="sdt" name="sdt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.cursdt }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束时间：</label><input type="text" id="edt" name="edt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.curedt }" maxlength="20" style="height:18px"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>

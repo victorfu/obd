@@ -33,8 +33,8 @@
 		<div class="queryDiv_h80">
 		   	<ul class="queryWrap_ul">
 				<li><label>设备号：</label><input type="text" name="qdevno" class="ipt100 inputDefault" value="${qdevno }" maxlength="20"/></li>
-		       	<li><label>有效期：</label><input type="text" id="sdttm" name="qsdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
-		        <li><label>-&nbsp;&nbsp;</label><input type="text" id="edttm" name="qedttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
+		       	<li><label>有效期：</label><input type="text" id="sdttm" name="qsdt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.cursdt }" maxlength="20" style="height:18px"/></li>
+		        <li><label>-&nbsp;&nbsp;</label><input type="text" id="edttm" name="qedt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.curedt }" maxlength="20" style="height:18px"/></li>
 		        <li>
 					<label>状态</label>
 					<s:select id="qstatex" name="qstate" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:80px; height:22px;" headerKey="-1" headerValue="全部" listValue="str" value="qstate"></s:select>
@@ -116,14 +116,14 @@
 		    <div class="lab_ipt_item">
 		    	<span class="lab120">设备类型：</span>
 		        <div class="ipt-box">
-		        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:160px; height:26px;" listKey="vid" listValue="dname" value="type"></s:select>
+		        	<s:select id="typex" name="type" list="#request.typeList" cssStyle="width:150px; height:26px;" listKey="vid" listValue="dname" value="type"></s:select>
 		            <span class="asterisk"></span>
 		        </div>
 		    </div>
 		    <div class="lab_ipt_item" id="is_show_devstate">
 		    	<span class="lab120">设备状态：</span>
 		        <div class="ipt-box">
-		        	<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:160px; height:26px;" listValue="str" value="state"></s:select>
+		        	<s:select id="statex" name="state" list="#application.vta.GetList('dev_state')" listKey="id" cssStyle="width:150px; height:26px;" listValue="str" value="state"></s:select>
 		            <span class=""></span>
 		        </div>
 		    </div>
@@ -200,12 +200,12 @@
 //split page task
 $(function(){
 	var nowPage = parent.document.getElementById("curDevicePage").value;
-	console.log("nowPage:"+nowPage);
+	//console.log("nowPage:"+nowPage);
 	var pflag = "${pageflag }";
-	console.log("pflag:"+pflag);
+	//console.log("pflag:"+pflag);
 	if(!pflag)
 	{
-		console.log("nowPage:"+nowPage);
+		//console.log("nowPage:"+nowPage);
 		nowPage = 1;
 	}
 	$("div.holder").jPages({

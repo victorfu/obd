@@ -5,8 +5,8 @@ public class DeviceForm {
 	//查询参数
 	private String qdevno;
 	private String qstate;
-	private String qsdttm;
-	private String qedttm;
+	private String qsdt;
+	private String qedt;
 	
 	private String devno;	//设备号
 	private String proxy;	//代理商
@@ -175,17 +175,17 @@ public class DeviceForm {
 	public void setQstate(String qstate) {
 		this.qstate = qstate;
 	}
-	public String getQsdttm() {
-		return qsdttm;
+	public String getQsdt() {
+		return qsdt;
 	}
-	public void setQsdttm(String qsdttm) {
-		this.qsdttm = qsdttm;
+	public void setQsdt(String qsdt) {
+		this.qsdt = qsdt;
 	}
-	public String getQedttm() {
-		return qedttm;
+	public String getQedt() {
+		return qedt;
 	}
-	public void setQedttm(String qedttm) {
-		this.qedttm = qedttm;
+	public void setQedt(String qedt) {
+		this.qedt = qedt;
 	}
 	public String getQtpname() {
 		return qtpname;

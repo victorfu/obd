@@ -30,9 +30,9 @@
    	<form name="form1" action="<c:url value='group-query.action?flag=4'/>" method="post">
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul">
-			<li><label>车牌号：</label><input type="text" name="chepai" class="ipt100 inputDefault" value="${chepai }" maxlength="20"/></li>
-	        <li><label>开始日期：</label><input type="text" id="sdttm" name="sdttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.cursdttm }" maxlength="20" style="height:18px"/></li>
-	        <li><label>结束日期：</label><input type="text" id="edttm" name="edttm" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate ipt140 inputDefault" value="${sessionScope.vts.curedttm }" maxlength="20" style="height:18px"/></li>
+			<li><label>车牌号：</label><input type="text" name="qchepai" class="ipt100 inputDefault" value="${sessionScope.vts.curChepai }" maxlength="20"/></li>
+	        <li><label>开始日期：</label><input type="text" id="sdt" name="sdt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.cursdt }" maxlength="20" style="height:18px"/></li>
+	        <li><label>结束日期：</label><input type="text" id="edt" name="edt" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" class="Wdate ipt100 inputDefault" value="${sessionScope.vts.curedt }" maxlength="20" style="height:18px"/></li>
 			<li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 		</ul>
 	</div>

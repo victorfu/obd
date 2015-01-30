@@ -39,12 +39,16 @@ public class RtAction extends BaseAction implements ModelDriven<RtForm>{
 	public String query()
 	{
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=rtForm.getSdttm() || null!=rtForm.getEdttm())
+		if(null!=rtForm.getSdt() || null!=rtForm.getEdt())
 		{
-			ds.cursdttm = rtForm.getSdttm();
-			ds.curedttm = rtForm.getEdttm();
+			ds.cursdt = rtForm.getSdt();
+			ds.curedt = rtForm.getEdt();
 		}
-		log.info("chepai:"+rtForm.getChepai()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		if(null!=rtForm.getQchepai())
+		{
+			ds.setCurChepai(rtForm.getQchepai());
+		}
+		log.info("curChepai:"+ds.getCurChepai()+", cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
 		List<Map<String, Object>> list = rtDao.queryRtList(ds, rtForm);
 		request.setAttribute("rtList", list);
 		return "rtPage";

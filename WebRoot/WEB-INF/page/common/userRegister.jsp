@@ -261,6 +261,14 @@
 				{
 					$("#error_msg")[0].innerHTML="设备不存在！";
 				}
+				else if(result=="-4")
+				{
+					$("#error_msg")[0].innerHTML="设备已占用！";
+				}
+				else if(result=="-5")
+				{
+					$("#error_msg")[0].innerHTML="车牌号已存在！";
+				}
 				else
 				{
 					alert("请求失败 ");

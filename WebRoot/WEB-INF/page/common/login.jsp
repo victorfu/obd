@@ -8,7 +8,7 @@
 	<link type="text/css" href="<c:url value='css/layout.css'/>" rel="stylesheet" />
 	<script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='js/cookie.js'/>"></script>
- 	<script type="text/javascript" src="<c:url value='js/CM.login.js?v=1'/>"></script>
+ 	<script type="text/javascript" src="<c:url value='js/CM.login.js?v=2'/>"></script>
  	
  	<!-- layer 弹出插件 start -->
 	<script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>

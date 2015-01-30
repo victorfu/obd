@@ -94,12 +94,12 @@
 </div>
 <script type="text/javascript">
 	var nowPage = parent.document.getElementById("curDeviceTypePage").value;
-	console.log("nowPage:"+nowPage);
+	//console.log("nowPage:"+nowPage);
 	var pflag = "${devtypepageflag }";
-	console.log("pflag:"+pflag);
+	//console.log("pflag:"+pflag);
 	if(!pflag)
 	{
-		console.log("nowPage:"+nowPage);
+		//console.log("nowPage:"+nowPage);
 		nowPage = 1;
 	}
 	$(function(){

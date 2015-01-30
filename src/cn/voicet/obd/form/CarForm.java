@@ -4,8 +4,8 @@ public class CarForm {
 	
 	//查询参数
 	private String qchepai;
-	private String sdttm;
-	private String edttm;
+	private String sdt;
+	private String edt;
 	
 	private int cid;		//车辆编号
 	private String devno;	//设备号
@@ -109,26 +109,19 @@ public class CarForm {
 		return qchepai;
 	}
 	public void setQchepai(String qchepai) {
-		if(qchepai.length()==0)
-		{
-			this.qchepai = null;
-		}
-		else
-		{
-			this.qchepai = qchepai;	
-		}
+		this.qchepai = qchepai;	
 	}
-	public String getSdttm() {
-		return sdttm;
+	public String getSdt() {
+		return sdt;
 	}
-	public void setSdttm(String sdttm) {
-		this.sdttm = sdttm;
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
 	}
-	public String getEdttm() {
-		return edttm;
+	public String getEdt() {
+		return edt;
 	}
-	public void setEdttm(String edttm) {
-		this.edttm = edttm;
+	public void setEdt(String edt) {
+		this.edt = edt;
 	}
 	public String getPageflag() {
 		return pageflag;

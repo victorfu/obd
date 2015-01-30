@@ -22,6 +22,41 @@
 	<script type="text/javascript" src="<c:url value='jPage/jPages.js'/>"></script>
  	<!-- jPage 分页插件  end -->
  	<script type="text/javascript" src="<c:url value='js/changeTabColor.js'/>"></script>
+ 	
+ 	<style type="text/css">@import "<c:url value='fauxconsole/fauxconsole.css'/>";</style>
+	<script type="text/javascript" src="<c:url value='fauxconsole/fauxconsole.js'/>"></script>
+ 	
+ 	<style>
+	.auto_hidden {
+	    width:150px;border-top: 1px solid #333;
+	    border-bottom: 1px solid #333;
+	    border-left: 1px solid #333;
+	    border-right: 1px solid #333;
+	    position:absolute;
+	    display:none;
+	}
+	.auto_show {
+	    width:150px;
+	    border-top: 1px solid #333;
+	    border-bottom: 1px solid #333;
+	    border-left: 1px solid #333;
+	    border-right: 1px solid #333;
+	    position:absolute;
+	    z-index:9999; /* 设置对象的层叠顺序 */
+	    display:block;
+	}
+	.auto_onmouseover{
+	    color:#ffffff;
+	    background-color:highlight;
+	    width:100%;
+	}
+	.auto_onmouseout{
+	    color:#000000;
+	    width:100%;
+	    background-color:#ffffff;
+	}
+	</style>
+ 	
 </head>
 <body>
 <div id="contentWrap">
@@ -31,10 +66,10 @@
    	<input type="hidden" id="pageflag_query" name="pageflag" value=""/>
 	<div class="queryDiv">
 	   	<ul class="queryWrap_ul_w600 left">
-			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${qchepai }"/></li>
+			<li><label>车牌号码：</label><input type="text" id="qchepaix" name="qchepai" class="ipt100 inputDefault"  value="${sessionScope.vts.curChepai }"/></li>
 	        <li><input type="submit" class="btn4" value="查&nbsp;&nbsp;询"/></li>
 	        <li>
-	        	<input type="button" onclick="saveCar('${sessionScope.vts.roleID }','0','0','','','','${sessionScope.vts.cursdt }','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
+	        	<input type="button" onclick="saveCar('0','0','','','','${sessionScope.vts.cursdt }','','','','','','')" class="btn4" value="添&nbsp;&nbsp;加"/>
 	        </li>
 		</ul>
 		<ul class="queryWrap_ul_w100 right">
@@ -79,7 +114,7 @@
 								<a href="javascript:unbindDev('${ls.cid }','${ls.dsn }')">解除绑定</a>&nbsp;&nbsp;
 							</c:otherwise>
 						</c:choose>
-						<a href="javascript:saveCar('${sessionScope.vts.roleID }','1','${ls.cid }','${ls.dsn }','${ls.pp }','${ls.xh }','${fn:substring(ls.gcdt,0,10) }','${ls.cph }','${ls.cjh }','${ls.fdjh }','${ls.ys }','${ls.tx }','${ls.gj }')">修改</a>&nbsp;&nbsp;
+						<a href="javascript:saveCar('1','${ls.cid }','${ls.dsn }','${ls.pp }','${ls.xh }','${fn:substring(ls.gcdt,0,10) }','${ls.cph }','${ls.cjh }','${ls.fdjh }','${ls.ys }','${ls.tx }','${ls.gj }')">修改</a>&nbsp;&nbsp;
 						
 						<c:choose>
 							<c:when test="${ls.del eq 1 }">
@@ -111,12 +146,12 @@
 	$(function(){
 		//curCarPage
 		var nowPage = parent.document.getElementById("curCarPage").value;
-		console.log("nowPage:"+nowPage);
+		//console.log("nowPage:"+nowPage);
 		var pflag = "${pageflag }";
-		console.log("pflag:"+pflag);
+		//console.log("pflag:"+pflag);
 		if(!pflag)
 		{
-			console.log("nowPage:"+nowPage);
+			//console.log("nowPage:"+nowPage);
 			nowPage = 1;
 		}
 		$("div.holder").jPages({
@@ -153,24 +188,20 @@
 <form id="form2" name="form2" action="<c:url value='car-saveCar.action'/>" method="post">
 	<input type="hidden" id="cidx" name="cid" value="0"/>
 	<input type="hidden" id="pageflag_update" name="pageflag" value="${pageflag }"/>
-	<div class="lab_ipt_item">
+	<div class="lab_ipt_item" id="is_show_devno">
   		<span class="lab120">设备号：</span>
+      	<div class="ipt-box" style="position:relative;">
+      		<div align="center">
+		        <input type="text" class="ipt_text_w150 inputDefault" id="o" name="devno" maxlength="13" onkeyup="autoComplete.start(event)"/>
+		    </div>
+		    <div class="auto_hidden" id="auto"><!--自动完成 DIV--></div>
+      	</div>
+  	</div>
+  	<div class="lab_ipt_item">
+  		<span class="lab120">车牌号：</span>
       	<div class="ipt-box">
-      		<c:choose>
-      			<%-- 普通用户 --%>
-      			<c:when test="${sessionScope.vts.roleID eq 4 }">
-					<label id="lab_devx"></label>
-					<input type="text" id="devnox" name="devno" class="ipt_text_w150 inputDefault" maxlength="15"/>
-					<span class=""></span>
-      			</c:when>
-				<%-- 管理员， 代理商 --%>
-      			<c:otherwise>
-      				<input type="hidden" id="lab_devnox_r" name="devno"/>
-		      		<label id="lab_devx"></label>
-		      		<s:select id="devnox" name="devno" list="#request.devList" cssStyle="width:160px; height:26px;" listKey="dsn" listValue="dsn" headerKey="" headerValue="--选择设备--" value="devno"></s:select>
-		          	<span class=""></span>	
-	      			</c:otherwise>	
-      		</c:choose>
+      		<input type="text" id="chepaix" name="chepai" class="ipt_text_w150 inputDefault"  maxlength="15"/>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -192,13 +223,6 @@
       	<div class="ipt-box">
       		<input type="text" id="buydtx" name="buydt" onclick="WdatePicker({skin:'whyGreen'})" class="Wdate ipt_text_w150 inputDefault"  maxlength="20"/>
           	<span class=""></span>
-      	</div>
-  	</div>
-  	<div class="lab_ipt_item">
-  		<span class="lab120">车牌号：</span>
-      	<div class="ipt-box">
-      		<input type="text" id="chepaix" name="chepai" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -253,6 +277,7 @@
 <!-- layer 弹出插件 end -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js'/>"></script>
 <script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
-<script type="text/javascript" src="<c:url value='js/obd_car.js?v=5'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_car.js?v=7'/>"></script>
+
 </body>
 </html>

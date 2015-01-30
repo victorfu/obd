@@ -27,9 +27,6 @@
   	<div id="nav">
     	<div class="nav_left">
     		<div class="nav_left_wel">
-    		<!--
-        	<span><a href="main.jsp" target="mainFrame" title="首页" style="color:#fff;">首页</a></span>
-        	-->
     		<span>欢迎：&nbsp;<s:property value="#session.vts.username"/></span>
     		<span></span>
     		</div>
@@ -47,14 +44,9 @@
     		<div class="dtree" style="height: 642px;">
     			<s:property value="#application.vta.getMenuInfoByRoleID(#session.vts.roleID, #session.vts.account)" escape="false"/>
     		</div>
-    		<!-- 
-            <ul class="menu">
-                
-            </ul>
-            -->
         </div>
         <div class="main_right">
-            <iframe id="mainFrame" name="mainFrame" src="<c:url value='${homePage }'/>" class="mainFrame" scrolling="no" marginwidth="1" marginheight="1" frameborder="0">
+            <iframe id="mainFrame" name="mainFrame" src="<c:url value='trip-query.action'/>" class="mainFrame" scrolling="no" marginwidth="1" marginheight="1" frameborder="0">
             </iframe>
         </div>
         <div class="clear"></div>

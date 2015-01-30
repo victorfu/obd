@@ -44,12 +44,12 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>{
 		{
 			deviceForm.setQstate(deviceForm.getQstate());
 		}
-		if(null!=deviceForm.getQsdttm() || null!=deviceForm.getQedttm())
+		if(null!=deviceForm.getQsdt() || null!=deviceForm.getQedt())
 		{
-			ds.cursdttm = deviceForm.getQsdttm();
-			ds.curedttm = deviceForm.getQedttm();
+			ds.cursdt = deviceForm.getQsdt();
+			ds.curedt = deviceForm.getQedt();
 		}
-		log.info("qdevno:"+deviceForm.getQdevno()+", sdttm:"+ds.cursdttm+", edt:"+ds.curedttm+", qstate:"+deviceForm.getQstate());
+		log.info("qdevno:"+deviceForm.getQdevno()+", sdt:"+ds.cursdt+", edt:"+ds.curedt+", qstate:"+deviceForm.getQstate());
 		List<Map<String, Object>> list = deviceDao.queryDeviceList(ds, deviceForm);
 		request.setAttribute("devList", list);
 		//

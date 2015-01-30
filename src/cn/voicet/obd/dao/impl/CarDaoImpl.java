@@ -31,7 +31,7 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", carForm.getQchepai());
+				cs.setString("cph", ds.getCurChepai());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -48,24 +48,23 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 		});
 	}
 
-	public List<Map<String, Object>> queryUsableDeviceList(final DotSession ds) {
-		log.info("sp:web_car_Dev_Available(?)");
-		return (List<Map<String, Object>>)this.getJdbcTemplate().execute("{call web_car_Dev_Available(?)}", new CallableStatementCallback() {
+	public StringBuffer getEnableDevno(final DotSession ds, final CarForm carForm) {
+		log.info("sp:web_car_Dev_Available(?,?)");
+		return (StringBuffer)this.getJdbcTemplate().execute("{call web_car_Dev_Available(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
+				cs.setInt("cid", carForm.getCid());
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
-				Map<String, Object> map = null;
-				List<Object> list = new ArrayList<Object>();
+				StringBuffer sb = new StringBuffer();
 				if(rs!=null){
 					while (rs.next()) {
-						 map = new HashMap<String, Object>();
-						 VTJime.putMapDataByColName(map, rs);
-		        		 list.add(map);
+						 sb.append(rs.getString("dsn"));
+						 sb.append(",");
 					}
 				}
-				return list;
+				return sb;
 			}
 		});
 	}
@@ -143,9 +142,9 @@ public class CarDaoImpl extends BaseDaoImpl implements CarDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("cph", carForm.getQchepai());
-				cs.setString("sdt", ds.cursdttm);
-				cs.setString("edt", ds.curedttm);
+				cs.setString("cph", ds.getCurChepai());
+				cs.setString("sdt", ds.cursdt);
+				cs.setString("edt", ds.curedt);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				String tripTotalData = "";

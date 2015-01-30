@@ -55,7 +55,7 @@ var responseLogin = function(data, textStatus, jqXHR)
 	{
 		alert("账号或密码错误");
 	}
-	verImg.src = "verCode?"+Math.random();
+	//verImg.src = "verCode?"+Math.random();
 }
 
 $(function(){

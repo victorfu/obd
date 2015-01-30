@@ -182,10 +182,12 @@
 							{
 								console.log("stop draw echarts!");
 							}
-							console.log(rec.length);
-							if(rec.length>50)
+							console.log("hbt rec length:"+rec.length);
+							if(rec.length>200)
 							{
+								console.log("hbt rec length gt 200");
 								clearHbtCkData();
+								console.log("clear hbt cookie data complete");
 							}
 						}
 					}

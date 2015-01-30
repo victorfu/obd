@@ -135,6 +135,10 @@
 			<result type="json"></result>
 		</action>
 		
+		<!-- 车辆设备绑定，获取可用的设备 -->
+		<action name="getEnableDevno" class="carAction" method="getEnableDevno">
+			<result type="json"></result>
+		</action>
 		<!-- 删除车辆 -->
 		<action name="deleteCar" class="carAction" method="deleteCar">
 			<result type="json"></result>

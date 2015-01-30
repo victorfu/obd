@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +21,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import cn.voicet.obd.model.HbtModel;
-import cn.voicet.obd.model.RtModel;
-
 @SuppressWarnings("unchecked")
 public class DotSession {
 
@@ -32,34 +28,15 @@ public class DotSession {
 	public String password;
 	public String username;
 	public String roleName;
-	public String agttelnum;
 	public String roleID;
 	public int userid;
 	public int userlev;		//用户级别
 	public int devnum;
 	public int carnum;
 	
-	
 	public SubPathTitle subPathTitle;
 	
-	
-	/*
-	 * 默认话务员
-	 */
-	public String dfagt;
-	
-	
-	
-	public String rbm;
-	public String rbn;
-	public String curBM;
-	public String curHM;
 	public String navPath;
-	public String opCode;//opera code tlype
-	public int isedit;
-	public int workyear;	//工作�?
-	public int yearlock;	//年锁�?
-	public int curGolbalPage;//全局当前�?
 	//private List stackList;
 	public Map map;
 	public List list;
@@ -67,17 +44,8 @@ public class DotSession {
 	public List list3;
 	public List list4;
 	public List list5;
-	public List ctsList;
-	public int curYear;	//当前年份
 	private int stackPos=0;
 	private StackInfo[] arrayStackInfo;
-	public String curCTS = "cts100";
-	
-	public String bmhm;
-	
-	public int sflag;
-	
-	public String html;
 	
 	//get server current date 2014-01-09
 	String curDate = String.format("%tF", new Date());
@@ -89,8 +57,7 @@ public class DotSession {
 	public String cursdttm = curDate+" 00:00:00";
 	public String curedttm = curDate+" 23:59:59";
 	
-	public Map<String, Object> lygagtMap1;
-	public Map<String, Object> lygagtMap2;
+	private String curChepai;	//当前车牌号
 	
 	private class StackInfo{
 		
@@ -170,12 +137,9 @@ public class DotSession {
 	public DotSession() {
 		account = "none";
 		roleName = "none";
-		curBM="";
 		roleID = "0";
-		opCode = "";
 		map = new HashMap();
 		subPathTitle = new SubPathTitle();
-		curYear = Calendar.getInstance().get(Calendar.YEAR);
 		list=null;
 		list5=null;
 		//
@@ -183,10 +147,6 @@ public class DotSession {
 		for (int i=0; i<8; i++) {
 			arrayStackInfo[i] = new StackInfo();
 		}
-		sflag=0;
-		//
-		lygagtMap1 = new HashMap();
-		lygagtMap2 = new HashMap();
 	}
 	
 	public void clear() {
@@ -403,78 +363,20 @@ public class DotSession {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public String getAgttelnum() {
-		return agttelnum;
-	}
-	public void setAgttelnum(String agttelnum) {
-		this.agttelnum = agttelnum;
-	}
 	public String getRoleID() {
 		return roleID;
 	}
 	public void setRoleID(String roleID) {
 		this.roleID = roleID;
 	}
-	public String getRbm() {
-		return rbm;
-	}
-	public void setRbm(String rbm) {
-		this.rbm = rbm;
-	}
-	public String getRbn() {
-		return rbn;
-	}
-	public void setRbn(String rbn) {
-		this.rbn = rbn;
-	}
-	public String getCurBM() {
-		return curBM;
-	}
-	public void setCurBM(String curBM) {
-		this.curBM = curBM;
-	}
-	public String getCurHM() {
-		return curHM;
-	}
-	public void setCurHM(String curHM) {
-		this.curHM = curHM;
-	}
+	
 	public String getNavPath() {
 		return navPath;
 	}
 	public void setNavPath(String navPath) {
 		this.navPath = navPath;
 	}
-	public String getOpCode() {
-		return opCode;
-	}
-	public void setOpCode(String opCode) {
-		this.opCode = opCode;
-	}
-	public int getIsedit() {
-		return isedit;
-	}
-	public void setIsedit(int isedit) {
-		this.isedit = isedit;
-	}
-	public int getWorkyear() {
-		return workyear;
-	}
-	public void setWorkyear(int workyear) {
-		this.workyear = workyear;
-	}
-	public int getYearlock() {
-		return yearlock;
-	}
-	public void setYearlock(int yearlock) {
-		this.yearlock = yearlock;
-	}
-	public int getCurGolbalPage() {
-		return curGolbalPage;
-	}
-	public void setCurGolbalPage(int curGolbalPage) {
-		this.curGolbalPage = curGolbalPage;
-	}
+	
 	public Map getMap() {
 		return map;
 	}
@@ -511,30 +413,6 @@ public class DotSession {
 	public void setList5(List list5) {
 		this.list5 = list5;
 	}
-	public List getCtsList() {
-		return ctsList;
-	}
-	public void setCtsList(List ctsList) {
-		this.ctsList = ctsList;
-	}
-	public int getCurYear() {
-		return curYear;
-	}
-	public void setCurYear(int curYear) {
-		this.curYear = curYear;
-	}
-	public String getCurCTS() {
-		return curCTS;
-	}
-	public void setCurCTS(String curCTS) {
-		this.curCTS = curCTS;
-	}
-	public String getBmhm() {
-		return bmhm;
-	}
-	public void setBmhm(String bmhm) {
-		this.bmhm = bmhm;
-	}
 	public String getCurDate() {
 		return curDate;
 	}
@@ -552,24 +430,6 @@ public class DotSession {
 	}
 	public void setCuredt(String curedt) {
 		this.curedt = curedt;
-	}
-	public String getDfagt() {
-		return dfagt;
-	}
-	public void setDfagt(String dfagt) {
-		this.dfagt = dfagt;
-	}
-	public Map<String, Object> getLygagtMap1() {
-		return lygagtMap1;
-	}
-	public void setLygagtMap1(Map<String, Object> lygagtMap1) {
-		this.lygagtMap1 = lygagtMap1;
-	}
-	public Map<String, Object> getLygagtMap2() {
-		return lygagtMap2;
-	}
-	public void setLygagtMap2(Map<String, Object> lygagtMap2) {
-		this.lygagtMap2 = lygagtMap2;
 	}
 	public String getCursdttm() {
 		return cursdttm;
@@ -608,5 +468,18 @@ public class DotSession {
 		this.carnum = carnum;
 	}
 	public int requestCount;
+	public String getCurChepai() {
+		return curChepai;
+	}
+	public void setCurChepai(String curChepai) {
+		if(curChepai.length()==0)
+		{
+			this.curChepai = null;	
+		}
+		else
+		{
+			this.curChepai = curChepai;
+		}
+	}
 }
 

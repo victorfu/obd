@@ -37,12 +37,16 @@ public class GroupAction extends BaseAction implements ModelDriven<GroupForm>{
 	{
 		log.info("flag:"+groupForm.getFlag());
 		DotSession ds = DotSession.getVTSession(request);
-		if(null!=groupForm.getSdttm() || null!=groupForm.getEdttm())
+		if(null!=groupForm.getSdt() || null!=groupForm.getEdt())
 		{
-			ds.cursdttm = groupForm.getSdttm();
-			ds.curedttm = groupForm.getEdttm();
+			ds.cursdt = groupForm.getSdt();
+			ds.curedt = groupForm.getEdt();
 		}
-		log.info("chepai:"+groupForm.getChepai()+", cursdttm:"+ds.cursdttm+", curedttm:"+ds.curedttm);
+		if(null!=groupForm.getQchepai())
+		{
+			ds.setCurChepai(groupForm.getQchepai());
+		}
+		log.info("curChepai:"+ds.getCurChepai()+", cursdt:"+ds.cursdt+", curedt:"+ds.curedt);
 		List<Map<String, Object>> list = groupDao.queryGroupList(ds, groupForm);
 		request.setAttribute("groupList", list);
 		if(groupForm.getFlag()==1)
