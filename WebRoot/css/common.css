@@ -13,6 +13,7 @@ input,img{vertical-align:middle;}
 a{text-decoration:none;}
 ol,ul,li{list-style:none}
 table {border-collapse:collapse;border-spacing:0; width:100%; line-height:20px;} 
+table,td{border: 1px solid #3B9FFF;}
 
 /* 所有表单定义默认 */
 .inputDefault{border:1px solid #B8B8B8;}

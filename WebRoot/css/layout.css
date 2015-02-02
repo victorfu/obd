@@ -35,6 +35,8 @@
 .login_content{float:right; width:240px; padding-left:80px;}
 .login_label{font:14px Microsoft YaHei; text-align:right; color:#111;}
 .table_login{margin-top:8px;}
+.table_login{border:0}
+.table_login td{border:0}
 
 /* contentWrap */
 #contentWrap{width:868px; height:672px; background:#E0EEFB;}

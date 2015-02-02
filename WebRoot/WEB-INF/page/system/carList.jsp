@@ -166,6 +166,7 @@
 	        delay : 0,
 	        callback : function( pages, items ){
 				document.getElementById("page_car_g").value = pages.current;
+				document.getElementById("pageflag_query").value = pages.current;
 				document.getElementById("pageflag_update").value = pages.current;
 				parent.document.getElementById("curCarPage").value = pages.current;
 		        $("#legend1").html("&nbsp;&nbsp;当前第"+pages.current+"页 ,&nbsp;&nbsp;总共"+pages.count+"页,&nbsp;&nbsp;");
@@ -208,14 +209,14 @@
   		<span class="lab120">品牌：</span>
       	<div class="ipt-box">
       		<input type="text" id="pinpaix" name="pinpai" class="ipt_text_w150 inputDefault" maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">型号：</span>
       	<div class="ipt-box">
       		<input type="text" id="xinghaox" name="xinghao" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -229,21 +230,21 @@
   		<span class="lab120">车架：</span>
       	<div class="ipt-box">
       		<input type="text" id="chejiax" name="chejia" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">
   		<span class="lab120">发动机编号：</span>
       	<div class="ipt-box">
       		<input type="text" id="fadongx" name="fadong" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">颜色：</span>
       	<div class="ipt-box">
       		<input type="text" id="colorx" name="color" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -277,7 +278,7 @@
 <!-- layer 弹出插件 end -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js'/>"></script>
 <script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
-<script type="text/javascript" src="<c:url value='js/obd_car.js?v=7'/>"></script>
+<script type="text/javascript" src="<c:url value='js/obd_car.js?v=8'/>"></script>
 
 </body>
 </html>

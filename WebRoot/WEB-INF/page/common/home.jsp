@@ -67,7 +67,7 @@
         
         <!-- 记录js分页当前页码 end -->
         </p>
-        <span>2014 VoiceT&nbsp;&nbsp;V141210&nbsp;&nbsp;[建议使用IE8以上版本或360兼容模式浏览器,&nbsp;显示器分辨率1280*1024]</span>
+        <span>2014 VoiceT&nbsp;&nbsp;V141210&nbsp;&nbsp;[建议使用IE8以上版本或360急速模式浏览器,&nbsp;显示器分辨率1280*1024]</span>
     </div>
     <!-- print window -->
 	<div style="height:0px;">

@@ -8,20 +8,21 @@ function checkUacc()
 	var a = $("#uaccx").val();
 	var al = a.length;
 	var h = /^[A-Za-z]{1}([A-Za-z0-9]){0,19}$/;
+	var bool = false;
 	if(!a)
 	{
 		$("#accErrMsg")[0].innerHTML="账号不能为空";
-		return false;
+		bool = false;
 	}
 	if(!h.test(a))
 	{
 		$("#accErrMsg")[0].innerHTML="账号由字母、数字组成,首位必须为字母";
-		return false;
+		bool = false;
 	}
 	if(al<6 || al>20)
 	{
 		$("#accErrMsg")[0].innerHTML="账号长度为6~20位";
-		return false;
+		bool = false;
 	}
 	//
 	$.ajax({
@@ -34,21 +35,21 @@ function checkUacc()
 			if(result=="0")
 			{
 				$("#accErrMsg")[0].innerHTML="";
-				return true;
+				bool = true;
 			}
 			else if(result=="1")
 			{
 				$("#accErrMsg")[0].innerHTML="账号已存在!";
-				return false;
+				bool = false;
 			}
 			else
 			{
 				alert("请求失败!");
-				return false;
+				bool = false;
 			}
 		}
 	});
-	return true;
+	return bool;
 }
 
 
@@ -56,9 +57,15 @@ function checkUacc()
 function checkUname()
 {
 	var n = $("#unamex").val();
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
 	if(!n)
 	{
 		$("#nameErrMsg")[0].innerHTML="用户姓名不能为空";
+		return false;
+	}
+	else if(reg.test(n))
+	{
+		$("#nameErrMsg")[0].innerHTML="用户姓名不能包含特殊字符";
 		return false;
 	}
 	else
@@ -122,32 +129,3 @@ function deleteAccount(uid,index)
 	} 
 }
 
-//保存用户
-function saveAccount()
-{
-	var uid = $("#uidx").val();
-	var aid = $("#aidx").val();
-	var ulevel = $("#ulevelx").val();
-	var uacc = $("#uaccx").val();
-	var uname = $("#unamex").val();
-	var idcard = $("#idcardx").val();
-	var idcardtype = $("#idcardtypex").val();
-	var qq = $("#qqx").val();
-	var email = $("#emailx").val();
-	var addr = $("#addrx").val();
-	var telnum = $("#telnumx").val();
-	var mobile = $("#mobilex").val();
-	var noteinfo = $("#noteinfox").val();
-	//
-	
-	$.ajax({
-		cache:false,
-		async:false,
-		type:"post",
-		data:{uid:uid, aid:aid, ulevel:ulevel, uacc:uacc, uname:uname, idcard:idcard, idcardtype:idcardtype, qq:qq, email:email, photo:'', addr:addr, telnum:telnum, mobile:mobile, noteinfo:noteinfo},
-		url:"saveAccount.action",
-		success: function(data) {
-			alert("保存成功");
-		}
-	});
-}

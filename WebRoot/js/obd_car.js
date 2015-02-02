@@ -2,8 +2,12 @@
 $(function(){
 	$("#chepaix").bind("blur",checkChepai);
 	$("#devnox").bind("blur",checkDevno);
+	$("#pinpaix").bind("blur",checkPinpai);
+	$("#xinghaox").bind("blur",checkXinghao);
+	$("#chejiax").bind("blur",checkChejia);
+	$("#fadongx").bind("blur",checkFadong);
+	$("#colorx").bind("blur",checkColor);
 });
-
 
 var Bind = function(object, fun) {
     return function() {
@@ -134,23 +138,6 @@ AutoComplete.prototype={
 var autoComplete=new AutoComplete('o','auto',['b0','b12','b22','b3','b4','b5','b6']);
 
 
-function checkChepai()
-{
-	var chep = $("#chepaix").val();
-	var reg = /^[\u4E00-\u9FA5][\da-zA-Z]{6}$/;
-	chep = removeHTMLTag(chep);
-	if(!chep || !reg.test(chep))
-	{
-		$(".asterisk")[0].innerHTML="车牌号格式不正确！";
-		return false;
-	}
-	else
-	{
-		$(".asterisk")[0].innerHTML="";
-		return true;
-	}
-}
-
 function checkDevno()
 {
 	var d = $("#o").val();
@@ -178,6 +165,98 @@ function checkDevno()
 	}
 	//console.log("b:"+b);
 	return b;
+}
+
+function checkChepai()
+{
+	var chep = $("#chepaix").val();
+	var reg = /^[\u4E00-\u9FA5][\da-zA-Z]{6}$/;
+	chep = removeHTMLTag(chep);
+	if(!chep || !reg.test(chep))
+	{
+		$(".asterisk")[0].innerHTML="车牌号格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[0].innerHTML="";
+		return true;
+	}
+}
+function checkPinpai()
+{
+	var pp = $("#pinpaix").val();
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(pp))
+	{
+		$(".asterisk")[1].innerHTML="品牌格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[1].innerHTML="";
+		return true;
+	}
+}
+function checkXinghao()
+{
+	var xh = $("#xinghaox").val();
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(xh))
+	{
+		$(".asterisk")[2].innerHTML="型号格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[2].innerHTML="";
+		return true;
+	}
+}
+function checkChejia()
+{
+	var cj = $("#chejiax").val();
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(cj))
+	{
+		$(".asterisk")[3].innerHTML="车架格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[3].innerHTML="";
+		return true;
+	}
+}
+function checkFadong()
+{
+	var fd = $("#fadongx").val();
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(fd))
+	{
+		$(".asterisk")[4].innerHTML="发动机格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[4].innerHTML="";
+		return true;
+	}
+}
+function checkColor()
+{
+	var co = $("#colorx").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(co))
+	{
+		$(".asterisk")[5].innerHTML="颜色格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[5].innerHTML="";
+		return true;
+	}
 }
 
 
@@ -216,8 +295,6 @@ function saveCar(s,cid,devno,pinpai,xinghao,buydt,chepai,chejia,fadong,color,tip
 				//console.log("devStr:"+devStr);
 			}
 		});
-		
-		
 	}
 	//
 	$("#cidx").val(cid);
@@ -253,25 +330,25 @@ function saveCarBtn(roleid)
 	
 	if(!checkDevno()) return false;
 	if(!checkChepai())	return false;
+	//		
+	if(!checkPinpai()) return false;
+	if(!checkXinghao()) return false;
+	if(!checkChejia()) return false;
+	if(!checkFadong()) return false;
+	if(!checkColor()) return false;
 	//
 	$("#form2").ajaxSubmit({ 
 		success:function(data){ //提交成功的回调函数
-			if(data=="0")
+			console.log("data:"+data);
+			if(data=="成功")
 			{
 				//alert("保存成功");
+				document.getElementById("pageflag_query").value =document.getElementById("pageflag_update").value;
 				document.form1.submit();
-			}
-			else if(data=="-1")
-			{
-				alert("车牌号已经存在");
-			}
-			else if(data=="-2")
-			{
-				alert("设备号不存在");
 			}
 			else
 			{
-				alert("请求失败");
+				alert(data);
 			}
         }
 	});

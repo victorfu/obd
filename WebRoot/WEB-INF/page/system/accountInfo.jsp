@@ -87,11 +87,51 @@
 	    </div>
     </div>
 </div>
-<script type="text/javascript" src="<c:url value='js/obd_account.js?v=2'/>"></script>
 <!-- layer 弹出插件 start -->
 <script type="text/javascript" src="<c:url value='layer/layer.min.js'/>"></script>
 <!-- layer 弹出插件 end -->
 <!-- ajax file upload -->
 <script type="text/javascript" src="<c:url value='js/jquery.form-3.46.0.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/CM.html.js?v=1'/>"></script>
+<script type="text/javascript">
+
+//保存用户
+function saveAccount()
+{
+	var uid = $("#uidx").val();
+	var aid = $("#aidx").val();
+	var ulevel = $("#ulevelx").val();
+	var uacc = $("#uaccx").val();
+	var uname = $("#unamex").val();
+	uname = removeHTMLTag(uname);
+	var idcard = $("#idcardx").val();
+	idcard = removeHTMLTag(idcard);
+	var idcardtype = $("#idcardtypex").val();
+
+	var qq = $("#qqx").val();
+	qq = removeHTMLTag(qq);
+	var email = $("#emailx").val();
+	email = removeHTMLTag(email);
+	var addr = $("#addrx").val();
+	addr = removeHTMLTag(addr);
+	var telnum = $("#telnumx").val();
+	telnum = removeHTMLTag(telnum);
+	var mobile = $("#mobilex").val();
+	mobile = removeHTMLTag(mobile);
+	var noteinfo = $("#noteinfox").val();
+	noteinfo = removeHTMLTag(noteinfo);
+	//
+	$.ajax({
+		cache:false,
+		async:false,
+		type:"post",
+		data:{uid:uid, aid:aid, ulevel:ulevel, uacc:uacc, uname:uname, idcard:idcard, idcardtype:idcardtype, qq:qq, email:email, photo:'', addr:addr, telnum:telnum, mobile:mobile, noteinfo:noteinfo},
+		url:"saveAccount.action",
+		success: function(data) {
+			alert("保存成功");
+		}
+	});
+}
+</script>
 </body>
 </html>

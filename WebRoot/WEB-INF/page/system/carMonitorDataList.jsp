@@ -88,7 +88,7 @@
 	        next : "下一页",
 	        last : "尾页",
 	        startPage : 1,
-	        perPage : 25,
+	        perPage : 26,
 	        keyBrowse:true,
 	        delay : 0,
 	        callback : function( pages, items ){

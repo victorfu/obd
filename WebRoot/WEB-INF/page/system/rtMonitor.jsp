@@ -27,13 +27,13 @@
 	});
 </script>
 <!-- ECharts单文件引入 -->
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="${pageContext.request.contextPath }/echarts/dist/echarts.js"></script>
 <script type="text/javascript" language="javascript">
 	var myChart;
 	var eCharts;
 	require.config({
 		paths : {
-			'echarts' : 'http://echarts.baidu.com/build/dist'
+			'echarts' : '${pageContext.request.contextPath }/echarts/dist'
 		}
 	});
 	require(

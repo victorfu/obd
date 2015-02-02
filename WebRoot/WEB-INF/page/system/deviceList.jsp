@@ -131,14 +131,14 @@
 		    	<span class="lab120">厂家：</span>
 		        <div class="ipt-box">
 		        	<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-		            <span class=""></span>
+		            <span class="asterisk"></span>
 		        </div>
 		    </div>
 		    <div class="lab_ipt_item">
 		    	<span class="lab120">型号：</span>
 		        <div class="ipt-box">
 		        	<input type="text" id="devxhx" name="devxh" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-		            <span class=""></span>
+		            <span class="asterisk"></span>
 		        </div>
 		    </div>
 		    <div class="lab_ipt_item">
@@ -152,7 +152,7 @@
 		    	<span class="lab120">识别码：</span>
 		        <div class="ipt-box">
 		        	<input type="text" id="identix" name="identi" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-		            <span class=""></span>
+		            <span class="asterisk"></span>
 		        </div>
 		    </div>
 			<div class="lab_ipt_item">

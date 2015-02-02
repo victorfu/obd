@@ -78,18 +78,7 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 		log.info("uid"+ds.userid+", cid:"+carForm.getCid()+", devno:"+carForm.getDevno()+", pinpai:"+carForm.getPinpai()+", xinghao:"+carForm.getXinghao()+", buydt:"+carForm.getBuydt()+", chepai:"+carForm.getChepai()+", chejia:"+carForm.getChejia()+", fadong:"+carForm.getFadong()+", color:"+carForm.getColor()+", tip:"+carForm.getTip()+", warn:"+carForm.getWarn());
 		String flag = carDao.saveCar(ds, carForm);
 		log.info("flag:"+flag);
-		if(flag.equals("0"))
-		{
-			log.info("save car ["+carForm.getCid()+"] complete!");
-		}
-		else if(flag.equals("-2"))
-		{
-			log.info("save car ["+carForm.getCid()+"] failure, cause devno isn't exist!!");
-		}
-		else
-		{
-			log.info("save car ["+carForm.getCid()+"] failure!!");
-		}
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().print(flag);
 		return null;
 	}

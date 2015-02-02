@@ -103,6 +103,10 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 									bCheckOK = false;
 								}
 								log.info("cellValues[j]:"+cellValues[j]);
+								if(cellValues[j].length()==0)
+								{
+									bCheckOK = false;
+								}
 							}
 							else
 							{
@@ -193,9 +197,19 @@ public class DeviceDaoImpl extends BaseDaoImpl implements DeviceDao {
 		switch (curCol) {
 			case 0:
 				//设备号必填
-				
+				if(null==cellValue || cellValue.length()<=0)
+				{
+					log.info("devno is null:"+cellValue);
+					return false;
+				}
 				break;
 			case 1:
+				//设备类型必填
+				if(null==cellValue || cellValue.length()<=0)
+				{
+					log.info("devtype is null:"+cellValue);
+					return false;
+				}
 				break;
 			case 2:
 				break;

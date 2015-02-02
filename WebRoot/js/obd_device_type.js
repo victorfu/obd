@@ -1,9 +1,12 @@
 $(function(){
 	$("#tpnamex").bind("blur",checkDevTypeName);
+	$("#changjx").bind("blur",checkChangj);
+	$("#addrx").bind("blur",checkAddr);
 	$("#telnumx").bind("blur",checkTelnum);
 	$("#mobilex").bind("blur",checkMobile);
 	$("#qqx").bind("blur",checkQQ);
 	$("#emailx").bind("blur",checkEmail);
+	$("#cjurlx").bind("blur",checkCjurl);
 });
 
 //类型名称
@@ -22,6 +25,38 @@ function checkDevTypeName()
 		return true;
 	}
 }
+
+function checkChangj()
+{
+	var cj = $("#changjx").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(cj))
+	{
+		$(".asterisk")[1].innerHTML="厂家格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[1].innerHTML="";
+		return true;
+	}
+}
+function checkAddr()
+{
+	var ad = $("#addrx").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(ad))
+	{
+		$(".asterisk")[2].innerHTML="地址格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[2].innerHTML="";
+		return true;
+	}
+}
+
 //电话号码
 function checkTelnum()
 {
@@ -29,12 +64,12 @@ function checkTelnum()
 	var reg = /^([0-9]|[-])+$/g;
 	if(telnum && !reg.exec(telnum))
 	{
-		$(".asterisk")[1].innerHTML="请输入合理的电话号码！";
+		$(".asterisk")[3].innerHTML="请输入合理的电话号码！";
 		return false;
 	}
 	else
 	{
-		$(".asterisk")[1].innerHTML="";
+		$(".asterisk")[3].innerHTML="";
 		return true;
 	}
 }
@@ -45,12 +80,12 @@ function checkMobile()
 	var reg = /0?(13|14|15|18)[0-9]{9}/;
 	if(mobile && !reg.exec(mobile))
 	{
-		$(".asterisk")[2].innerHTML="请输入合理的手机号！";
+		$(".asterisk")[4].innerHTML="请输入合理的手机号！";
 		return false;
 	}
 	else
 	{
-		$(".asterisk")[2].innerHTML="";
+		$(".asterisk")[4].innerHTML="";
 		return true;
 	}
 }
@@ -61,12 +96,12 @@ function checkQQ()
 	var reg = /^[0-9]*[0-9][0-9]*$/;
 	if(qq && !reg.exec(qq))
 	{
-		$(".asterisk")[3].innerHTML="请输入合理的QQ号！";
+		$(".asterisk")[5].innerHTML="请输入合理的QQ号！";
 		return false;
 	}
 	else
 	{
-		$(".asterisk")[3].innerHTML="";
+		$(".asterisk")[5].innerHTML="";
 		return true;
 	}
 }
@@ -77,16 +112,49 @@ function checkEmail()
 	var reg = /\w+((-w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+/;
 	if(email && !reg.exec(email))
 	{
-		$(".asterisk")[4].innerHTML="请输入合理的Email号！";
+		$(".asterisk")[6].innerHTML="请输入合理的Email号！";
 		return false;
 	}
 	else
 	{
-		$(".asterisk")[4].innerHTML="";
+		$(".asterisk")[6].innerHTML="";
 		return true;
 	}
 }
 
+function checkCjurl()
+{
+	var cju = $("#cjurlx").val();
+	if(cju && !IsURL(cju))
+	{
+		$(".asterisk")[7].innerHTML="请输入合理的网址！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[7].innerHTML="";
+		return true;
+	}
+}
+
+function IsURL(str_url){ 
+	var strRegex = "^((https|http|ftp|rtsp|mms)?://)"  
+		  + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp的user@  
+		  + "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP形式的URL- 199.194.52.184  
+		  + "|" // 允许IP和DOMAIN（域名） 
+		  + "([0-9a-z_!~*'()-]+\.)*" // 域名- www.  
+		  + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." // 二级域名  
+		  + "[a-z]{2,6})" // first level domain- .com or .museum  
+		  + "(:[0-9]{1,4})?" // 端口- :80  
+		  + "((/?)|" // a slash isn't required if there is no file name  
+		  + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";  
+	var re=new RegExp(strRegex);
+	if (re.test(str_url)){ 
+		return true;  
+	}else{  
+		return false;  
+	} 
+} 
 //save device type
 function saveType(s,typeno,tpname,changj,addr,telnum,mobile,qq,email,cjurl)
 {
@@ -131,11 +199,13 @@ function saveType(s,typeno,tpname,changj,addr,telnum,mobile,qq,email,cjurl)
 function saveTypeBtn()
 {
 	if(!checkDevTypeName()) return false;
+	if(!checkChangj()) return false;
+	if(!checkAddr()) return false;
 	if(!checkTelnum()) return false;
 	if(!checkMobile()) return false;
 	if(!checkQQ()) return false;
 	if(!checkEmail()) return false;
-	
+	if(!checkCjurl()) return false;
 	document.form2.submit();
 }
 

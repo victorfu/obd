@@ -44,11 +44,12 @@
                  <tr>
                      <th width="6%">账号</th>
                      <th width="6%">级别</th>
-                     <th width="6%">密码</th>
                      <th width="6%">姓名</th>
+                     <c:if test="${sessionScope.vts.roleID eq 1 }">
+                     <th width="6%">密码</th>
+                     </c:if>
                      <th width="4%">设备数</th>
                      <th width="4%">车辆数</th>
-                     <th width="6%">邮箱</th>
                      <th width="12%">操作</th>
                  </tr>
              </thead>
@@ -62,11 +63,12 @@
 						<c:if test="${ls.lev eq 3 }">企业管理员</c:if>
 						<c:if test="${ls.lev eq 4 }">用户</c:if>
 					</td>
-					<td>${ls.pwd }</td>
 					<td>${ls.name }</td>
+					<c:if test="${sessionScope.vts.roleID eq 1 }">
+					<td>${ls.pwdex }</td>
+					</c:if>
 					<td>${ls.devcount }</td>
 					<td>${ls.carcount }</td>
-					<td>${ls.mail }</td>
 					<td>
 						<c:if test="${sessionScope.vts.userid ne ls.uid }">
 							<c:if test="${ls.lev gt 2}">
@@ -195,7 +197,7 @@ $(function(){
         next : "下一页",
         last : "尾页",
         startPage : nowPage,
-        perPage : 25,
+        perPage : 26,
         keyBrowse:true,
         delay : 0,
         callback : function( pages, items ){

@@ -1,7 +1,6 @@
 package cn.voicet.common.dao.impl;
 
 import java.sql.CallableStatement;
-import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import cn.voicet.common.dao.UserDao;
 import cn.voicet.common.form.UserForm;
 import cn.voicet.common.util.DotSession;
+import cn.voicet.common.util.SecurityHelper;
 import cn.voicet.common.util.VTJime;
 
 @Repository(UserDao.SERVICE_NAME)
@@ -28,13 +28,10 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return (Map<String, Object>)this.getJdbcTemplate().execute("{call web_user_login(?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 			throws SQLException, DataAccessException {
-				DatabaseMetaData md = cs.getConnection().getMetaData();
-				log.info("数据库名称(name):" + md.getDatabaseProductName());
-				log.info("数据库主版本(marjor):" + md.getDatabaseMajorVersion());
-				log.info("数据库次版本(minor):" + md.getDatabaseMinorVersion());
-				log.info("数据库版本(version):" + md.getDatabaseProductVersion());
 				cs.setString("account", userForm.getAccount());
-				cs.setString("pwd", userForm.getPassword());
+				String encpwd = SecurityHelper.DESEncrypt(userForm.getPassword(), "8a!2e4b4%1b6e2&ba5.-011b?720f-=+");
+				log.info("encpwd:"+encpwd);
+				cs.setString("pwd", encpwd);
 				cs.execute();
 				ResultSet rs = cs.getResultSet();
 				Map<String, Object> map = null;
@@ -55,8 +52,12 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
-				cs.setString("pwd", userForm.getOldpwd());
-				cs.setString("newpwd", userForm.getNewpwd());
+				String encpwd = SecurityHelper.DESEncrypt(userForm.getOldpwd(), "8a!2e4b4%1b6e2&ba5.-011b?720f-=+");
+				String encnewpwd = SecurityHelper.DESEncrypt(userForm.getNewpwd(), "8a!2e4b4%1b6e2&ba5.-011b?720f-=+");
+				logger.info("encpwd:"+encpwd);
+				logger.info("encnewpwd:"+encnewpwd);
+				cs.setString("pwd", encpwd);
+				cs.setString("newpwd", encnewpwd);
 				cs.registerOutParameter("retv", Types.VARCHAR);
 				cs.execute();
 				log.info("ret:"+cs.getString("retv"));
@@ -79,7 +80,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 					throws SQLException, DataAccessException {
 				cs.setString("puid", "0");
 				cs.setString("account", userForm.getAccount());
-				cs.setString("pwd", userForm.getPassword());
+				String encpwd = SecurityHelper.DESEncrypt(userForm.getPassword(), "8a!2e4b4%1b6e2&ba5.-011b?720f-=+");
+				logger.info("encpwd:"+encpwd);
+				cs.setString("pwd", encpwd);
 				cs.setString("devno", userForm.getDevno());
 				cs.setString("cph", userForm.getChepai());
 				cs.registerOutParameter("retv", Types.VARCHAR);

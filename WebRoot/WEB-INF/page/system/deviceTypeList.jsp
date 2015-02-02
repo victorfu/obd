@@ -50,7 +50,6 @@
                     <th width="6%">地址</th>
                     <th width="6%">电话</th>
                     <th width="8%">手机</th>
-                    <th width="8%">QQ</th>
                     <th width="8%">邮箱</th>
                     <th width="8%">官网</th>
 					<c:if test="${sessionScope.vts.roleID eq 1 }">
@@ -66,7 +65,6 @@
 					<td>${ls.addr }</td>
 					<td>${ls.tel }</td>
 					<td>${ls.mobile }</td>
-					<td>${ls.qq }</td>
 					<td>${ls.mail }</td>
 					<td>${ls.url }</td>
 					<c:if test="${sessionScope.vts.roleID eq 1 }">
@@ -147,14 +145,14 @@
   		<span class="lab120">厂家：</span>
       	<div class="ipt-box">
       		<input type="text" id="changjx" name="changj" class="ipt_text_w150 inputDefault" maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
   		<span class="lab120">地址：</span>
       	<div class="ipt-box">
       		<input type="text" id="addrx" name="addr" class="ipt_text_w150 inputDefault"  maxlength="20"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
   	<div class="lab_ipt_item">
@@ -189,7 +187,7 @@
   		<span class="lab120">厂家网址：</span>
       	<div class="ipt-box">
       		<input type="text" id="cjurlx" name="cjurl" class="ipt_text_w150 inputDefault"  maxlength="30"/>
-          	<span class=""></span>
+          	<span class="asterisk"></span>
       	</div>
   	</div>
 	<div class="lab_ipt_item">

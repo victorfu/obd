@@ -1,5 +1,8 @@
 $(function(){
 	$("#devnox").bind("blur",checkDevno);
+	$("#changjx").bind("blur",checkChangj);
+	$("#devxhx").bind("blur",checkDevxh);
+	$("#identix").bind("blur",checkIdenti);
 });
 
 function checkDevno()
@@ -25,6 +28,53 @@ function checkDevno()
 }
 //devnox
 
+function checkChangj()
+{
+	var cj = $("#changjx").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(cj))
+	{
+		$(".asterisk")[2].innerHTML="厂家格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[2].innerHTML="";
+		return true;
+	}
+}
+
+function checkDevxh()
+{
+	var xh = $("#devxhx").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(xh))
+	{
+		$(".asterisk")[3].innerHTML="型号格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[3].innerHTML="";
+		return true;
+	}
+}
+
+function checkIdenti()
+{
+	var sbm = $("#identix").val();	
+	var reg=/[`~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]]/im;  
+	if(reg.test(sbm))
+	{
+		$(".asterisk")[4].innerHTML="识别码格式不正确！";
+		return false;
+	}
+	else
+	{
+		$(".asterisk")[4].innerHTML="";
+		return true;
+	}
+}
 
 //show select file dialog
 function showSelFile()
@@ -151,6 +201,11 @@ function saveDeviceBtn()
 {
 	if(!checkTypeListSize()) return false;
 	if(!checkDevno()) return false;
+	
+	if(!checkChangj()) return false;
+	if(!checkDevxh()) return false;
+	if(!checkIdenti()) return false;
+	
 	document.form2.submit();
 }
 

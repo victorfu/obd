@@ -5,6 +5,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import cn.voicet.common.listener.SingleLoginListener;
 import cn.voicet.common.util.DotRoleMenu;
 
 @Controller("indexAction")
@@ -22,6 +23,13 @@ public class IndexAction extends BaseAction{
 			ServletActionContext.getServletContext().setAttribute("vta", roleMenu);
 		}
 		log.info("to login");
+
+		boolean b = SingleLoginListener.isOnline(request.getSession());
+		System.out.println("b1:"+b);
+		if(b)
+		{
+			return "show_home";
+		}
 		return "show_login";
 	}
 }

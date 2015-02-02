@@ -16,6 +16,7 @@
 		<!-- 首页功能 -->
 		<action name="index" class="indexAction" method="index">
 			<result name="show_login">/WEB-INF/page/common/login.jsp</result>
+			<result name="show_home">/WEB-INF/page/common/home.jsp</result>
 		</action>
 		<!-- 用户登录 -->
 		<action name="user-*" class="userAction" method="{1}">

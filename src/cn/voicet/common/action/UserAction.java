@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.voicet.common.dao.UserDao;
 import cn.voicet.common.form.UserForm;
+import cn.voicet.common.listener.SingleLoginListener;
 import cn.voicet.common.util.DotSession;
 
 import com.opensymphony.xwork2.ModelDriven;
@@ -73,6 +74,9 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>{
 		} catch (IOException e) {
 			log.error(e);
 		}
+		
+		boolean b = SingleLoginListener.isAlreadyEnter(request.getSession(), ds.account);
+		System.out.println("b:"+b);
 		return null;
 	}
 

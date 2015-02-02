@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.voicet.common.dao.impl.BaseDaoImpl;
 import cn.voicet.common.util.DotSession;
+import cn.voicet.common.util.SecurityHelper;
 import cn.voicet.common.util.VTJime;
 import cn.voicet.obd.dao.AccountDao;
 import cn.voicet.obd.form.AccountForm;
@@ -41,6 +42,8 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 					while (rs.next()) {
 						 map = new HashMap<String, Object>();
 						 VTJime.putMapDataByColName(map, rs);
+						 //解密加密过后的密码，以便管理员查看
+						 map.put("pwdex", SecurityHelper.DESDecrypt(rs.getString("pwd"), "8a!2e4b4%1b6e2&ba5.-011b?720f-=+"));
 		        		 list.add(map);
 					}
 				}
@@ -50,14 +53,17 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	}
 
 	public void addAccount(final DotSession ds, final AccountForm accountForm) {
-		log.info("sp:web_user_create_account(?,?,?,?)");
-		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?)}", new CallableStatementCallback() {
+		log.info("sp:web_user_create_account(?,?,?,?,?)");
+		this.getJdbcTemplate().execute("{call web_user_create_account(?,?,?,?,?)}", new CallableStatementCallback() {
 			public Object doInCallableStatement(CallableStatement cs)
 					throws SQLException, DataAccessException {
 				cs.setInt("uid", ds.userid);
 				cs.setInt("lev", accountForm.getUlevel());
 				cs.setString("subaccount", accountForm.getUacc());
 				cs.setString("uname", accountForm.getUname());
+				String encpwd = SecurityHelper.DESEncrypt("123456", "8a!2e4b4%1b6e2&ba5.-011b?720f-=+");
+				log.info("encpwd:"+encpwd);
+				cs.setString("pwd", encpwd);
 				cs.execute();
 				return null;
 			}
