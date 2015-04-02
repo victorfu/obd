@@ -1,9 +1,13 @@
 package cn.voicet.obd.action;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -107,6 +111,22 @@ public class CarAction extends BaseAction implements ModelDriven<CarForm>{
 	public String monitor()
 	{
 		return "carMonitorPage";
+	}
+	
+	public String getCarMonitor() throws IOException
+	{
+		
+		Map map = new HashMap();
+		double num = Math.random()*0.01;
+		String s = String.format("%.3f", num);
+		map.put("lng", 116.407+Double.parseDouble(s));
+		map.put("lat", 39.905+Double.parseDouble(s));
+		JSONObject json = new JSONObject();
+		json.putAll(map);
+		
+		response.getWriter().print(json.toString());
+		log.info("json:"+json);
+		return null;
 	}
 	
 	/**

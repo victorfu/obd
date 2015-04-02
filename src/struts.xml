@@ -166,6 +166,11 @@
 			<result type="json"></result>
 		</action>
 		
+		<!-- ajax获取车辆实时定位数据 -->
+		<action name="get_car_monitor" class="carAction" method="getCarMonitor">
+			<result type="json"></result>
+		</action>
+		
 		<!-- 普通用户保存车辆，检测设备是否存在 -->
 		<action name="checkEnableDev" class="carAction" method="checkEnableDev">
 			<result type="json"></result>

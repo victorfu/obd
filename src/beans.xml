@@ -46,18 +46,17 @@
 	<bean id="dataSourceProperties" class="cn.voicet.common.util.PropertiesEncryptFactoryBean">
         <property name="properties">
             <props>
-                <prop key="user">OuUsLdBubWa7G8kPCis0PA==</prop>
-                <prop key="password">xRfaaCXNT0y7G8kPCis0PA==</prop>
+                <prop key="user">CgnomTi2ZUM=</prop>
+                <prop key="password">b5aM/eaCoSDcktD2lMcA6Q==</prop>
             </props>
         </property>
     </bean>
-    
 	
 	<bean id="dataSource_druid" class="com.alibaba.druid.pool.DruidDataSource"  
         destroy-method="close">  
-        <property name="url" value="jdbc:sqlserver://218.94.123.43:5566;databaseName=obd_db" />  
-        <property name="username" value="webadmin" />  
-        <property name="password" value="begin110" />  
+        <property name="url" value="jdbc:sqlserver://115.28.14.146:6800;databaseName=OBD_DB" /> 
+        <property name="username" value="sa" />  
+        <property name="password" value="niceday123" />  
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />  
         <property name="filters" value="stat" />  
   
